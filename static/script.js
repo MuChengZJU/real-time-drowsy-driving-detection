@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     socket.on('status_update', function (data) {
+        console.log("Received status_update:", data); // DEBUG: Log received data
         if (data.error) {
             addLog(`Error from server: ${data.error}`);
             overallAlert.textContent = data.error;

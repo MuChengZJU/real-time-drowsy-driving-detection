@@ -234,29 +234,32 @@ def video_stream_generator():
             continue
 
         # Get the latest AI data (status and draw elements)
-        # current_status_for_draw = None
-        # current_draw_elements = None
-        # with ai_status_lock:
-        #     if latest_ai_status_dict is not None:
-        #          current_status_for_draw = latest_ai_status_dict.copy()
-        # with ai_draw_elements_lock:
-        #     if latest_ai_draw_elements is not None:
-        #         current_draw_elements = latest_ai_draw_elements.copy()
+        current_status_for_draw = None
+        current_draw_elements = None
+        with ai_status_lock:
+            if latest_ai_status_dict is not None:
+                 current_status_for_draw = latest_ai_status_dict.copy()
+        with ai_draw_elements_lock:
+            if latest_ai_draw_elements is not None:
+                current_draw_elements = latest_ai_draw_elements.copy()
 
-        print("VG: Skipping AI overlay for debugging video stream.") # DEBUG: Temporarily skip AI overlay
-        # if ai_processor is not None and current_status_for_draw and current_draw_elements:
-        #     # Call draw_overlays with the current raw frame and latest AI data
-        #     # ai_processor.draw_overlays expects: frame_to_draw_on, status_info, draw_elements
-        #     try:
-        #         frame_with_overlays = ai_processor.draw_overlays(
-        #             current_frame_to_display, # The copy of latest_raw_frame
-        #             current_status_for_draw, 
-        #             current_draw_elements
-        #         )
-        #         current_frame_to_display = frame_with_overlays
-        #     except Exception as e:
-        #         print(f"Error in draw_overlays: {e}")
-        #         # Fallback to current_frame_to_display without overlays if drawing fails
+        # print("VG: Skipping AI overlay for debugging video stream.") # DEBUG: Temporarily skip AI overlay
+        if ai_processor is not None and current_status_for_draw and current_draw_elements:
+            # Call draw_overlays with the current raw frame and latest AI data
+            # ai_processor.draw_overlays expects: frame_to_draw_on, status_info, draw_elements
+            try:
+                frame_with_overlays = ai_processor.draw_overlays(
+                    current_frame_to_display, # The copy of latest_raw_frame
+                    current_status_for_draw, 
+                    current_draw_elements
+                )
+                current_frame_to_display = frame_with_overlays
+            except Exception as e:
+                import traceback # Make sure traceback is imported
+                print(f"Error in draw_overlays: {e}")
+                traceback.print_exc() # This will print the full stack trace
+                # Fallback to current_frame_to_display (which is latest_raw_frame.copy())
+                # No need to reassign, current_frame_to_display already holds the raw frame if overlay fails
 
         # Encode and yield the frame
         # print(f"VG: Before imencode. Frame shape: {current_frame_to_display.shape if current_frame_to_display is not None else 'None'}") # DEBUG

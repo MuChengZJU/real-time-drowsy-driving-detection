@@ -59,13 +59,16 @@ def video_stream_generator():
         else:
             # If get_processed_frame returns None (e.g., end of video file), stop streaming
             # Or handle camera read errors if applicable
-            print("No frame available from processor or processor stopped.")
+            # print("No frame available from processor or processor stopped.") # Reduce log noise
+            pass # Just continue loop, sleep below handles rate
             # Add a small delay to prevent tight loop on error
-            time.sleep(0.1) 
+            # time.sleep(0.1) 
             # If camera is the source, you might want to continue trying or stop based on processing_active
             # For now, if processing_active is true, we assume it tries to get a frame again.
-            if not processing_active: # Break if processing was explicitly stopped
-                 break
+            # if not processing_active: # Break if processing was explicitly stopped
+            #      break
+        # Add a small sleep here to limit the yield rate and prevent busy-looping
+        time.sleep(0.03) # Aim for ~33 FPS max yield rate, actual content updates less often
 
 @app.route('/video_feed')
 def video_feed():
@@ -125,28 +128,37 @@ def process_and_emit_status():
         print("Cannot start status emission: AI Processor not initialized.")
         return
 
+    target_process_interval = 0.25  # Increased target interval to 250ms (~4 FPS)
+    last_process_time = time.time()
+
     while processing_active:
-        try:
-            # Process a frame to update internal states and get the latest status
-            _, status_data = ai_processor.process_single_frame()
-            if status_data:
-                socketio.emit('status_update', status_data)
-            else:
-                # This might happen if camera fails or video ends
-                print("No status data from AI processor.")
-                # If it's a persistent issue, might need to stop processing_active
-                # For now, we rely on processing_active to be managed by client connections
-                pass 
-            
-            # Control the rate of processing and emission
-            # This should roughly match camera FPS or desired update rate.
-            # ai_logic's process_single_frame includes camera read, so its own timing is important.
-            # The sleep here is for the emit rate.
-            socketio.sleep(0.1) # Emit status approx 10 times per second
-        except Exception as e:
-            print(f"Error in processing/emitting status: {e}")
-            # Consider stopping processing or attempting to reinitialize processor on certain errors
-            socketio.sleep(1) # Wait a bit before retrying if an error occurs
+        current_time = time.time()
+        
+        # Check if enough time has passed since the last processing
+        if current_time - last_process_time >= target_process_interval:
+            try:
+                # Process a frame to update internal states and get the latest status
+                _, status_data = ai_processor.process_single_frame()
+                last_process_time = time.time() # Update last process time *after* processing
+
+                if status_data:
+                    socketio.emit('status_update', status_data)
+                else:
+                    # This might happen if camera fails or video ends
+                    print("No status data from AI processor.")
+                    # Maybe stop processing if this persists?
+                    # processing_active = False
+                    # break
+                    pass 
+                
+            except Exception as e:
+                print(f"Error in processing/emitting status: {e}")
+                # Consider stopping processing or attempting to reinitialize processor on certain errors
+                socketio.sleep(1) # Wait a bit before retrying if an error occurs
+        else:
+            # Not enough time passed, sleep briefly to prevent busy-waiting
+            # This sleep value can be tuned. Smaller value = more responsive check, higher CPU usage.
+            socketio.sleep(0.01) # Sleep for 10ms
     
     print("AI Processing and status emission stopped.")
     # When loop finishes (processing_active is False), release resources

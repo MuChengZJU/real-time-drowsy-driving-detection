@@ -193,6 +193,6 @@ if __name__ == '__main__':
     print("Starting Flask-SocketIO server...")
     # initialize_processor() # Initialize AI processor at startup (optional, can be lazy)
     # The current logic initializes when the first client connects or /start_detection is called.
-    socketio.run(app, host='0.0..0', port=5000, debug=False, use_reloader=False)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False, use_reloader=False)
     # Note: use_reloader=False is important for background threads and resource management like camera.
     # If debug=True and use_reloader=True, Flask might start two instances of the app. 

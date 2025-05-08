@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drowsiness Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Drowsiness Detector</h1>
+        <div class="main-content">
+            <div class="video-container">
+                <h2>Live Feed</h2>
+                <img id="videoFeed" src="/video_feed" alt="Video Stream" width="640" height="480">
+            </div>
+            <div class="status-container">
+                <h2>Current Status</h2>
+                <div id="statusMessages">
+                    <p><strong>Overall Alert:</strong> <span id="overallAlert">Connecting...</span></p>
+                    <p><strong>Blinks:</strong> <span id="blinks">0</span></p>
+                    <p><strong>Microsleeps:</strong> <span id="microsleepsDuration">0.00</span>s</p>
+                    <p><strong>Yawns:</strong> <span id="yawns">0</span></p>
+                    <p><strong>Yawn Duration:</strong> <span id="yawnDuration">0.00</span>s</p>
+                    <p><strong>Left Eye:</strong> <span id="leftEyeState">-</span></p>
+                    <p><strong>Right Eye:</strong> <span id="rightEyeState">-</span></p>
+                    <p><strong>Yawn State:</strong> <span id="yawnState">-</span></p>
+                </div>
+                <div class="controls">
+                    <button id="startButton">Start Detection</button>
+                    <button id="stopButton">Stop Detection</button>
+                </div>
+            </div>
+        </div>
+        <div class="logs-container">
+            <h2>Event Log</h2>
+            <div id="eventLog" class="event-log"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 

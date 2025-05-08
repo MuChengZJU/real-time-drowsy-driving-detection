@@ -4,6 +4,7 @@ from flask import Flask, Response, render_template, jsonify
 from flask_socketio import SocketIO, emit
 import threading
 import queue # Import queue
+import psutil # Import psutil
 
 # Assuming ai_logic.py is in the src directory and this app.py is in the root of real-time-drowsy-driving-detection
 import sys
@@ -25,6 +26,8 @@ camera_thread = None
 processing_active = False
 processing_lock = threading.Lock()   # Lock for safely managing state transitions
 client_count = 0
+current_process = psutil.Process(os.getpid()) # Get current process for monitoring
+psutil.cpu_percent(percpu=True) # Initialize per-core usage calculation
 
 # --- Camera Capture Thread ---
 def capture_frames(camera_device, frame_q, stop_evt):
@@ -34,6 +37,9 @@ def capture_frames(camera_device, frame_q, stop_evt):
         print(f"Error: Camera {camera_device} is not opened in capture thread.")
         return
 
+    frame_read_count = 0
+    fps_start_time = time.time()
+
     while not stop_evt.is_set():
         ret, frame = cap.read()
         if not ret:
@@ -42,6 +48,7 @@ def capture_frames(camera_device, frame_q, stop_evt):
             time.sleep(0.1)
             continue
         
+        frame_read_count += 1
         # Put the latest frame into the queue, overwriting if full
         try:
             frame_q.put_nowait(frame) 
@@ -57,6 +64,15 @@ def capture_frames(camera_device, frame_q, stop_evt):
                 print("Warning: Could not place frame in queue even after clearing.")
                 pass # Skip frame if queue is still somehow full
         
+        # Calculate and print Camera FPS periodically
+        current_time = time.time()
+        elapsed_time = current_time - fps_start_time
+        if elapsed_time >= 2.0: # Print every 2 seconds
+            camera_fps = frame_read_count / elapsed_time
+            print(f"Camera FPS: {camera_fps:.2f}")
+            fps_start_time = current_time
+            frame_read_count = 0
+
         # Small sleep to prevent this thread from consuming 100% CPU if camera is fast
         time.sleep(0.005) # Adjust as needed, e.g., 5ms
 
@@ -70,31 +86,52 @@ def process_and_emit_status(frame_q, stop_evt):
         print("Cannot start status emission: AI Processor not initialized.")
         return
 
-    target_process_interval = 0.25  # Process approx every 250ms (~4 FPS)
+    target_process_interval = 0.25  # Keep the interval for *attempting* processing
     last_process_time = time.time()
     latest_frame = None
+    
+    # Reset AI FPS calculation, focus on processing time
+    # ai_frame_processed_count = 0
+    # ai_fps_start_time = time.time()
+    last_monitor_time = time.time()
+    cpu_per_core_usage = [0.0] * psutil.cpu_count() # Initialize per-core list
+    ram_usage_mb = 0.0
+    processing_time_ms = 0.0
 
     while not stop_evt.is_set():
-        # Get the latest frame from the queue (non-blocking)
         try:
             latest_frame = frame_q.get_nowait()
         except queue.Empty:
-            # No new frame available since last check, continue using previous if exists
             pass 
 
-        if latest_frame is None: # Skip processing if we haven't received any frame yet
+        if latest_frame is None: 
             socketio.sleep(0.01)
             continue
             
         current_time = time.time()
-        # Check if enough time has passed since the last processing
+        
+        # Process frame if interval has passed
         if current_time - last_process_time >= target_process_interval:
             try:
-                # Process the latest available frame
+                frame_process_start_time = time.time()
                 _, status_data = ai_processor.process_frame(latest_frame)
-                last_process_time = time.time() # Update last process time
+                frame_process_end_time = time.time()
+                processing_time_ms = (frame_process_end_time - frame_process_start_time) * 1000 # Calculate in ms
+                last_process_time = frame_process_end_time # Update based on actual end time
+                
+                # Calculate Monitor Stats periodically (less frequently is fine)
+                if current_time - last_monitor_time >= 2.0:
+                    cpu_per_core_usage = psutil.cpu_percent(percpu=True) # Get list of per-core usage
+                    ram_usage_mb = current_process.memory_info().rss / (1024 * 1024)
+                    last_monitor_time = current_time
+                    # Print more detailed info to console
+                    print(f"AI Frame Process Time: {processing_time_ms:.1f} ms | RAM: {ram_usage_mb:.1f} MB | CPU per Core: {[f'{c:.1f}%' for c in cpu_per_core_usage]}")
 
                 if status_data:
+                    # Add detailed monitor stats to status data
+                    status_data['processing_time_ms'] = round(processing_time_ms, 1)
+                    status_data['cpu_per_core_usage'] = [round(c, 1) for c in cpu_per_core_usage]
+                    status_data['ram_usage_mb'] = round(ram_usage_mb, 1)
                     socketio.emit('status_update', status_data)
                 else:
                     print("No status data from AI processor processing.")
@@ -102,9 +139,11 @@ def process_and_emit_status(frame_q, stop_evt):
                 
             except Exception as e:
                 print(f"Error in processing/emitting status: {e}")
+                # Consider adding traceback for detailed debugging
+                # import traceback
+                # traceback.print_exc()
                 socketio.sleep(1) 
         else:
-            # Not enough time passed, sleep briefly
             socketio.sleep(0.01) 
     
     print("AI Processing and status emission stopped.")
@@ -237,16 +276,24 @@ def video_feed():
 @app.route('/status')
 def get_status_http():
     global ai_processor
-    # Get status directly from the processor if it exists and is active
-    if ai_processor and processing_active:
-        status = ai_processor.get_current_status()
-        return jsonify(status)
-    # Provide a default/inactive status if not running
-    return jsonify({
+    # Return default/inactive status as processing time/per-core usage might not be ready
+    default_status = {
         "blinks": 0, "microsleeps_duration": 0.0, "yawns": 0,
         "yawn_duration": 0.0, "left_eye_state": "-", "right_eye_state": "-",
-        "yawn_state": "-", "overall_alert": "Inactive"
-    }), 200 # Return 200 even if inactive, status reflects state
+        "yawn_state": "-", "overall_alert": "Inactive",
+        "processing_time_ms": 0.0,
+        "cpu_per_core_usage": [0.0] * psutil.cpu_count(),
+        "ram_usage_mb": 0.0
+    }
+    if ai_processor and processing_active:
+        # Get latest status, but monitoring stats might be slightly delayed
+        status = ai_processor.get_current_status()
+        # Fill in defaults if monitoring stats aren't in the base status
+        status['processing_time_ms'] = status.get('processing_time_ms', 0.0)
+        status['cpu_per_core_usage'] = status.get('cpu_per_core_usage', [0.0] * psutil.cpu_count())
+        status['ram_usage_mb'] = status.get('ram_usage_mb', 0.0)
+        return jsonify(status)
+    return jsonify(default_status), 200
 
 # --- SocketIO Event Handlers ---
 @socketio.on('connect')
@@ -263,9 +310,13 @@ def handle_connect():
 
     # Always send ack
     emit('connection_ack', {'message': 'Connected to server'})
-    # Optionally send current status immediately if processor is active
+    # Send initial status, including defaults for monitor stats
     if ai_processor and processing_active:
-         emit('status_update', ai_processor.get_current_status())
+         initial_status = ai_processor.get_current_status()
+         initial_status['processing_time_ms'] = 0.0
+         initial_status['cpu_per_core_usage'] = [0.0] * psutil.cpu_count()
+         initial_status['ram_usage_mb'] = 0.0
+         emit('status_update', initial_status)
 
 @socketio.on('disconnect')
 def handle_disconnect():

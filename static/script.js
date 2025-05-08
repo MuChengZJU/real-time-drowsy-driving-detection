@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('startButton');
     const stopButton = document.getElementById('stopButton');
 
+    // Get new monitor elements
+    const aiTime = document.getElementById('aiTime');
+    const cpuPerCore = document.getElementById('cpuPerCore');
+    const ramUsage = document.getElementById('ramUsage');
+
     let lastAlert = "";
 
     function addLog(message) {
@@ -35,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
         addLog('Disconnected from server.');
         overallAlert.textContent = 'Disconnected';
         overallAlert.className = 'alert-danger';
+        // Reset monitor values on disconnect
+        aiTime.textContent = '-';
+        cpuPerCore.textContent = '-';
+        ramUsage.textContent = '-';
     });
 
     socket.on('connection_ack', function(data) {
@@ -49,15 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        blinks.textContent = data.blinks;
-        microsleepsDuration.textContent = data.microsleeps_duration.toFixed(2) + 's';
-        yawns.textContent = data.yawns;
-        yawnDuration.textContent = data.yawn_duration.toFixed(2) + 's';
-        leftEyeState.textContent = data.left_eye_state;
-        rightEyeState.textContent = data.right_eye_state;
-        yawnState.textContent = data.yawn_state;
+        blinks.textContent = data.blinks !== undefined ? data.blinks : '-';
+        microsleepsDuration.textContent = data.microsleeps_duration !== undefined ? data.microsleeps_duration.toFixed(2) + 's' : '-';
+        yawns.textContent = data.yawns !== undefined ? data.yawns : '-';
+        yawnDuration.textContent = data.yawn_duration !== undefined ? data.yawn_duration.toFixed(2) + 's' : '-';
+        leftEyeState.textContent = data.left_eye_state || '-';
+        rightEyeState.textContent = data.right_eye_state || '-';
+        yawnState.textContent = data.yawn_state || '-';
 
-        const currentAlert = data.overall_alert || "Awake";
+        const currentAlert = data.overall_alert || "Inactive"; // Default to Inactive if not provided
         overallAlert.textContent = currentAlert;
 
         if (currentAlert.includes("Prolonged Microsleep")) {
@@ -68,13 +77,20 @@ document.addEventListener('DOMContentLoaded', function () {
             overallAlert.className = 'alert-safe';
         }
 
-        if (currentAlert !== "Awake" && currentAlert !== lastAlert) {
+        if (currentAlert !== "Awake" && currentAlert !== "Inactive" && currentAlert !== lastAlert) {
             addLog(`Alert: ${currentAlert}`);
-            // Potentially play a sound here if browser allows
-            // var audio = new Audio('/path/to/alert_sound.mp3');
-            // audio.play().catch(e => console.log("Audio play failed: ", e));
         }
         lastAlert = currentAlert;
+
+        // Update new monitor fields
+        aiTime.textContent = data.processing_time_ms !== undefined ? data.processing_time_ms.toFixed(1) + ' ms' : '-';
+        // Format the per-core CPU usage list
+        if (data.cpu_per_core_usage !== undefined && Array.isArray(data.cpu_per_core_usage)) {
+            cpuPerCore.textContent = '[' + data.cpu_per_core_usage.map(c => c.toFixed(1)).join(', ') + '] %';
+        } else {
+            cpuPerCore.textContent = '-';
+        }
+        ramUsage.textContent = data.ram_usage_mb !== undefined ? data.ram_usage_mb.toFixed(1) + ' MB' : '-';
     });
 
     startButton.addEventListener('click', function() {

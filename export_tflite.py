@@ -7,10 +7,9 @@ import shutil # 用于文件移动
 EYE_MODEL_PT_PATH = 'runs/detecteye/train/weights/best.pt'
 YAWN_MODEL_PT_PATH = 'runs/detectyawn/train/weights/best.pt'
 
-# 校准数据 YAML 文件或目录路径
-# 对于 INT8 量化是必需的。对于 FP16，此参数会被忽略但为了统一接口可以传入。
-EYE_CALIBRATION_DATA = 'data/calibration_images_eye/' # 直接指向校准图片目录
-YAWN_CALIBRATION_DATA = 'data/calibration_images_yawn/' # 直接指向校准图片目录
+# 校准数据 YAML 文件路径 (使用新创建的YAML文件)
+EYE_CALIBRATION_DATA_YAML = 'eye_calibration_config.yaml'
+YAWN_CALIBRATION_DATA_YAML = 'yawn_calibration_config.yaml'
 
 # 要测试的图像尺寸列表
 IMAGE_SIZES_TO_EXPORT = [320, 640]
@@ -40,8 +39,8 @@ def get_output_path(original_pt_path, image_size, precision_str):
 
 # --- 主转换逻辑 ---
 models_to_convert = [
-    {"name": "眼睛状态检测", "pt_path": EYE_MODEL_PT_PATH, "calibration_data": EYE_CALIBRATION_DATA, "output_prefix": "eye_detect"},
-    {"name": "打哈欠检测", "pt_path": YAWN_MODEL_PT_PATH, "calibration_data": YAWN_CALIBRATION_DATA, "output_prefix": "yawn_detect"},
+    {"name": "眼睛状态检测", "pt_path": EYE_MODEL_PT_PATH, "calibration_data": EYE_CALIBRATION_DATA_YAML, "output_prefix": "eye_detect"},
+    {"name": "打哈欠检测", "pt_path": YAWN_MODEL_PT_PATH, "calibration_data": YAWN_CALIBRATION_DATA_YAML, "output_prefix": "yawn_detect"},
 ]
 
 for model_info in models_to_convert:
@@ -58,19 +57,17 @@ for model_info in models_to_convert:
 
         # 1. 转换为 INT8 TFLite
         try:
-            print(f"正在转换为 INT8 TFLite (imgsz: {img_size})...")
+            print(f"正在转换为 INT8 TFLite (imgsz: {img_size}) 使用配置: {model_info['calibration_data']}...")
             model.export(
                 format='tflite',
                 imgsz=img_size,
                 int8=True,
-                data=model_info['calibration_data'],
+                data=model_info['calibration_data'], # 使用YAML配置文件
             )
             
-            # 源文件路径 (由 Ultralytics 生成)
             source_file_name_int8 = f"{original_base_name}_int8.tflite"
             source_file_path_int8 = os.path.join(ultralytics_output_dir, source_file_name_int8)
 
-            # 目标文件路径
             target_file_name_int8 = f"{model_info['output_prefix']}_{img_size}_int8.tflite"
             target_file_path_int8 = os.path.join(TARGET_OUTPUT_DIR, target_file_name_int8)
 
@@ -92,29 +89,39 @@ for model_info in models_to_convert:
                 half=True,
             )
 
-            # 源文件路径 (由 Ultralytics 生成)
-            source_file_name_fp16 = f"{original_base_name}_fp16.tflite"
+            # Ultralytics 生成的文件名是 _float16.tflite
+            source_file_name_fp16 = f"{original_base_name}_float16.tflite" 
             source_file_path_fp16 = os.path.join(ultralytics_output_dir, source_file_name_fp16)
             
-            # 目标文件路径
-            target_file_name_fp16 = f"{model_info['output_prefix']}_{img_size}_fp16.tflite"
+            target_file_name_fp16 = f"{model_info['output_prefix']}_{img_size}_fp16.tflite" #我们期望的目标文件名
             target_file_path_fp16 = os.path.join(TARGET_OUTPUT_DIR, target_file_name_fp16)
 
             if os.path.exists(source_file_path_fp16):
                 shutil.move(source_file_path_fp16, target_file_path_fp16)
                 print(f"FP16 TFLite 模型 ({model_info['name']}, imgsz: {img_size}) 转换完成并移动到: {target_file_path_fp16}")
             else:
-                print(f"错误：未找到预期的 FP16 TFLite 输出文件: {source_file_path_fp16}")
+                # Fallback in case the naming convention changes or for older versions
+                fallback_source_name_fp16 = f"{original_base_name}_fp16.tflite"
+                fallback_source_path_fp16 = os.path.join(ultralytics_output_dir, fallback_source_name_fp16)
+                if os.path.exists(fallback_source_path_fp16):
+                    shutil.move(fallback_source_path_fp16, target_file_path_fp16)
+                    print(f"FP16 TFLite 模型 ({model_info['name']}, imgsz: {img_size}) (using fallback name {fallback_source_name_fp16}) 转换完成并移动到: {target_file_path_fp16}")
+                else:
+                    print(f"错误：未找到预期的 FP16 TFLite 输出文件 ({source_file_name_fp16} 或 {fallback_source_name_fp16}) 在: {ultralytics_output_dir}")
                 
         except Exception as e:
             print(f"转换为 FP16 TFLite ({model_info['name']}, imgsz: {img_size}) 时出错: {e}")
             
-    # 可选：清理空的 _saved_model 目录 (如果需要)
-    # if os.path.exists(ultralytics_output_dir) and not os.listdir(ultralytics_output_dir):
-    #     print(f"清理空的目录: {ultralytics_output_dir}")
-    #     shutil.rmtree(ultralytics_output_dir)
-    # elif os.path.exists(ultralytics_output_dir):
-    #      print(f"注意: 目录 {ultralytics_output_dir} 中可能还有其他文件，未被删除。")
+    # 可选：清理空的 _saved_model 目录
+    # try:
+    #     if os.path.exists(ultralytics_output_dir) and not os.listdir(ultralytics_output_dir):
+    #         print(f"清理空的目录: {ultralytics_output_dir}")
+    #         shutil.rmtree(ultralytics_output_dir)
+    #     elif os.path.exists(ultralytics_output_dir):
+    #         # 如果目录不为空，可能是因为生成了其他类型的文件（如 .onnx, .pb）
+    #         print(f"注意: 目录 {ultralytics_output_dir} 中可能还有其他文件，未被删除。")
+    # except Exception as e:
+    #     print(f"清理目录 {ultralytics_output_dir} 时出错: {e}")
 
 
 print("\n" + "="*50 + "\n")

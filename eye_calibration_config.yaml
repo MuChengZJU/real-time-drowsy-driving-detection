@@ -1,0 +1,4 @@
+train: ../data/calibration_images_eye/
+val: ../data/calibration_images_eye/ # For calibration, val can be the same as train or a subset
+nc: 2
+names: ['open_eye', 'close_eye'] 

@@ -1,0 +1,4 @@
+train: ../data/calibration_images_yawn/
+val: ../data/calibration_images_yawn/ # For calibration, val can be the same as train or a subset
+nc: 2
+names: ['yawn', 'no_yawn'] 

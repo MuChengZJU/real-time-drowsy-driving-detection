@@ -84,14 +84,21 @@ document.addEventListener('DOMContentLoaded', function () {
         lastAlert = currentAlert;
 
         // Update new monitor fields
-        aiTime.textContent = data.processing_time_ms !== undefined ? data.processing_time_ms.toFixed(1) + ' ms' : '-';
-        // Format the per-core CPU usage list
-        if (data.cpu_per_core_usage !== undefined && Array.isArray(data.cpu_per_core_usage)) {
-            cpuPerCore.textContent = '[' + data.cpu_per_core_usage.map(c => c.toFixed(1)).join(', ') + '] %';
+        if (data.performance) {
+            aiTime.textContent = data.performance.ai_frame_process_time_ms !== undefined ? data.performance.ai_frame_process_time_ms.toFixed(1) + ' ms' : '-';
+            
+            if (data.performance.cpu_usage_percent_core !== undefined && Array.isArray(data.performance.cpu_usage_percent_core)) {
+                // Backend already formats as strings with '%', so just join
+                cpuPerCore.textContent = data.performance.cpu_usage_percent_core.join(', ') ;
+            } else {
+                cpuPerCore.textContent = '-';
+            }
+            ramUsage.textContent = data.performance.ram_usage_mb !== undefined ? data.performance.ram_usage_mb.toFixed(1) + ' MB' : '-';
         } else {
+            aiTime.textContent = '-';
             cpuPerCore.textContent = '-';
+            ramUsage.textContent = '-';
         }
-        ramUsage.textContent = data.ram_usage_mb !== undefined ? data.ram_usage_mb.toFixed(1) + ' MB' : '-';
     });
 
     startButton.addEventListener('click', function() {

@@ -1,0 +1,2230 @@
+File logging setup complete. Subsequent output will be logged and also printed to console.
+Starting Drowsiness Detection System with final settings:
+  Selected Configuration Key: fp16_320 (Description: FP16 models with 320x320 input. Balanced speed and precision.)
+  Eye Model: model/tflite/eye_detect_320_fp16.tflite
+  Yawn Model: model/tflite/yawn_detect_320_fp16.tflite
+  Camera Index: 0
+  Host: 0.0.0.0
+  Port: 5000
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.215:5000
+Press CTRL+C to quit
+192.168.31.245 - - [10/May/2025 00:15:08] "GET /socket.io/?EIO=4&transport=polling&t=PQrr3vN HTTP/1.1" 200 -
+Client connected
+192.168.31.245 - - [10/May/2025 00:15:08] "GET /socket.io/?EIO=4&transport=polling&t=PQrr3vn&sid=UNnJoyqzwvz06NqOAAAA HTTP/1.1" 200 -
+192.168.31.245 - - [10/May/2025 00:15:08] "POST /socket.io/?EIO=4&transport=polling&t=PQrr3vm&sid=UNnJoyqzwvz06NqOAAAA HTTP/1.1" 200 -
+Attempting to start detection...
+Opening camera 0...
+Camera opened successfully.
+Initializing AIDrowsinessProcessor...
+Eye TFLite model: model/tflite/eye_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+Eye TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+Eye TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+Yawn TFLite model: model/tflite/yawn_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+Yawn TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+Yawn TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+AIDrowsinessProcessor initialized with Eye: model/tflite/eye_detect_320_fp16.tflite, Yawn: model/tflite/yawn_detect_320_fp16.tflite
+Starting threads for detection...
+[CAMERA_THREAD] Starting. Initial detection_active: True, stop_event: False
+[AI_THREAD] AI Processing and status emission started.Detection started successfully.
+
+192.168.31.245 - - [10/May/2025 00:15:12] "POST /start_detection HTTP/1.1" 200 -
+[VIDEO_STREAM] Function CALLED. detection_active: True, stop_event: False, APP_ARGS.display_fps: 20
+[VIDEO_STREAM] Initialized with TARGET_VIDEO_FPS: 20, delay_per_frame: 0.05
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] PRE-YIELD (placeholder) frame. Text: Waiting for AI frame...
+192.168.31.245 - - [10/May/2025 00:15:12] "GET /video_feed?1746807312312 HTTP/1.1" 200 -
+[VIDEO_STREAM] POST-YIELD (placeholder) frame.
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] PRE-YIELD (placeholder) frame. Text: Waiting for AI frame...
+[VIDEO_STREAM] POST-YIELD (placeholder) frame.
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] PRE-YIELD (placeholder) frame. Text: Waiting for AI frame...
+[VIDEO_STREAM] POST-YIELD (placeholder) frame.
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] PRE-YIELD (placeholder) frame. Text: Waiting for AI frame...
+[VIDEO_STREAM] POST-YIELD (placeholder) frame.
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] PRE-YIELD frame 1. Size: 66215
+/home/srtp/01_driver/real-time-drowsy-driving-detection/venv/lib/python3.11/site-packages/google/protobuf/symbol_database.py:55: UserWarning: SymbolDatabase.GetPrototype() is deprecated. Please use message_factory.GetMessageClass() instead. SymbolDatabase.GetPrototype() will be removed soon.
+  warnings.warn('SymbolDatabase.GetPrototype() is deprecated. Please '
+[VIDEO_STREAM] POST-YIELD frame 1.
+[VIDEO_STREAM] Top of while True loop. Frame: 1
+[VIDEO_STREAM] Inside try block. Frame: 1
+[VIDEO_STREAM] PRE-YIELD frame 2. Size: 66452
+[VIDEO_STREAM] POST-YIELD frame 2.
+[VIDEO_STREAM] Top of while True loop. Frame: 2
+[VIDEO_STREAM] Inside try block. Frame: 2
+[VIDEO_STREAM] PRE-YIELD frame 3. Size: 66047
+[VIDEO_STREAM] POST-YIELD frame 3.
+[VIDEO_STREAM] Top of while True loop. Frame: 3
+[VIDEO_STREAM] Inside try block. Frame: 3
+[VIDEO_STREAM] PRE-YIELD frame 4. Size: 66047
+[VIDEO_STREAM] POST-YIELD frame 4.
+[VIDEO_STREAM] Top of while True loop. Frame: 4
+[VIDEO_STREAM] Inside try block. Frame: 4
+[VIDEO_STREAM] PRE-YIELD frame 5. Size: 66047
+[VIDEO_STREAM] POST-YIELD frame 5.
+[VIDEO_STREAM] Top of while True loop. Frame: 5
+[VIDEO_STREAM] Inside try block. Frame: 5
+[VIDEO_STREAM] PRE-YIELD frame 6. Size: 77710
+[VIDEO_STREAM] POST-YIELD frame 6.
+[VIDEO_STREAM] Top of while True loop. Frame: 6
+[VIDEO_STREAM] Inside try block. Frame: 6
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 7. Size: 77710
+[VIDEO_STREAM] POST-YIELD frame 7.
+[VIDEO_STREAM] Top of while True loop. Frame: 7
+[VIDEO_STREAM] Inside try block. Frame: 7[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] PRE-YIELD frame 8. Size: 77729
+[VIDEO_STREAM] POST-YIELD frame 8.
+[VIDEO_STREAM] Top of while True loop. Frame: 8
+[VIDEO_STREAM] Inside try block. Frame: 8
+[VIDEO_STREAM] PRE-YIELD frame 9. Size: 77729
+[VIDEO_STREAM] POST-YIELD frame 9.
+[VIDEO_STREAM] Top of while True loop. Frame: 9
+[VIDEO_STREAM] Inside try block. Frame: 9
+[VIDEO_STREAM] PRE-YIELD frame 10. Size: 77729
+[VIDEO_STREAM] POST-YIELD frame 10.
+[VIDEO_STREAM] Top of while True loop. Frame: 10
+[VIDEO_STREAM] Inside try block. Frame: 10
+[VIDEO_STREAM] PRE-YIELD frame 11. Size: 77909
+[VIDEO_STREAM] POST-YIELD frame 11.
+[VIDEO_STREAM] Top of while True loop. Frame: 11
+[VIDEO_STREAM] Inside try block. Frame: 11
+[VIDEO_STREAM] PRE-YIELD frame 12. Size: 77909
+[VIDEO_STREAM] POST-YIELD frame 12.
+[VIDEO_STREAM] Top of while True loop. Frame: 12
+[VIDEO_STREAM] Inside try block. Frame: 12
+[VIDEO_STREAM] PRE-YIELD frame 13. Size: 77909
+[VIDEO_STREAM] POST-YIELD frame 13.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 13
+
+[VIDEO_STREAM] Inside try block. Frame: 13
+[VIDEO_STREAM] PRE-YIELD frame 14. Size: 77017
+[VIDEO_STREAM] POST-YIELD frame 14.
+[VIDEO_STREAM] Top of while True loop. Frame: 14
+[VIDEO_STREAM] Inside try block. Frame: 14
+[VIDEO_STREAM] PRE-YIELD frame 15. Size: 77017
+[VIDEO_STREAM] POST-YIELD frame 15.
+[VIDEO_STREAM] Top of while True loop. Frame: 15
+[VIDEO_STREAM] Inside try block. Frame: 15
+[VIDEO_STREAM] PRE-YIELD frame 16. Size: 78189
+[VIDEO_STREAM] POST-YIELD frame 16.
+[VIDEO_STREAM] Top of while True loop. Frame: 16
+[VIDEO_STREAM] Inside try block. Frame: 16
+[VIDEO_STREAM] PRE-YIELD frame 17. Size: 78189
+[VIDEO_STREAM] POST-YIELD frame 17.
+[VIDEO_STREAM] Top of while True loop. Frame: 17
+[VIDEO_STREAM] Inside try block. Frame: 17
+[VIDEO_STREAM] PRE-YIELD frame 18. Size: 78189
+[VIDEO_STREAM] POST-YIELD frame 18.
+[VIDEO_STREAM] Top of while True loop. Frame: 18
+[VIDEO_STREAM] Inside try block. Frame: 18
+[VIDEO_STREAM] PRE-YIELD frame 19. Size: 78323
+[VIDEO_STREAM] POST-YIELD frame 19.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 19
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Inside try block. Frame: 19
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 0, 'ai_frame_process_time_ms': 1156.7, 'ram_usage_mb': 1051.7, 'cpu_usage_percent_core': ['0.0%', '0.0%', '0.0%', '0.0%']}}
+[VIDEO_STREAM] PRE-YIELD frame 20. Size: 99532
+[VIDEO_STREAM] POST-YIELD frame 20.
+[VIDEO_STREAM] Top of while True loop. Frame: 20
+[VIDEO_STREAM] Inside try block. Frame: 20
+[VIDEO_STREAM] PRE-YIELD frame 21. Size: 98943
+[VIDEO_STREAM] POST-YIELD frame 21.
+[VIDEO_STREAM] Top of while True loop. Frame: 21
+[VIDEO_STREAM] Inside try block. Frame: 21
+[VIDEO_STREAM] PRE-YIELD frame 22. Size: 99908
+[VIDEO_STREAM] POST-YIELD frame 22.
+[VIDEO_STREAM] Top of while True loop. Frame: 22
+[VIDEO_STREAM] Inside try block. Frame: 22
+[VIDEO_STREAM] PRE-YIELD frame 23. Size: 99908
+[VIDEO_STREAM] POST-YIELD frame 23.
+[VIDEO_STREAM] Top of while True loop. Frame: 23
+[VIDEO_STREAM] Inside try block. Frame: 23
+[VIDEO_STREAM] PRE-YIELD frame 24. Size: 99908
+[VIDEO_STREAM] POST-YIELD frame 24.
+[VIDEO_STREAM] Top of while True loop. Frame: 24
+[VIDEO_STREAM] Inside try block. Frame: 24
+[VIDEO_STREAM] PRE-YIELD frame 25. Size: 100344
+[VIDEO_STREAM] POST-YIELD frame 25.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 25
+
+[VIDEO_STREAM] Inside try block. Frame: 25
+[VIDEO_STREAM] PRE-YIELD frame 26. Size: 100344
+[VIDEO_STREAM] POST-YIELD frame 26.
+[VIDEO_STREAM] Top of while True loop. Frame: 26
+[VIDEO_STREAM] Inside try block. Frame: 26
+[VIDEO_STREAM] PRE-YIELD frame 27. Size: 99610
+[VIDEO_STREAM] POST-YIELD frame 27.
+[VIDEO_STREAM] Top of while True loop. Frame: 27
+[VIDEO_STREAM] Inside try block. Frame: 27
+[VIDEO_STREAM] PRE-YIELD frame 28. Size: 99610
+[VIDEO_STREAM] POST-YIELD frame 28.
+[VIDEO_STREAM] Top of while True loop. Frame: 28
+[VIDEO_STREAM] Inside try block. Frame: 28
+[VIDEO_STREAM] PRE-YIELD frame 29. Size: 99610
+[VIDEO_STREAM] POST-YIELD frame 29.
+[VIDEO_STREAM] Top of while True loop. Frame: 29
+[VIDEO_STREAM] Inside try block. Frame: 29
+[VIDEO_STREAM] PRE-YIELD frame 30. Size: 99356
+[VIDEO_STREAM] POST-YIELD frame 30.
+[VIDEO_STREAM] Top of while True loop. Frame: 30
+[VIDEO_STREAM] Inside try block. Frame: 30
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 31. Size: 99356
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] POST-YIELD frame 31.
+[VIDEO_STREAM] Top of while True loop. Frame: 31
+[VIDEO_STREAM] Inside try block. Frame: 31
+[VIDEO_STREAM] PRE-YIELD frame 32. Size: 99211
+[VIDEO_STREAM] POST-YIELD frame 32.
+[VIDEO_STREAM] Top of while True loop. Frame: 32
+[VIDEO_STREAM] Inside try block. Frame: 32
+[VIDEO_STREAM] PRE-YIELD frame 33. Size: 99211
+[VIDEO_STREAM] POST-YIELD frame 33.
+[VIDEO_STREAM] Top of while True loop. Frame: 33
+[VIDEO_STREAM] Inside try block. Frame: 33
+[VIDEO_STREAM] PRE-YIELD frame 34. Size: 99211
+[VIDEO_STREAM] POST-YIELD frame 34.
+[VIDEO_STREAM] Top of while True loop. Frame: 34
+[VIDEO_STREAM] Inside try block. Frame: 34
+[VIDEO_STREAM] PRE-YIELD frame 35. Size: 99080
+[VIDEO_STREAM] POST-YIELD frame 35.
+[VIDEO_STREAM] Top of while True loop. Frame: 35
+[VIDEO_STREAM] Inside try block. Frame: 35
+[VIDEO_STREAM] PRE-YIELD frame 36. Size: 99080
+[VIDEO_STREAM] POST-YIELD frame 36.
+[VIDEO_STREAM] Top of while True loop. Frame: 36
+[VIDEO_STREAM] Inside try block. Frame: 36
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 37. Size: 99080[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 0, 'ai_frame_process_time_ms': 1093.9, 'ram_usage_mb': 1053.4, 'cpu_usage_percent_core': ['35.4%', '97.2%', '13.9%', '9.3%']}}[VIDEO_STREAM] POST-YIELD frame 37.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 37
+[VIDEO_STREAM] Inside try block. Frame: 37
+[VIDEO_STREAM] PRE-YIELD frame 38. Size: 99614
+[VIDEO_STREAM] POST-YIELD frame 38.
+[VIDEO_STREAM] Top of while True loop. Frame: 38
+[VIDEO_STREAM] Inside try block. Frame: 38
+[VIDEO_STREAM] PRE-YIELD frame 39. Size: 99721
+[VIDEO_STREAM] POST-YIELD frame 39.
+[VIDEO_STREAM] Top of while True loop. Frame: 39
+[VIDEO_STREAM] Inside try block. Frame: 39
+[VIDEO_STREAM] PRE-YIELD frame 40. Size: 99721
+[VIDEO_STREAM] POST-YIELD frame 40.
+[VIDEO_STREAM] Top of while True loop. Frame: 40
+[VIDEO_STREAM] Inside try block. Frame: 40
+[VIDEO_STREAM] PRE-YIELD frame 41. Size: 99721
+[VIDEO_STREAM] POST-YIELD frame 41.
+[VIDEO_STREAM] Top of while True loop. Frame: 41
+[VIDEO_STREAM] Inside try block. Frame: 41
+[VIDEO_STREAM] PRE-YIELD frame 42. Size: 99636
+[VIDEO_STREAM] POST-YIELD frame 42.
+[VIDEO_STREAM] Top of while True loop. Frame: 42
+[VIDEO_STREAM] Inside try block. Frame: 42
+[VIDEO_STREAM] PRE-YIELD frame 43. Size: 99636
+[VIDEO_STREAM] POST-YIELD frame 43.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 43
+
+[VIDEO_STREAM] Inside try block. Frame: 43
+[VIDEO_STREAM] PRE-YIELD frame 44. Size: 99636
+[VIDEO_STREAM] POST-YIELD frame 44.
+[VIDEO_STREAM] Top of while True loop. Frame: 44
+[VIDEO_STREAM] Inside try block. Frame: 44
+[VIDEO_STREAM] PRE-YIELD frame 45. Size: 99400
+[VIDEO_STREAM] POST-YIELD frame 45.
+[VIDEO_STREAM] Top of while True loop. Frame: 45
+[VIDEO_STREAM] Inside try block. Frame: 45
+[VIDEO_STREAM] PRE-YIELD frame 46. Size: 99400
+[VIDEO_STREAM] POST-YIELD frame 46.
+[VIDEO_STREAM] Top of while True loop. Frame: 46
+[VIDEO_STREAM] Inside try block. Frame: 46
+[VIDEO_STREAM] PRE-YIELD frame 47. Size: 99498
+[VIDEO_STREAM] POST-YIELD frame 47.
+[VIDEO_STREAM] Top of while True loop. Frame: 47
+[VIDEO_STREAM] Inside try block. Frame: 47
+[VIDEO_STREAM] PRE-YIELD frame 48. Size: 99498
+[VIDEO_STREAM] POST-YIELD frame 48.
+[VIDEO_STREAM] Top of while True loop. Frame: 48
+[VIDEO_STREAM] Inside try block. Frame: 48
+[VIDEO_STREAM] PRE-YIELD frame 49. Size: 99498
+[VIDEO_STREAM] POST-YIELD frame 49.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 49
+[VIDEO_STREAM] Inside try block. Frame: 49
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] PRE-YIELD frame 50. Size: 99258
+[VIDEO_STREAM] POST-YIELD frame 50.
+[VIDEO_STREAM] Top of while True loop. Frame: 50
+[VIDEO_STREAM] Inside try block. Frame: 50
+[VIDEO_STREAM] PRE-YIELD frame 51. Size: 99258
+[VIDEO_STREAM] POST-YIELD frame 51.
+[VIDEO_STREAM] Top of while True loop. Frame: 51
+[VIDEO_STREAM] Inside try block. Frame: 51
+[VIDEO_STREAM] PRE-YIELD frame 52. Size: 99258
+[VIDEO_STREAM] POST-YIELD frame 52.
+[VIDEO_STREAM] Top of while True loop. Frame: 52
+[VIDEO_STREAM] Inside try block. Frame: 52
+[VIDEO_STREAM] PRE-YIELD frame 53. Size: 98957
+[VIDEO_STREAM] POST-YIELD frame 53.
+[VIDEO_STREAM] Top of while True loop. Frame: 53
+[VIDEO_STREAM] Inside try block. Frame: 53
+[VIDEO_STREAM] PRE-YIELD frame 54. Size: 98957
+[VIDEO_STREAM] POST-YIELD frame 54.
+[VIDEO_STREAM] Top of while True loop. Frame: 54
+[VIDEO_STREAM] Inside try block. Frame: 54
+[VIDEO_STREAM] PRE-YIELD frame 55. Size: 98957
+[VIDEO_STREAM] POST-YIELD frame 55.
+[VIDEO_STREAM] Top of while True loop. Frame: 55
+[VIDEO_STREAM] Inside try block. Frame: 55
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 0, 'ai_frame_process_time_ms': 1074.3, 'ram_usage_mb': 1051.9, 'cpu_usage_percent_core': ['15.5%', '97.2%', '23.1%', '12.3%']}}
+[VIDEO_STREAM] PRE-YIELD frame 56. Size: 98356
+[VIDEO_STREAM] POST-YIELD frame 56.
+[VIDEO_STREAM] Top of while True loop. Frame: 56
+[VIDEO_STREAM] Inside try block. Frame: 56
+[VIDEO_STREAM] PRE-YIELD frame 57. Size: 98342
+[VIDEO_STREAM] POST-YIELD frame 57.
+[VIDEO_STREAM] Top of while True loop. Frame: 57
+[VIDEO_STREAM] Inside try block. Frame: 57
+[VIDEO_STREAM] PRE-YIELD frame 58. Size: 98439
+[VIDEO_STREAM] POST-YIELD frame 58.
+[VIDEO_STREAM] Top of while True loop. Frame: 58
+[VIDEO_STREAM] Inside try block. Frame: 58
+[VIDEO_STREAM] PRE-YIELD frame 59. Size: 98833
+[VIDEO_STREAM] POST-YIELD frame 59.
+[VIDEO_STREAM] Top of while True loop. Frame: 59
+[VIDEO_STREAM] Inside try block. Frame: 59
+[VIDEO_STREAM] PRE-YIELD frame 60. Size: 98833
+[VIDEO_STREAM] POST-YIELD frame 60.
+[VIDEO_STREAM] Top of while True loop. Frame: 60
+[VIDEO_STREAM] Inside try block. Frame: 60
+[VIDEO_STREAM] PRE-YIELD frame 61. Size: 98833
+[VIDEO_STREAM] POST-YIELD frame 61.
+[VIDEO_STREAM] Top of while True loop. Frame: 61
+[VIDEO_STREAM] Inside try block. Frame: 61
+[VIDEO_STREAM] PRE-YIELD frame 62. Size: 99069
+[VIDEO_STREAM] POST-YIELD frame 62.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 62[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 62
+[VIDEO_STREAM] PRE-YIELD frame 63. Size: 99069
+[VIDEO_STREAM] POST-YIELD frame 63.
+[VIDEO_STREAM] Top of while True loop. Frame: 63
+[VIDEO_STREAM] Inside try block. Frame: 63
+[VIDEO_STREAM] PRE-YIELD frame 64. Size: 99666
+[VIDEO_STREAM] POST-YIELD frame 64.
+[VIDEO_STREAM] Top of while True loop. Frame: 64
+[VIDEO_STREAM] Inside try block. Frame: 64
+[VIDEO_STREAM] PRE-YIELD frame 65. Size: 99666
+[VIDEO_STREAM] POST-YIELD frame 65.
+[VIDEO_STREAM] Top of while True loop. Frame: 65
+[VIDEO_STREAM] Inside try block. Frame: 65
+[VIDEO_STREAM] PRE-YIELD frame 66. Size: 99666
+[VIDEO_STREAM] POST-YIELD frame 66.
+[VIDEO_STREAM] Top of while True loop. Frame: 66
+[VIDEO_STREAM] Inside try block. Frame: 66
+[VIDEO_STREAM] PRE-YIELD frame 67. Size: 98658
+[VIDEO_STREAM] POST-YIELD frame 67.
+[VIDEO_STREAM] Top of while True loop. Frame: 67
+[VIDEO_STREAM] Inside try block. Frame: 67
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)[VIDEO_STREAM] PRE-YIELD frame 68. Size: 98658
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.4985901415348053
+[VIDEO_STREAM] POST-YIELD frame 68.
+[VIDEO_STREAM] Top of while True loop. Frame: 68
+[VIDEO_STREAM] Inside try block. Frame: 68
+[VIDEO_STREAM] PRE-YIELD frame 69. Size: 98658
+[VIDEO_STREAM] POST-YIELD frame 69.
+[VIDEO_STREAM] Top of while True loop. Frame: 69
+[VIDEO_STREAM] Inside try block. Frame: 69
+[VIDEO_STREAM] PRE-YIELD frame 70. Size: 98485
+[VIDEO_STREAM] POST-YIELD frame 70.
+[VIDEO_STREAM] Top of while True loop. Frame: 70
+[VIDEO_STREAM] Inside try block. Frame: 70
+[VIDEO_STREAM] PRE-YIELD frame 71. Size: 98485
+[VIDEO_STREAM] POST-YIELD frame 71.
+[VIDEO_STREAM] Top of while True loop. Frame: 71
+[VIDEO_STREAM] Inside try block. Frame: 71
+[VIDEO_STREAM] PRE-YIELD frame 72. Size: 98485
+[VIDEO_STREAM] POST-YIELD frame 72.
+[VIDEO_STREAM] Top of while True loop. Frame: 72
+[VIDEO_STREAM] Inside try block. Frame: 72
+[VIDEO_STREAM] PRE-YIELD frame 73. Size: 99165
+[VIDEO_STREAM] POST-YIELD frame 73.
+[VIDEO_STREAM] Top of while True loop. Frame: 73
+[VIDEO_STREAM] Inside try block. Frame: 73
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] PRE-YIELD frame 74. Size: 99165
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 0, 'ai_frame_process_time_ms': 1089.5, 'ram_usage_mb': 1054.3, 'cpu_usage_percent_core': ['18.8%', '97.2%', '25.7%', '13.0%']}}[VIDEO_STREAM] POST-YIELD frame 74.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 74
+[VIDEO_STREAM] Inside try block. Frame: 74
+[VIDEO_STREAM] PRE-YIELD frame 75. Size: 99096
+[VIDEO_STREAM] POST-YIELD frame 75.
+[VIDEO_STREAM] Top of while True loop. Frame: 75
+[VIDEO_STREAM] Inside try block. Frame: 75
+[VIDEO_STREAM] PRE-YIELD frame 76. Size: 98751
+[VIDEO_STREAM] POST-YIELD frame 76.
+[VIDEO_STREAM] Top of while True loop. Frame: 76
+[VIDEO_STREAM] Inside try block. Frame: 76
+[VIDEO_STREAM] PRE-YIELD frame 77. Size: 99608
+[VIDEO_STREAM] POST-YIELD frame 77.
+[VIDEO_STREAM] Top of while True loop. Frame: 77
+[VIDEO_STREAM] Inside try block. Frame: 77
+[VIDEO_STREAM] PRE-YIELD frame 78. Size: 99608
+[VIDEO_STREAM] POST-YIELD frame 78.
+[VIDEO_STREAM] Top of while True loop. Frame: 78
+[VIDEO_STREAM] Inside try block. Frame: 78
+[VIDEO_STREAM] PRE-YIELD frame 79. Size: 99608
+[VIDEO_STREAM] POST-YIELD frame 79.
+[VIDEO_STREAM] Top of while True loop. Frame: 79
+[VIDEO_STREAM] Inside try block. Frame: 79
+[VIDEO_STREAM] PRE-YIELD frame 80. Size: 100004
+[VIDEO_STREAM] POST-YIELD frame 80.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 80[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.3062570095062256
+
+[VIDEO_STREAM] Inside try block. Frame: 80
+[CAMERA_THREAD] Captured 35 frames in last ~5.01s. Approx FPS: 6.99
+[VIDEO_STREAM] PRE-YIELD frame 81. Size: 100004
+[VIDEO_STREAM] POST-YIELD frame 81.
+[VIDEO_STREAM] Top of while True loop. Frame: 81
+[VIDEO_STREAM] Inside try block. Frame: 81
+[VIDEO_STREAM] PRE-YIELD frame 82. Size: 99711
+[VIDEO_STREAM] POST-YIELD frame 82.
+[VIDEO_STREAM] Top of while True loop. Frame: 82
+[VIDEO_STREAM] Inside try block. Frame: 82
+[VIDEO_STREAM] PRE-YIELD frame 83. Size: 99711
+[VIDEO_STREAM] POST-YIELD frame 83.
+[VIDEO_STREAM] Top of while True loop. Frame: 83
+[VIDEO_STREAM] Inside try block. Frame: 83
+[VIDEO_STREAM] PRE-YIELD frame 84. Size: 99711
+[VIDEO_STREAM] POST-YIELD frame 84.
+[VIDEO_STREAM] Top of while True loop. Frame: 84
+[VIDEO_STREAM] Inside try block. Frame: 84
+[VIDEO_STREAM] PRE-YIELD frame 85. Size: 99830
+[VIDEO_STREAM] POST-YIELD frame 85.
+[VIDEO_STREAM] Top of while True loop. Frame: 85
+[VIDEO_STREAM] Inside try block. Frame: 85
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 86. Size: 99830[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6051451563835144
+[VIDEO_STREAM] POST-YIELD frame 86.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 86
+[VIDEO_STREAM] Inside try block. Frame: 86
+[VIDEO_STREAM] PRE-YIELD frame 87. Size: 99830
+[VIDEO_STREAM] POST-YIELD frame 87.
+[VIDEO_STREAM] Top of while True loop. Frame: 87
+[VIDEO_STREAM] Inside try block. Frame: 87
+[VIDEO_STREAM] PRE-YIELD frame 88. Size: 99878
+[VIDEO_STREAM] POST-YIELD frame 88.
+[VIDEO_STREAM] Top of while True loop. Frame: 88
+[VIDEO_STREAM] Inside try block. Frame: 88
+[VIDEO_STREAM] PRE-YIELD frame 89. Size: 99878
+[VIDEO_STREAM] POST-YIELD frame 89.
+[VIDEO_STREAM] Top of while True loop. Frame: 89
+[VIDEO_STREAM] Inside try block. Frame: 89
+[VIDEO_STREAM] PRE-YIELD frame 90. Size: 99878
+[VIDEO_STREAM] POST-YIELD frame 90.
+[VIDEO_STREAM] Top of while True loop. Frame: 90
+[VIDEO_STREAM] Inside try block. Frame: 90
+[VIDEO_STREAM] PRE-YIELD frame 91. Size: 99884
+[VIDEO_STREAM] POST-YIELD frame 91.
+[VIDEO_STREAM] Top of while True loop. Frame: 91
+[VIDEO_STREAM] Inside try block. Frame: 91
+[VIDEO_STREAM] PRE-YIELD frame 92. Size: 99884
+[VIDEO_STREAM] POST-YIELD frame 92.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 92[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 92
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.99, 'ai_frame_process_time_ms': 1089.5, 'ram_usage_mb': 1054.5, 'cpu_usage_percent_core': ['23.8%', '97.2%', '26.2%', '15.2%']}}
+[VIDEO_STREAM] PRE-YIELD frame 93. Size: 100193
+[VIDEO_STREAM] POST-YIELD frame 93.
+[VIDEO_STREAM] Top of while True loop. Frame: 93
+[VIDEO_STREAM] Inside try block. Frame: 93
+[VIDEO_STREAM] PRE-YIELD frame 94. Size: 100541
+[VIDEO_STREAM] POST-YIELD frame 94.
+[VIDEO_STREAM] Top of while True loop. Frame: 94
+[VIDEO_STREAM] Inside try block. Frame: 94
+[VIDEO_STREAM] PRE-YIELD frame 95. Size: 100541
+[VIDEO_STREAM] POST-YIELD frame 95.
+[VIDEO_STREAM] Top of while True loop. Frame: 95
+[VIDEO_STREAM] Inside try block. Frame: 95
+[VIDEO_STREAM] PRE-YIELD frame 96. Size: 100541
+[VIDEO_STREAM] POST-YIELD frame 96.
+[VIDEO_STREAM] Top of while True loop. Frame: 96
+[VIDEO_STREAM] Inside try block. Frame: 96
+[VIDEO_STREAM] PRE-YIELD frame 97. Size: 99970
+[VIDEO_STREAM] POST-YIELD frame 97.
+[VIDEO_STREAM] Top of while True loop. Frame: 97
+[VIDEO_STREAM] Inside try block. Frame: 97
+[VIDEO_STREAM] PRE-YIELD frame 98. Size: 99970
+[VIDEO_STREAM] POST-YIELD frame 98.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 98
+[VIDEO_STREAM] Inside try block. Frame: 98
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] PRE-YIELD frame 99. Size: 100059
+[VIDEO_STREAM] POST-YIELD frame 99.
+[VIDEO_STREAM] Top of while True loop. Frame: 99
+[VIDEO_STREAM] Inside try block. Frame: 99
+[VIDEO_STREAM] PRE-YIELD frame 100. Size: 100059
+[VIDEO_STREAM] POST-YIELD frame 100.
+[VIDEO_STREAM] Top of while True loop. Frame: 100
+[VIDEO_STREAM] Inside try block. Frame: 100
+[VIDEO_STREAM] PRE-YIELD frame 101. Size: 100059
+[VIDEO_STREAM] POST-YIELD frame 101.
+[VIDEO_STREAM] Top of while True loop. Frame: 101
+[VIDEO_STREAM] Inside try block. Frame: 101
+[VIDEO_STREAM] PRE-YIELD frame 102. Size: 100078
+[VIDEO_STREAM] POST-YIELD frame 102.
+[VIDEO_STREAM] Top of while True loop. Frame: 102
+[VIDEO_STREAM] Inside try block. Frame: 102
+[VIDEO_STREAM] PRE-YIELD frame 103. Size: 100078
+[VIDEO_STREAM] POST-YIELD frame 103.
+[VIDEO_STREAM] Top of while True loop. Frame: 103
+[VIDEO_STREAM] Inside try block. Frame: 103
+[VIDEO_STREAM] PRE-YIELD frame 104. Size: 100078
+[VIDEO_STREAM] POST-YIELD frame 104.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 104
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.5760623812675476
+[VIDEO_STREAM] Inside try block. Frame: 104
+[VIDEO_STREAM] PRE-YIELD frame 105. Size: 99880
+[VIDEO_STREAM] POST-YIELD frame 105.
+[VIDEO_STREAM] Top of while True loop. Frame: 105
+[VIDEO_STREAM] Inside try block. Frame: 105
+[VIDEO_STREAM] PRE-YIELD frame 106. Size: 99880
+[VIDEO_STREAM] POST-YIELD frame 106.
+[VIDEO_STREAM] Top of while True loop. Frame: 106
+[VIDEO_STREAM] Inside try block. Frame: 106
+[VIDEO_STREAM] PRE-YIELD frame 107. Size: 99651
+[VIDEO_STREAM] POST-YIELD frame 107.
+[VIDEO_STREAM] Top of while True loop. Frame: 107
+[VIDEO_STREAM] Inside try block. Frame: 107
+[VIDEO_STREAM] PRE-YIELD frame 108. Size: 99651
+[VIDEO_STREAM] POST-YIELD frame 108.
+[VIDEO_STREAM] Top of while True loop. Frame: 108
+[VIDEO_STREAM] Inside try block. Frame: 108
+[VIDEO_STREAM] PRE-YIELD frame 109. Size: 99413
+[VIDEO_STREAM] POST-YIELD frame 109.
+[VIDEO_STREAM] Top of while True loop. Frame: 109
+[VIDEO_STREAM] Inside try block. Frame: 109
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 110. Size: 99413[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.99, 'ai_frame_process_time_ms': 1068.9, 'ram_usage_mb': 1056.2, 'cpu_usage_percent_core': ['17.5%', '98.1%', '26.2%', '10.5%']}}[VIDEO_STREAM] POST-YIELD frame 110.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 110
+[VIDEO_STREAM] Inside try block. Frame: 110
+[VIDEO_STREAM] PRE-YIELD frame 111. Size: 99727
+[VIDEO_STREAM] POST-YIELD frame 111.
+[VIDEO_STREAM] Top of while True loop. Frame: 111
+[VIDEO_STREAM] Inside try block. Frame: 111
+[VIDEO_STREAM] PRE-YIELD frame 112. Size: 100275
+[VIDEO_STREAM] POST-YIELD frame 112.
+[VIDEO_STREAM] Top of while True loop. Frame: 112
+[VIDEO_STREAM] Inside try block. Frame: 112
+[VIDEO_STREAM] PRE-YIELD frame 113. Size: 99780
+[VIDEO_STREAM] POST-YIELD frame 113.
+[VIDEO_STREAM] Top of while True loop. Frame: 113
+[VIDEO_STREAM] Inside try block. Frame: 113
+[VIDEO_STREAM] PRE-YIELD frame 114. Size: 99780
+[VIDEO_STREAM] POST-YIELD frame 114.
+[VIDEO_STREAM] Top of while True loop. Frame: 114
+[VIDEO_STREAM] Inside try block. Frame: 114
+[VIDEO_STREAM] PRE-YIELD frame 115. Size: 99780
+[VIDEO_STREAM] POST-YIELD frame 115.
+[VIDEO_STREAM] Top of while True loop. Frame: 115
+[VIDEO_STREAM] Inside try block. Frame: 115
+[VIDEO_STREAM] PRE-YIELD frame 116. Size: 99974
+[VIDEO_STREAM] POST-YIELD frame 116.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 116
+
+[VIDEO_STREAM] Inside try block. Frame: 116
+[VIDEO_STREAM] PRE-YIELD frame 117. Size: 99974
+[VIDEO_STREAM] POST-YIELD frame 117.
+[VIDEO_STREAM] Top of while True loop. Frame: 117
+[VIDEO_STREAM] Inside try block. Frame: 117
+[VIDEO_STREAM] PRE-YIELD frame 118. Size: 100198
+[VIDEO_STREAM] POST-YIELD frame 118.
+[VIDEO_STREAM] Top of while True loop. Frame: 118
+[VIDEO_STREAM] Inside try block. Frame: 118
+[VIDEO_STREAM] PRE-YIELD frame 119. Size: 100198
+[VIDEO_STREAM] POST-YIELD frame 119.
+[VIDEO_STREAM] Top of while True loop. Frame: 119
+[VIDEO_STREAM] Inside try block. Frame: 119
+[VIDEO_STREAM] PRE-YIELD frame 120. Size: 100198
+[VIDEO_STREAM] POST-YIELD frame 120.
+[VIDEO_STREAM] Top of while True loop. Frame: 120
+[VIDEO_STREAM] Inside try block. Frame: 120
+[VIDEO_STREAM] PRE-YIELD frame 121. Size: 99924
+[VIDEO_STREAM] POST-YIELD frame 121.
+[VIDEO_STREAM] Top of while True loop. Frame: 121
+[VIDEO_STREAM] Inside try block. Frame: 121
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 122. Size: 99924
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6171479225158691
+[VIDEO_STREAM] POST-YIELD frame 122.
+[VIDEO_STREAM] Top of while True loop. Frame: 122
+[VIDEO_STREAM] Inside try block. Frame: 122
+[VIDEO_STREAM] PRE-YIELD frame 123. Size: 99924
+[VIDEO_STREAM] POST-YIELD frame 123.
+[VIDEO_STREAM] Top of while True loop. Frame: 123
+[VIDEO_STREAM] Inside try block. Frame: 123
+[VIDEO_STREAM] PRE-YIELD frame 124. Size: 100033
+[VIDEO_STREAM] POST-YIELD frame 124.
+[VIDEO_STREAM] Top of while True loop. Frame: 124
+[VIDEO_STREAM] Inside try block. Frame: 124
+[VIDEO_STREAM] PRE-YIELD frame 125. Size: 100033
+[VIDEO_STREAM] POST-YIELD frame 125.
+[VIDEO_STREAM] Top of while True loop. Frame: 125
+[VIDEO_STREAM] Inside try block. Frame: 125
+[VIDEO_STREAM] PRE-YIELD frame 126. Size: 100260
+[VIDEO_STREAM] POST-YIELD frame 126.
+[VIDEO_STREAM] Top of while True loop. Frame: 126
+[VIDEO_STREAM] Inside try block. Frame: 126
+[VIDEO_STREAM] PRE-YIELD frame 127. Size: 100260
+[VIDEO_STREAM] POST-YIELD frame 127.
+[VIDEO_STREAM] Top of while True loop. Frame: 127
+[VIDEO_STREAM] Inside try block. Frame: 127
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 128. Size: 100260[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] POST-YIELD frame 128.[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.99, 'ai_frame_process_time_ms': 1076.1, 'ram_usage_mb': 1051.6, 'cpu_usage_percent_core': ['14.0%', '97.2%', '17.0%', '25.7%']}}
+
+[VIDEO_STREAM] Top of while True loop. Frame: 128
+[VIDEO_STREAM] Inside try block. Frame: 128
+[VIDEO_STREAM] PRE-YIELD frame 129. Size: 100358
+[VIDEO_STREAM] POST-YIELD frame 129.
+[VIDEO_STREAM] Top of while True loop. Frame: 129
+[VIDEO_STREAM] Inside try block. Frame: 129
+[VIDEO_STREAM] PRE-YIELD frame 130. Size: 100202
+[VIDEO_STREAM] POST-YIELD frame 130.
+[VIDEO_STREAM] Top of while True loop. Frame: 130
+[VIDEO_STREAM] Inside try block. Frame: 130
+[VIDEO_STREAM] PRE-YIELD frame 131. Size: 100202
+[VIDEO_STREAM] POST-YIELD frame 131.
+[VIDEO_STREAM] Top of while True loop. Frame: 131
+[VIDEO_STREAM] Inside try block. Frame: 131
+[VIDEO_STREAM] PRE-YIELD frame 132. Size: 100202
+[VIDEO_STREAM] POST-YIELD frame 132.
+[VIDEO_STREAM] Top of while True loop. Frame: 132
+[VIDEO_STREAM] Inside try block. Frame: 132
+[VIDEO_STREAM] PRE-YIELD frame 133. Size: 100314
+[VIDEO_STREAM] POST-YIELD frame 133.
+[VIDEO_STREAM] Top of while True loop. Frame: 133
+[VIDEO_STREAM] Inside try block. Frame: 133
+[VIDEO_STREAM] PRE-YIELD frame 134. Size: 100314
+[VIDEO_STREAM] POST-YIELD frame 134.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 134
+
+[VIDEO_STREAM] Inside try block. Frame: 134
+[VIDEO_STREAM] PRE-YIELD frame 135. Size: 100480
+[VIDEO_STREAM] POST-YIELD frame 135.
+[VIDEO_STREAM] Top of while True loop. Frame: 135
+[VIDEO_STREAM] Inside try block. Frame: 135
+[VIDEO_STREAM] PRE-YIELD frame 136. Size: 100480
+[VIDEO_STREAM] POST-YIELD frame 136.
+[VIDEO_STREAM] Top of while True loop. Frame: 136
+[VIDEO_STREAM] Inside try block. Frame: 136
+[VIDEO_STREAM] PRE-YIELD frame 137. Size: 100480
+[VIDEO_STREAM] POST-YIELD frame 137.
+[VIDEO_STREAM] Top of while True loop. Frame: 137
+[VIDEO_STREAM] Inside try block. Frame: 137
+[VIDEO_STREAM] PRE-YIELD frame 138. Size: 100467
+[VIDEO_STREAM] POST-YIELD frame 138.
+[VIDEO_STREAM] Top of while True loop. Frame: 138
+[VIDEO_STREAM] Inside try block. Frame: 138
+[VIDEO_STREAM] PRE-YIELD frame 139. Size: 100467
+[VIDEO_STREAM] POST-YIELD frame 139.
+[VIDEO_STREAM] Top of while True loop. Frame: 139
+[VIDEO_STREAM] Inside try block. Frame: 139
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 140. Size: 100467[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6085577011108398
+
+[VIDEO_STREAM] POST-YIELD frame 140.
+[VIDEO_STREAM] Top of while True loop. Frame: 140
+[VIDEO_STREAM] Inside try block. Frame: 140
+[VIDEO_STREAM] PRE-YIELD frame 141. Size: 100563
+[VIDEO_STREAM] POST-YIELD frame 141.
+[VIDEO_STREAM] Top of while True loop. Frame: 141
+[VIDEO_STREAM] Inside try block. Frame: 141
+[VIDEO_STREAM] PRE-YIELD frame 142. Size: 100563
+[VIDEO_STREAM] POST-YIELD frame 142.
+[VIDEO_STREAM] Top of while True loop. Frame: 142
+[VIDEO_STREAM] Inside try block. Frame: 142
+[VIDEO_STREAM] PRE-YIELD frame 143. Size: 100563
+[VIDEO_STREAM] POST-YIELD frame 143.
+[VIDEO_STREAM] Top of while True loop. Frame: 143
+[VIDEO_STREAM] Inside try block. Frame: 143
+[VIDEO_STREAM] PRE-YIELD frame 144. Size: 100577
+[VIDEO_STREAM] POST-YIELD frame 144.
+[VIDEO_STREAM] Top of while True loop. Frame: 144
+[VIDEO_STREAM] Inside try block. Frame: 144
+[VIDEO_STREAM] PRE-YIELD frame 145. Size: 100577
+[VIDEO_STREAM] POST-YIELD frame 145.
+[VIDEO_STREAM] Top of while True loop. Frame: 145
+[VIDEO_STREAM] Inside try block. Frame: 145
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 146. Size: 100577[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.99, 'ai_frame_process_time_ms': 1093.0, 'ram_usage_mb': 1053.9, 'cpu_usage_percent_core': ['15.5%', '98.1%', '17.8%', '21.5%']}}
+[VIDEO_STREAM] POST-YIELD frame 146.
+[VIDEO_STREAM] Top of while True loop. Frame: 146
+[VIDEO_STREAM] Inside try block. Frame: 146
+[VIDEO_STREAM] PRE-YIELD frame 147. Size: 100023
+[VIDEO_STREAM] POST-YIELD frame 147.
+[VIDEO_STREAM] Top of while True loop. Frame: 147
+[VIDEO_STREAM] Inside try block. Frame: 147
+[VIDEO_STREAM] PRE-YIELD frame 148. Size: 99821
+[VIDEO_STREAM] POST-YIELD frame 148.
+[VIDEO_STREAM] Top of while True loop. Frame: 148
+[VIDEO_STREAM] Inside try block. Frame: 148
+[VIDEO_STREAM] PRE-YIELD frame 149. Size: 99821
+[VIDEO_STREAM] POST-YIELD frame 149.
+[VIDEO_STREAM] Top of while True loop. Frame: 149
+[VIDEO_STREAM] Inside try block. Frame: 149
+[VIDEO_STREAM] PRE-YIELD frame 150. Size: 99821
+[VIDEO_STREAM] POST-YIELD frame 150.
+[VIDEO_STREAM] Top of while True loop. Frame: 150
+[VIDEO_STREAM] Inside try block. Frame: 150
+[VIDEO_STREAM] PRE-YIELD frame 151. Size: 100320
+[VIDEO_STREAM] POST-YIELD frame 151.
+[VIDEO_STREAM] Top of while True loop. Frame: 151
+[VIDEO_STREAM] Inside try block. Frame: 151
+[VIDEO_STREAM] PRE-YIELD frame 152. Size: 100320
+[VIDEO_STREAM] POST-YIELD frame 152.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 152
+
+[VIDEO_STREAM] Inside try block. Frame: 152
+[VIDEO_STREAM] PRE-YIELD frame 153. Size: 100320
+[VIDEO_STREAM] POST-YIELD frame 153.
+[VIDEO_STREAM] Top of while True loop. Frame: 153
+[VIDEO_STREAM] Inside try block. Frame: 153
+[VIDEO_STREAM] PRE-YIELD frame 154. Size: 100719
+[VIDEO_STREAM] POST-YIELD frame 154.
+[VIDEO_STREAM] Top of while True loop. Frame: 154
+[VIDEO_STREAM] Inside try block. Frame: 154
+[VIDEO_STREAM] PRE-YIELD frame 155. Size: 100719
+[VIDEO_STREAM] POST-YIELD frame 155.
+[VIDEO_STREAM] Top of while True loop. Frame: 155
+[VIDEO_STREAM] Inside try block. Frame: 155
+[VIDEO_STREAM] PRE-YIELD frame 156. Size: 100752
+[VIDEO_STREAM] POST-YIELD frame 156.
+[VIDEO_STREAM] Top of while True loop. Frame: 156
+[VIDEO_STREAM] Inside try block. Frame: 156
+[VIDEO_STREAM] PRE-YIELD frame 157. Size: 100752
+[VIDEO_STREAM] POST-YIELD frame 157.
+[VIDEO_STREAM] Top of while True loop. Frame: 157
+[VIDEO_STREAM] Inside try block. Frame: 157
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 158. Size: 100752
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] POST-YIELD frame 158.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 158
+[VIDEO_STREAM] Inside try block. Frame: 158
+[VIDEO_STREAM] PRE-YIELD frame 159. Size: 100832
+[VIDEO_STREAM] POST-YIELD frame 159.
+[VIDEO_STREAM] Top of while True loop. Frame: 159
+[VIDEO_STREAM] Inside try block. Frame: 159
+[VIDEO_STREAM] PRE-YIELD frame 160. Size: 100832
+[VIDEO_STREAM] POST-YIELD frame 160.
+[VIDEO_STREAM] Top of while True loop. Frame: 160
+[VIDEO_STREAM] Inside try block. Frame: 160
+[VIDEO_STREAM] PRE-YIELD frame 161. Size: 100832
+[VIDEO_STREAM] POST-YIELD frame 161.
+[VIDEO_STREAM] Top of while True loop. Frame: 161
+[VIDEO_STREAM] Inside try block. Frame: 161
+[VIDEO_STREAM] PRE-YIELD frame 162. Size: 101448
+[VIDEO_STREAM] POST-YIELD frame 162.
+[VIDEO_STREAM] Top of while True loop. Frame: 162
+[VIDEO_STREAM] Inside try block. Frame: 162
+[VIDEO_STREAM] PRE-YIELD frame 163. Size: 101448
+[VIDEO_STREAM] POST-YIELD frame 163.
+[VIDEO_STREAM] Top of while True loop. Frame: 163
+[VIDEO_STREAM] Inside try block. Frame: 163
+[VIDEO_STREAM] PRE-YIELD frame 164. Size: 101448
+[VIDEO_STREAM] POST-YIELD frame 164.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 164
+
+[VIDEO_STREAM] Inside try block. Frame: 164
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.99, 'ai_frame_process_time_ms': 1097.5, 'ram_usage_mb': 1050.9, 'cpu_usage_percent_core': ['10.8%', '99.1%', '17.9%', '24.5%']}}
+[CAMERA_THREAD] Captured 34 frames in last ~5.07s. Approx FPS: 6.71
+[VIDEO_STREAM] PRE-YIELD frame 165. Size: 101393
+[VIDEO_STREAM] POST-YIELD frame 165.
+[VIDEO_STREAM] Top of while True loop. Frame: 165
+[VIDEO_STREAM] Inside try block. Frame: 165
+[VIDEO_STREAM] PRE-YIELD frame 166. Size: 104334
+[VIDEO_STREAM] POST-YIELD frame 166.
+[VIDEO_STREAM] Top of while True loop. Frame: 166
+[VIDEO_STREAM] Inside try block. Frame: 166
+[VIDEO_STREAM] PRE-YIELD frame 167. Size: 104334
+[VIDEO_STREAM] POST-YIELD frame 167.
+[VIDEO_STREAM] Top of while True loop. Frame: 167
+[VIDEO_STREAM] Inside try block. Frame: 167
+[VIDEO_STREAM] PRE-YIELD frame 168. Size: 104334
+[VIDEO_STREAM] POST-YIELD frame 168.
+[VIDEO_STREAM] Top of while True loop. Frame: 168
+[VIDEO_STREAM] Inside try block. Frame: 168
+[VIDEO_STREAM] PRE-YIELD frame 169. Size: 104964
+[VIDEO_STREAM] POST-YIELD frame 169.
+[VIDEO_STREAM] Top of while True loop. Frame: 169
+[VIDEO_STREAM] Inside try block. Frame: 169
+[VIDEO_STREAM] PRE-YIELD frame 170. Size: 104964
+[VIDEO_STREAM] POST-YIELD frame 170.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 170[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 170
+[VIDEO_STREAM] PRE-YIELD frame 171. Size: 101363
+[VIDEO_STREAM] POST-YIELD frame 171.
+[VIDEO_STREAM] Top of while True loop. Frame: 171
+[VIDEO_STREAM] Inside try block. Frame: 171
+[VIDEO_STREAM] PRE-YIELD frame 172. Size: 101363
+[VIDEO_STREAM] POST-YIELD frame 172.
+[VIDEO_STREAM] Top of while True loop. Frame: 172
+[VIDEO_STREAM] Inside try block. Frame: 172
+[VIDEO_STREAM] PRE-YIELD frame 173. Size: 101363
+[VIDEO_STREAM] POST-YIELD frame 173.
+[VIDEO_STREAM] Top of while True loop. Frame: 173
+[VIDEO_STREAM] Inside try block. Frame: 173
+[VIDEO_STREAM] PRE-YIELD frame 174. Size: 103272
+[VIDEO_STREAM] POST-YIELD frame 174.
+[VIDEO_STREAM] Top of while True loop. Frame: 174
+[VIDEO_STREAM] Inside try block. Frame: 174
+[VIDEO_STREAM] PRE-YIELD frame 175. Size: 103272
+[VIDEO_STREAM] POST-YIELD frame 175.
+[VIDEO_STREAM] Top of while True loop. Frame: 175
+[VIDEO_STREAM] Inside try block. Frame: 175
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 176. Size: 103272[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.620230495929718
+
+[VIDEO_STREAM] POST-YIELD frame 176.
+[VIDEO_STREAM] Top of while True loop. Frame: 176
+[VIDEO_STREAM] Inside try block. Frame: 176
+[VIDEO_STREAM] PRE-YIELD frame 177. Size: 103787
+[VIDEO_STREAM] POST-YIELD frame 177.
+[VIDEO_STREAM] Top of while True loop. Frame: 177
+[VIDEO_STREAM] Inside try block. Frame: 177
+[VIDEO_STREAM] PRE-YIELD frame 178. Size: 103787
+[VIDEO_STREAM] POST-YIELD frame 178.
+[VIDEO_STREAM] Top of while True loop. Frame: 178
+[VIDEO_STREAM] Inside try block. Frame: 178
+[VIDEO_STREAM] PRE-YIELD frame 179. Size: 103787
+[VIDEO_STREAM] POST-YIELD frame 179.
+[VIDEO_STREAM] Top of while True loop. Frame: 179
+[VIDEO_STREAM] Inside try block. Frame: 179
+[VIDEO_STREAM] PRE-YIELD frame 180. Size: 105871
+[VIDEO_STREAM] POST-YIELD frame 180.
+[VIDEO_STREAM] Top of while True loop. Frame: 180
+[VIDEO_STREAM] Inside try block. Frame: 180
+[VIDEO_STREAM] PRE-YIELD frame 181. Size: 105871
+[VIDEO_STREAM] POST-YIELD frame 181.
+[VIDEO_STREAM] Top of while True loop. Frame: 181
+[VIDEO_STREAM] Inside try block. Frame: 181
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 182. Size: 105871
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] POST-YIELD frame 182.[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.71, 'ai_frame_process_time_ms': 1104.0, 'ram_usage_mb': 1055.4, 'cpu_usage_percent_core': ['25.0%', '97.3%', '11.3%', '27.1%']}}
+
+[VIDEO_STREAM] Top of while True loop. Frame: 182
+[VIDEO_STREAM] Inside try block. Frame: 182
+[VIDEO_STREAM] PRE-YIELD frame 183. Size: 105025
+[VIDEO_STREAM] POST-YIELD frame 183.
+[VIDEO_STREAM] Top of while True loop. Frame: 183
+[VIDEO_STREAM] Inside try block. Frame: 183
+[VIDEO_STREAM] PRE-YIELD frame 184. Size: 105885
+[VIDEO_STREAM] POST-YIELD frame 184.
+[VIDEO_STREAM] Top of while True loop. Frame: 184
+[VIDEO_STREAM] Inside try block. Frame: 184
+[VIDEO_STREAM] PRE-YIELD frame 185. Size: 105885
+[VIDEO_STREAM] POST-YIELD frame 185.
+[VIDEO_STREAM] Top of while True loop. Frame: 185
+[VIDEO_STREAM] Inside try block. Frame: 185
+[VIDEO_STREAM] PRE-YIELD frame 186. Size: 105885
+[VIDEO_STREAM] POST-YIELD frame 186.
+[VIDEO_STREAM] Top of while True loop. Frame: 186
+[VIDEO_STREAM] Inside try block. Frame: 186
+[VIDEO_STREAM] PRE-YIELD frame 187. Size: 103258
+[VIDEO_STREAM] POST-YIELD frame 187.
+[VIDEO_STREAM] Top of while True loop. Frame: 187
+[VIDEO_STREAM] Inside try block. Frame: 187
+[VIDEO_STREAM] PRE-YIELD frame 188. Size: 103258
+[VIDEO_STREAM] POST-YIELD frame 188.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 188[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 188
+[VIDEO_STREAM] PRE-YIELD frame 189. Size: 104010
+[VIDEO_STREAM] POST-YIELD frame 189.
+[VIDEO_STREAM] Top of while True loop. Frame: 189
+[VIDEO_STREAM] Inside try block. Frame: 189
+[VIDEO_STREAM] PRE-YIELD frame 190. Size: 104010
+[VIDEO_STREAM] POST-YIELD frame 190.
+[VIDEO_STREAM] Top of while True loop. Frame: 190
+[VIDEO_STREAM] Inside try block. Frame: 190
+[VIDEO_STREAM] PRE-YIELD frame 191. Size: 104010
+[VIDEO_STREAM] POST-YIELD frame 191.
+[VIDEO_STREAM] Top of while True loop. Frame: 191
+[VIDEO_STREAM] Inside try block. Frame: 191
+[VIDEO_STREAM] PRE-YIELD frame 192. Size: 104018
+[VIDEO_STREAM] POST-YIELD frame 192.
+[VIDEO_STREAM] Top of while True loop. Frame: 192
+[VIDEO_STREAM] Inside try block. Frame: 192
+[VIDEO_STREAM] PRE-YIELD frame 193. Size: 104018
+[VIDEO_STREAM] POST-YIELD frame 193.
+[VIDEO_STREAM] Top of while True loop. Frame: 193
+[VIDEO_STREAM] Inside try block. Frame: 193
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 194. Size: 104018
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6805420517921448[VIDEO_STREAM] POST-YIELD frame 194.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 194
+[VIDEO_STREAM] Inside try block. Frame: 194
+[VIDEO_STREAM] PRE-YIELD frame 195. Size: 104204
+[VIDEO_STREAM] POST-YIELD frame 195.
+[VIDEO_STREAM] Top of while True loop. Frame: 195
+[VIDEO_STREAM] Inside try block. Frame: 195
+[VIDEO_STREAM] PRE-YIELD frame 196. Size: 104204
+[VIDEO_STREAM] POST-YIELD frame 196.
+[VIDEO_STREAM] Top of while True loop. Frame: 196
+[VIDEO_STREAM] Inside try block. Frame: 196
+[VIDEO_STREAM] PRE-YIELD frame 197. Size: 104204
+[VIDEO_STREAM] POST-YIELD frame 197.
+[VIDEO_STREAM] Top of while True loop. Frame: 197
+[VIDEO_STREAM] Inside try block. Frame: 197
+[VIDEO_STREAM] PRE-YIELD frame 198. Size: 105492
+[VIDEO_STREAM] POST-YIELD frame 198.
+[VIDEO_STREAM] Top of while True loop. Frame: 198
+[VIDEO_STREAM] Inside try block. Frame: 198
+[VIDEO_STREAM] PRE-YIELD frame 199. Size: 105492
+[VIDEO_STREAM] POST-YIELD frame 199.
+[VIDEO_STREAM] Top of while True loop. Frame: 199
+[VIDEO_STREAM] Inside try block. Frame: 199
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.71, 'ai_frame_process_time_ms': 1078.3, 'ram_usage_mb': 1054.2, 'cpu_usage_percent_core': ['14.7%', '99.1%', '10.4%', '35.2%']}}
+[VIDEO_STREAM] PRE-YIELD frame 200. Size: 105492
+[VIDEO_STREAM] POST-YIELD frame 200.
+[VIDEO_STREAM] Top of while True loop. Frame: 200
+[VIDEO_STREAM] Inside try block. Frame: 200
+[VIDEO_STREAM] PRE-YIELD frame 201. Size: 100717
+[VIDEO_STREAM] POST-YIELD frame 201.
+[VIDEO_STREAM] Top of while True loop. Frame: 201
+[VIDEO_STREAM] Inside try block. Frame: 201
+[VIDEO_STREAM] PRE-YIELD frame 202. Size: 105709
+[VIDEO_STREAM] POST-YIELD frame 202.
+[VIDEO_STREAM] Top of while True loop. Frame: 202
+[VIDEO_STREAM] Inside try block. Frame: 202
+[VIDEO_STREAM] PRE-YIELD frame 203. Size: 105709
+[VIDEO_STREAM] POST-YIELD frame 203.
+[VIDEO_STREAM] Top of while True loop. Frame: 203
+[VIDEO_STREAM] Inside try block. Frame: 203
+[VIDEO_STREAM] PRE-YIELD frame 204. Size: 105709
+[VIDEO_STREAM] POST-YIELD frame 204.
+[VIDEO_STREAM] Top of while True loop. Frame: 204
+[VIDEO_STREAM] Inside try block. Frame: 204
+[VIDEO_STREAM] PRE-YIELD frame 205. Size: 101784
+[VIDEO_STREAM] POST-YIELD frame 205.
+[VIDEO_STREAM] Top of while True loop. Frame: 205
+[VIDEO_STREAM] Inside try block. Frame: 205
+[VIDEO_STREAM] PRE-YIELD frame 206. Size: 101784
+[VIDEO_STREAM] POST-YIELD frame 206.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 206
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Inside try block. Frame: 206
+[VIDEO_STREAM] PRE-YIELD frame 207. Size: 100781
+[VIDEO_STREAM] POST-YIELD frame 207.
+[VIDEO_STREAM] Top of while True loop. Frame: 207
+[VIDEO_STREAM] Inside try block. Frame: 207
+[VIDEO_STREAM] PRE-YIELD frame 208. Size: 100781
+[VIDEO_STREAM] POST-YIELD frame 208.
+[VIDEO_STREAM] Top of while True loop. Frame: 208
+[VIDEO_STREAM] Inside try block. Frame: 208
+[VIDEO_STREAM] PRE-YIELD frame 209. Size: 100781
+[VIDEO_STREAM] POST-YIELD frame 209.
+[VIDEO_STREAM] Top of while True loop. Frame: 209
+[VIDEO_STREAM] Inside try block. Frame: 209
+[VIDEO_STREAM] PRE-YIELD frame 210. Size: 100467
+[VIDEO_STREAM] POST-YIELD frame 210.
+[VIDEO_STREAM] Top of while True loop. Frame: 210
+[VIDEO_STREAM] Inside try block. Frame: 210
+[VIDEO_STREAM] PRE-YIELD frame 211. Size: 100467
+[VIDEO_STREAM] POST-YIELD frame 211.
+[VIDEO_STREAM] Top of while True loop. Frame: 211
+[VIDEO_STREAM] Inside try block. Frame: 211
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 212. Size: 100467[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.34098944067955017
+
+[VIDEO_STREAM] POST-YIELD frame 212.
+[VIDEO_STREAM] Top of while True loop. Frame: 212
+[VIDEO_STREAM] Inside try block. Frame: 212
+[VIDEO_STREAM] PRE-YIELD frame 213. Size: 102221
+[VIDEO_STREAM] POST-YIELD frame 213.
+[VIDEO_STREAM] Top of while True loop. Frame: 213
+[VIDEO_STREAM] Inside try block. Frame: 213
+[VIDEO_STREAM] PRE-YIELD frame 214. Size: 102221
+[VIDEO_STREAM] POST-YIELD frame 214.
+[VIDEO_STREAM] Top of while True loop. Frame: 214
+[VIDEO_STREAM] Inside try block. Frame: 214
+[VIDEO_STREAM] PRE-YIELD frame 215. Size: 102221
+[VIDEO_STREAM] POST-YIELD frame 215.
+[VIDEO_STREAM] Top of while True loop. Frame: 215
+[VIDEO_STREAM] Inside try block. Frame: 215
+[VIDEO_STREAM] PRE-YIELD frame 216. Size: 104313
+[VIDEO_STREAM] POST-YIELD frame 216.
+[VIDEO_STREAM] Top of while True loop. Frame: 216
+[VIDEO_STREAM] Inside try block. Frame: 216
+[VIDEO_STREAM] PRE-YIELD frame 217. Size: 104313
+[VIDEO_STREAM] POST-YIELD frame 217.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 217
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Inside try block. Frame: 217
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.71, 'ai_frame_process_time_ms': 1080.0, 'ram_usage_mb': 1052.2, 'cpu_usage_percent_core': ['12.9%', '100.0%', '4.8%', '34.6%']}}
+[VIDEO_STREAM] PRE-YIELD frame 218. Size: 109580
+[VIDEO_STREAM] POST-YIELD frame 218.
+[VIDEO_STREAM] Top of while True loop. Frame: 218
+[VIDEO_STREAM] Inside try block. Frame: 218
+[VIDEO_STREAM] PRE-YIELD frame 219. Size: 109469
+[VIDEO_STREAM] POST-YIELD frame 219.
+[VIDEO_STREAM] Top of while True loop. Frame: 219
+[VIDEO_STREAM] Inside try block. Frame: 219
+[VIDEO_STREAM] PRE-YIELD frame 220. Size: 109469
+[VIDEO_STREAM] POST-YIELD frame 220.
+[VIDEO_STREAM] Top of while True loop. Frame: 220
+[VIDEO_STREAM] Inside try block. Frame: 220
+[VIDEO_STREAM] PRE-YIELD frame 221. Size: 109469
+[VIDEO_STREAM] POST-YIELD frame 221.
+[VIDEO_STREAM] Top of while True loop. Frame: 221
+[VIDEO_STREAM] Inside try block. Frame: 221
+[VIDEO_STREAM] PRE-YIELD frame 222. Size: 109315
+[VIDEO_STREAM] POST-YIELD frame 222.
+[VIDEO_STREAM] Top of while True loop. Frame: 222
+[VIDEO_STREAM] Inside try block. Frame: 222
+[VIDEO_STREAM] PRE-YIELD frame 223. Size: 109315
+[VIDEO_STREAM] POST-YIELD frame 223.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 223
+[VIDEO_STREAM] Inside try block. Frame: 223[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] PRE-YIELD frame 224. Size: 108236
+[VIDEO_STREAM] POST-YIELD frame 224.
+[VIDEO_STREAM] Top of while True loop. Frame: 224
+[VIDEO_STREAM] Inside try block. Frame: 224
+[VIDEO_STREAM] PRE-YIELD frame 225. Size: 108236
+[VIDEO_STREAM] POST-YIELD frame 225.
+[VIDEO_STREAM] Top of while True loop. Frame: 225
+[VIDEO_STREAM] Inside try block. Frame: 225
+[VIDEO_STREAM] PRE-YIELD frame 226. Size: 108236
+[VIDEO_STREAM] POST-YIELD frame 226.
+[VIDEO_STREAM] Top of while True loop. Frame: 226
+[VIDEO_STREAM] Inside try block. Frame: 226
+[VIDEO_STREAM] PRE-YIELD frame 227. Size: 107598
+[VIDEO_STREAM] POST-YIELD frame 227.
+[VIDEO_STREAM] Top of while True loop. Frame: 227
+[VIDEO_STREAM] Inside try block. Frame: 227
+[VIDEO_STREAM] PRE-YIELD frame 228. Size: 107598
+[VIDEO_STREAM] POST-YIELD frame 228.
+[VIDEO_STREAM] Top of while True loop. Frame: 228
+[VIDEO_STREAM] Inside try block. Frame: 228
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] PRE-YIELD frame 229. Size: 107598
+[VIDEO_STREAM] POST-YIELD frame 229.
+[VIDEO_STREAM] Top of while True loop. Frame: 229
+[VIDEO_STREAM] Inside try block. Frame: 229
+[VIDEO_STREAM] PRE-YIELD frame 230. Size: 108380
+[VIDEO_STREAM] POST-YIELD frame 230.
+[VIDEO_STREAM] Top of while True loop. Frame: 230
+[VIDEO_STREAM] Inside try block. Frame: 230
+[VIDEO_STREAM] PRE-YIELD frame 231. Size: 108380
+[VIDEO_STREAM] POST-YIELD frame 231.
+[VIDEO_STREAM] Top of while True loop. Frame: 231
+[VIDEO_STREAM] Inside try block. Frame: 231
+[VIDEO_STREAM] PRE-YIELD frame 232. Size: 108380
+[VIDEO_STREAM] POST-YIELD frame 232.
+[VIDEO_STREAM] Top of while True loop. Frame: 232
+[VIDEO_STREAM] Inside try block. Frame: 232
+[VIDEO_STREAM] PRE-YIELD frame 233. Size: 107784
+[VIDEO_STREAM] POST-YIELD frame 233.
+[VIDEO_STREAM] Top of while True loop. Frame: 233
+[VIDEO_STREAM] Inside try block. Frame: 233
+[VIDEO_STREAM] PRE-YIELD frame 234. Size: 107784
+[VIDEO_STREAM] POST-YIELD frame 234.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Top of while True loop. Frame: 234
+[VIDEO_STREAM] Inside try block. Frame: 234
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.71, 'ai_frame_process_time_ms': 1072.7, 'ram_usage_mb': 1049.3, 'cpu_usage_percent_core': ['21.6%', '98.1%', '17.8%', '18.3%']}}
+[VIDEO_STREAM] PRE-YIELD frame 235. Size: 106427
+[VIDEO_STREAM] POST-YIELD frame 235.
+[VIDEO_STREAM] Top of while True loop. Frame: 235
+[VIDEO_STREAM] Inside try block. Frame: 235
+[VIDEO_STREAM] PRE-YIELD frame 236. Size: 106296
+[VIDEO_STREAM] POST-YIELD frame 236.
+[VIDEO_STREAM] Top of while True loop. Frame: 236
+[VIDEO_STREAM] Inside try block. Frame: 236
+[VIDEO_STREAM] PRE-YIELD frame 237. Size: 106296
+[VIDEO_STREAM] POST-YIELD frame 237.
+[VIDEO_STREAM] Top of while True loop. Frame: 237
+[VIDEO_STREAM] Inside try block. Frame: 237
+[VIDEO_STREAM] PRE-YIELD frame 238. Size: 106296
+[VIDEO_STREAM] POST-YIELD frame 238.
+[VIDEO_STREAM] Top of while True loop. Frame: 238
+[VIDEO_STREAM] Inside try block. Frame: 238
+[VIDEO_STREAM] PRE-YIELD frame 239. Size: 108666
+[VIDEO_STREAM] POST-YIELD frame 239.
+[VIDEO_STREAM] Top of while True loop. Frame: 239
+[VIDEO_STREAM] Inside try block. Frame: 239
+[VIDEO_STREAM] PRE-YIELD frame 240. Size: 108666
+[VIDEO_STREAM] POST-YIELD frame 240.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 1, MaxConfidence: 0.3474348485469818
+[VIDEO_STREAM] Top of while True loop. Frame: 240
+[VIDEO_STREAM] Inside try block. Frame: 240
+[VIDEO_STREAM] PRE-YIELD frame 241. Size: 107706
+[VIDEO_STREAM] POST-YIELD frame 241.
+[VIDEO_STREAM] Top of while True loop. Frame: 241
+[VIDEO_STREAM] Inside try block. Frame: 241
+[VIDEO_STREAM] PRE-YIELD frame 242. Size: 107706
+[VIDEO_STREAM] POST-YIELD frame 242.
+[VIDEO_STREAM] Top of while True loop. Frame: 242
+[VIDEO_STREAM] Inside try block. Frame: 242
+[VIDEO_STREAM] PRE-YIELD frame 243. Size: 107706
+[VIDEO_STREAM] POST-YIELD frame 243.
+[VIDEO_STREAM] Top of while True loop. Frame: 243
+[VIDEO_STREAM] Inside try block. Frame: 243
+[VIDEO_STREAM] PRE-YIELD frame 244. Size: 104626
+[VIDEO_STREAM] POST-YIELD frame 244.
+[VIDEO_STREAM] Top of while True loop. Frame: 244
+[VIDEO_STREAM] Inside try block. Frame: 244
+[VIDEO_STREAM] PRE-YIELD frame 245. Size: 104626
+[VIDEO_STREAM] POST-YIELD frame 245.
+[VIDEO_STREAM] Top of while True loop. Frame: 245
+[VIDEO_STREAM] Inside try block. Frame: 245
+[VIDEO_STREAM] PRE-YIELD frame 246. Size: 104626
+[VIDEO_STREAM] POST-YIELD frame 246.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 246[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 246
+[VIDEO_STREAM] PRE-YIELD frame 247. Size: 105095
+[VIDEO_STREAM] POST-YIELD frame 247.
+[VIDEO_STREAM] Top of while True loop. Frame: 247
+[VIDEO_STREAM] Inside try block. Frame: 247
+[VIDEO_STREAM] PRE-YIELD frame 248. Size: 105095
+[VIDEO_STREAM] POST-YIELD frame 248.
+[CAMERA_THREAD] Captured 33 frames in last ~5.17s. Approx FPS: 6.38
+[VIDEO_STREAM] Top of while True loop. Frame: 248
+[VIDEO_STREAM] Inside try block. Frame: 248
+[VIDEO_STREAM] PRE-YIELD frame 249. Size: 105095
+[VIDEO_STREAM] POST-YIELD frame 249.
+[VIDEO_STREAM] Top of while True loop. Frame: 249
+[VIDEO_STREAM] Inside try block. Frame: 249
+[VIDEO_STREAM] PRE-YIELD frame 250. Size: 107126
+[VIDEO_STREAM] POST-YIELD frame 250.
+[VIDEO_STREAM] Top of while True loop. Frame: 250
+[VIDEO_STREAM] Inside try block. Frame: 250
+[VIDEO_STREAM] PRE-YIELD frame 251. Size: 107126
+[VIDEO_STREAM] POST-YIELD frame 251.
+[VIDEO_STREAM] Top of while True loop. Frame: 251
+[VIDEO_STREAM] Inside try block. Frame: 251
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 252. Size: 107126
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] POST-YIELD frame 252.
+
+[VIDEO_STREAM] Top of while True loop. Frame: 252
+[VIDEO_STREAM] Inside try block. Frame: 252
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Close Eye', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.38, 'ai_frame_process_time_ms': 1087.1, 'ram_usage_mb': 1053.9, 'cpu_usage_percent_core': ['24.5%', '98.2%', '21.4%', '13.8%']}}
+[VIDEO_STREAM] PRE-YIELD frame 253. Size: 114538
+[VIDEO_STREAM] POST-YIELD frame 253.
+[VIDEO_STREAM] Top of while True loop. Frame: 253
+[VIDEO_STREAM] Inside try block. Frame: 253
+[VIDEO_STREAM] PRE-YIELD frame 254. Size: 116750
+[VIDEO_STREAM] POST-YIELD frame 254.
+[VIDEO_STREAM] Top of while True loop. Frame: 254
+[VIDEO_STREAM] Inside try block. Frame: 254
+[VIDEO_STREAM] PRE-YIELD frame 255. Size: 116750
+[VIDEO_STREAM] POST-YIELD frame 255.
+[VIDEO_STREAM] Top of while True loop. Frame: 255
+[VIDEO_STREAM] Inside try block. Frame: 255
+[VIDEO_STREAM] PRE-YIELD frame 256. Size: 116750
+[VIDEO_STREAM] POST-YIELD frame 256.
+[VIDEO_STREAM] Top of while True loop. Frame: 256
+[VIDEO_STREAM] Inside try block. Frame: 256
+[VIDEO_STREAM] PRE-YIELD frame 257. Size: 114194
+[VIDEO_STREAM] POST-YIELD frame 257.
+[VIDEO_STREAM] Top of while True loop. Frame: 257
+[VIDEO_STREAM] Inside try block. Frame: 257
+[VIDEO_STREAM] PRE-YIELD frame 258. Size: 114194
+[VIDEO_STREAM] POST-YIELD frame 258.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.30173394083976746[VIDEO_STREAM] Top of while True loop. Frame: 258
+
+[VIDEO_STREAM] Inside try block. Frame: 258
+[VIDEO_STREAM] PRE-YIELD frame 259. Size: 114194
+[VIDEO_STREAM] POST-YIELD frame 259.
+[VIDEO_STREAM] Top of while True loop. Frame: 259
+[VIDEO_STREAM] Inside try block. Frame: 259
+[VIDEO_STREAM] PRE-YIELD frame 260. Size: 114899
+[VIDEO_STREAM] POST-YIELD frame 260.
+[VIDEO_STREAM] Top of while True loop. Frame: 260
+[VIDEO_STREAM] Inside try block. Frame: 260
+[VIDEO_STREAM] PRE-YIELD frame 261. Size: 114899
+[VIDEO_STREAM] POST-YIELD frame 261.
+[VIDEO_STREAM] Top of while True loop. Frame: 261
+[VIDEO_STREAM] Inside try block. Frame: 261
+[VIDEO_STREAM] PRE-YIELD frame 262. Size: 112037
+[VIDEO_STREAM] POST-YIELD frame 262.
+[VIDEO_STREAM] Top of while True loop. Frame: 262
+[VIDEO_STREAM] Inside try block. Frame: 262
+[VIDEO_STREAM] PRE-YIELD frame 263. Size: 112037
+[VIDEO_STREAM] POST-YIELD frame 263.
+[VIDEO_STREAM] Top of while True loop. Frame: 263
+[VIDEO_STREAM] Inside try block. Frame: 263
+[VIDEO_STREAM] PRE-YIELD frame 264. Size: 112037
+[VIDEO_STREAM] POST-YIELD frame 264.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 264[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 264
+[VIDEO_STREAM] PRE-YIELD frame 265. Size: 112737
+[VIDEO_STREAM] POST-YIELD frame 265.
+[VIDEO_STREAM] Top of while True loop. Frame: 265
+[VIDEO_STREAM] Inside try block. Frame: 265
+[VIDEO_STREAM] PRE-YIELD frame 266. Size: 112737
+[VIDEO_STREAM] POST-YIELD frame 266.
+[VIDEO_STREAM] Top of while True loop. Frame: 266
+[VIDEO_STREAM] Inside try block. Frame: 266
+[VIDEO_STREAM] PRE-YIELD frame 267. Size: 112737
+[VIDEO_STREAM] POST-YIELD frame 267.
+[VIDEO_STREAM] Top of while True loop. Frame: 267
+[VIDEO_STREAM] Inside try block. Frame: 267
+[VIDEO_STREAM] PRE-YIELD frame 268. Size: 111726
+[VIDEO_STREAM] POST-YIELD frame 268.
+[VIDEO_STREAM] Top of while True loop. Frame: 268
+[VIDEO_STREAM] Inside try block. Frame: 268
+[VIDEO_STREAM] PRE-YIELD frame 269. Size: 111726
+[VIDEO_STREAM] POST-YIELD frame 269.
+[VIDEO_STREAM] Top of while True loop. Frame: 269
+[VIDEO_STREAM] Inside try block. Frame: 269
+[VIDEO_STREAM] PRE-YIELD frame 270. Size: 111726
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[VIDEO_STREAM] POST-YIELD frame 270.[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 270
+[VIDEO_STREAM] Inside try block. Frame: 270
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.38, 'ai_frame_process_time_ms': 1075.2, 'ram_usage_mb': 1056.6, 'cpu_usage_percent_core': ['32.4%', '100.0%', '15.7%', '6.7%']}}
+[VIDEO_STREAM] PRE-YIELD frame 271. Size: 118644
+[VIDEO_STREAM] POST-YIELD frame 271.
+[VIDEO_STREAM] Top of while True loop. Frame: 271
+[VIDEO_STREAM] Inside try block. Frame: 271
+[VIDEO_STREAM] PRE-YIELD frame 272. Size: 119092
+[VIDEO_STREAM] POST-YIELD frame 272.
+[VIDEO_STREAM] Top of while True loop. Frame: 272
+[VIDEO_STREAM] Inside try block. Frame: 272
+[VIDEO_STREAM] PRE-YIELD frame 273. Size: 119092
+[VIDEO_STREAM] POST-YIELD frame 273.
+[VIDEO_STREAM] Top of while True loop. Frame: 273
+[VIDEO_STREAM] Inside try block. Frame: 273
+[VIDEO_STREAM] PRE-YIELD frame 274. Size: 119092
+[VIDEO_STREAM] POST-YIELD frame 274.
+[VIDEO_STREAM] Top of while True loop. Frame: 274
+[VIDEO_STREAM] Inside try block. Frame: 274
+[VIDEO_STREAM] PRE-YIELD frame 275. Size: 124492
+[VIDEO_STREAM] POST-YIELD frame 275.
+[VIDEO_STREAM] Top of while True loop. Frame: 275
+[VIDEO_STREAM] Inside try block. Frame: 275
+[VIDEO_STREAM] PRE-YIELD frame 276. Size: 124492
+[VIDEO_STREAM] POST-YIELD frame 276.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 276[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Inside try block. Frame: 276
+
+[VIDEO_STREAM] PRE-YIELD frame 277. Size: 124492
+[VIDEO_STREAM] POST-YIELD frame 277.
+[VIDEO_STREAM] Top of while True loop. Frame: 277
+[VIDEO_STREAM] Inside try block. Frame: 277
+[VIDEO_STREAM] PRE-YIELD frame 278. Size: 124110
+[VIDEO_STREAM] POST-YIELD frame 278.
+[VIDEO_STREAM] Top of while True loop. Frame: 278
+[VIDEO_STREAM] Inside try block. Frame: 278
+[VIDEO_STREAM] PRE-YIELD frame 279. Size: 124110
+[VIDEO_STREAM] POST-YIELD frame 279.
+[VIDEO_STREAM] Top of while True loop. Frame: 279
+[VIDEO_STREAM] Inside try block. Frame: 279
+[VIDEO_STREAM] PRE-YIELD frame 280. Size: 116977
+[VIDEO_STREAM] POST-YIELD frame 280.
+[VIDEO_STREAM] Top of while True loop. Frame: 280
+[VIDEO_STREAM] Inside try block. Frame: 280
+[VIDEO_STREAM] PRE-YIELD frame 281. Size: 116977
+[VIDEO_STREAM] POST-YIELD frame 281.
+[VIDEO_STREAM] Top of while True loop. Frame: 281
+[VIDEO_STREAM] Inside try block. Frame: 281
+[VIDEO_STREAM] PRE-YIELD frame 282. Size: 116977
+[VIDEO_STREAM] POST-YIELD frame 282.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.5117059946060181[VIDEO_STREAM] Top of while True loop. Frame: 282
+
+[VIDEO_STREAM] Inside try block. Frame: 282
+[VIDEO_STREAM] PRE-YIELD frame 283. Size: 116977
+[VIDEO_STREAM] POST-YIELD frame 283.
+[VIDEO_STREAM] Top of while True loop. Frame: 283
+[VIDEO_STREAM] Inside try block. Frame: 283
+[VIDEO_STREAM] PRE-YIELD frame 284. Size: 115838
+[VIDEO_STREAM] POST-YIELD frame 284.
+[VIDEO_STREAM] Top of while True loop. Frame: 284
+[VIDEO_STREAM] Inside try block. Frame: 284
+[VIDEO_STREAM] PRE-YIELD frame 285. Size: 115838
+[VIDEO_STREAM] POST-YIELD frame 285.
+[VIDEO_STREAM] Top of while True loop. Frame: 285
+[VIDEO_STREAM] Inside try block. Frame: 285
+[VIDEO_STREAM] PRE-YIELD frame 286. Size: 115297
+[VIDEO_STREAM] POST-YIELD frame 286.
+[VIDEO_STREAM] Top of while True loop. Frame: 286
+[VIDEO_STREAM] Inside try block. Frame: 286
+[VIDEO_STREAM] PRE-YIELD frame 287. Size: 115297
+[VIDEO_STREAM] POST-YIELD frame 287.
+[VIDEO_STREAM] Top of while True loop. Frame: 287
+[VIDEO_STREAM] Inside try block. Frame: 287
+[VIDEO_STREAM] PRE-YIELD frame 288. Size: 115297[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] POST-YIELD frame 288.[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Top of while True loop. Frame: 288
+[VIDEO_STREAM] Inside try block. Frame: 288
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.38, 'ai_frame_process_time_ms': 1084.7, 'ram_usage_mb': 1056.6, 'cpu_usage_percent_core': ['25.7%', '98.1%', '15.6%', '15.9%']}}
+[VIDEO_STREAM] PRE-YIELD frame 289. Size: 115909
+[VIDEO_STREAM] POST-YIELD frame 289.
+[VIDEO_STREAM] Top of while True loop. Frame: 289
+[VIDEO_STREAM] Inside try block. Frame: 289
+[VIDEO_STREAM] PRE-YIELD frame 290. Size: 115916
+[VIDEO_STREAM] POST-YIELD frame 290.
+[VIDEO_STREAM] Top of while True loop. Frame: 290
+[VIDEO_STREAM] Inside try block. Frame: 290
+[VIDEO_STREAM] PRE-YIELD frame 291. Size: 115916
+[VIDEO_STREAM] POST-YIELD frame 291.
+[VIDEO_STREAM] Top of while True loop. Frame: 291
+[VIDEO_STREAM] Inside try block. Frame: 291
+[VIDEO_STREAM] PRE-YIELD frame 292. Size: 115916
+[VIDEO_STREAM] POST-YIELD frame 292.
+[VIDEO_STREAM] Top of while True loop. Frame: 292
+[VIDEO_STREAM] Inside try block. Frame: 292
+[VIDEO_STREAM] PRE-YIELD frame 293. Size: 116054
+[VIDEO_STREAM] POST-YIELD frame 293.
+[VIDEO_STREAM] Top of while True loop. Frame: 293
+[VIDEO_STREAM] Inside try block. Frame: 293
+[VIDEO_STREAM] PRE-YIELD frame 294. Size: 116054
+[VIDEO_STREAM] POST-YIELD frame 294.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 294
+
+[VIDEO_STREAM] Inside try block. Frame: 294
+[VIDEO_STREAM] PRE-YIELD frame 295. Size: 116054
+[VIDEO_STREAM] POST-YIELD frame 295.
+[VIDEO_STREAM] Top of while True loop. Frame: 295
+[VIDEO_STREAM] Inside try block. Frame: 295
+[VIDEO_STREAM] PRE-YIELD frame 296. Size: 120061
+[VIDEO_STREAM] POST-YIELD frame 296.
+[VIDEO_STREAM] Top of while True loop. Frame: 296
+[VIDEO_STREAM] Inside try block. Frame: 296
+[VIDEO_STREAM] PRE-YIELD frame 297. Size: 120061
+[VIDEO_STREAM] POST-YIELD frame 297.
+[VIDEO_STREAM] Top of while True loop. Frame: 297
+[VIDEO_STREAM] Inside try block. Frame: 297
+[VIDEO_STREAM] PRE-YIELD frame 298. Size: 119917
+[VIDEO_STREAM] POST-YIELD frame 298.
+[VIDEO_STREAM] Top of while True loop. Frame: 298
+[VIDEO_STREAM] Inside try block. Frame: 298
+[VIDEO_STREAM] PRE-YIELD frame 299. Size: 119917
+[VIDEO_STREAM] POST-YIELD frame 299.
+[VIDEO_STREAM] Top of while True loop. Frame: 299
+[VIDEO_STREAM] Inside try block. Frame: 299
+[VIDEO_STREAM] PRE-YIELD frame 300. Size: 119917
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] POST-YIELD frame 300.
+[VIDEO_STREAM] Top of while True loop. Frame: 300
+[VIDEO_STREAM] Inside try block. Frame: 300
+[VIDEO_STREAM] PRE-YIELD frame 301. Size: 119917
+[VIDEO_STREAM] POST-YIELD frame 301.
+[VIDEO_STREAM] Top of while True loop. Frame: 301
+[VIDEO_STREAM] Inside try block. Frame: 301
+[VIDEO_STREAM] PRE-YIELD frame 302. Size: 120321
+[VIDEO_STREAM] POST-YIELD frame 302.
+[VIDEO_STREAM] Top of while True loop. Frame: 302
+[VIDEO_STREAM] Inside try block. Frame: 302
+[VIDEO_STREAM] PRE-YIELD frame 303. Size: 120321
+[VIDEO_STREAM] POST-YIELD frame 303.
+[VIDEO_STREAM] Top of while True loop. Frame: 303
+[VIDEO_STREAM] Inside try block. Frame: 303
+[VIDEO_STREAM] PRE-YIELD frame 304. Size: 121111
+[VIDEO_STREAM] POST-YIELD frame 304.
+[VIDEO_STREAM] Top of while True loop. Frame: 304
+[VIDEO_STREAM] Inside try block. Frame: 304
+[VIDEO_STREAM] PRE-YIELD frame 305. Size: 121111
+[VIDEO_STREAM] POST-YIELD frame 305.
+[VIDEO_STREAM] Top of while True loop. Frame: 305
+[VIDEO_STREAM] Inside try block. Frame: 305
+[VIDEO_STREAM] PRE-YIELD frame 306. Size: 121111
+[VIDEO_STREAM] POST-YIELD frame 306.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 306[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 306
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.38, 'ai_frame_process_time_ms': 1083.1, 'ram_usage_mb': 1056.6, 'cpu_usage_percent_core': ['33.3%', '98.2%', '24.1%', '4.7%']}}
+[VIDEO_STREAM] PRE-YIELD frame 307. Size: 117644
+[VIDEO_STREAM] POST-YIELD frame 307.
+[VIDEO_STREAM] Top of while True loop. Frame: 307
+[VIDEO_STREAM] Inside try block. Frame: 307
+[VIDEO_STREAM] PRE-YIELD frame 308. Size: 118143
+[VIDEO_STREAM] POST-YIELD frame 308.
+[VIDEO_STREAM] Top of while True loop. Frame: 308
+[VIDEO_STREAM] Inside try block. Frame: 308
+[VIDEO_STREAM] PRE-YIELD frame 309. Size: 118143
+[VIDEO_STREAM] POST-YIELD frame 309.
+[VIDEO_STREAM] Top of while True loop. Frame: 309
+[VIDEO_STREAM] Inside try block. Frame: 309
+[VIDEO_STREAM] PRE-YIELD frame 310. Size: 118143
+[VIDEO_STREAM] POST-YIELD frame 310.
+[VIDEO_STREAM] Top of while True loop. Frame: 310
+[VIDEO_STREAM] Inside try block. Frame: 310
+[VIDEO_STREAM] PRE-YIELD frame 311. Size: 118226
+[VIDEO_STREAM] POST-YIELD frame 311.
+[VIDEO_STREAM] Top of while True loop. Frame: 311
+[VIDEO_STREAM] Inside try block. Frame: 311
+[VIDEO_STREAM] PRE-YIELD frame 312. Size: 118226
+[VIDEO_STREAM] POST-YIELD frame 312.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 312
+
+[VIDEO_STREAM] Inside try block. Frame: 312
+[VIDEO_STREAM] PRE-YIELD frame 313. Size: 117825
+[VIDEO_STREAM] POST-YIELD frame 313.
+[VIDEO_STREAM] Top of while True loop. Frame: 313
+[VIDEO_STREAM] Inside try block. Frame: 313
+[VIDEO_STREAM] PRE-YIELD frame 314. Size: 117825
+[VIDEO_STREAM] POST-YIELD frame 314.
+[VIDEO_STREAM] Top of while True loop. Frame: 314
+[VIDEO_STREAM] Inside try block. Frame: 314
+[VIDEO_STREAM] PRE-YIELD frame 315. Size: 117825
+[VIDEO_STREAM] POST-YIELD frame 315.
+[VIDEO_STREAM] Top of while True loop. Frame: 315
+[VIDEO_STREAM] Inside try block. Frame: 315
+[VIDEO_STREAM] PRE-YIELD frame 316. Size: 118355
+[VIDEO_STREAM] POST-YIELD frame 316.
+[VIDEO_STREAM] Top of while True loop. Frame: 316
+[VIDEO_STREAM] Inside try block. Frame: 316
+[VIDEO_STREAM] PRE-YIELD frame 317. Size: 118355
+[VIDEO_STREAM] POST-YIELD frame 317.
+[VIDEO_STREAM] Top of while True loop. Frame: 317
+[VIDEO_STREAM] Inside try block. Frame: 317
+[VIDEO_STREAM] PRE-YIELD frame 318. Size: 118355
+[VIDEO_STREAM] POST-YIELD frame 318.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 318
+
+[VIDEO_STREAM] Inside try block. Frame: 318
+[VIDEO_STREAM] PRE-YIELD frame 319. Size: 118266
+[VIDEO_STREAM] POST-YIELD frame 319.
+[VIDEO_STREAM] Top of while True loop. Frame: 319
+[VIDEO_STREAM] Inside try block. Frame: 319
+[VIDEO_STREAM] PRE-YIELD frame 320. Size: 118266
+[VIDEO_STREAM] POST-YIELD frame 320.
+[VIDEO_STREAM] Top of while True loop. Frame: 320
+[VIDEO_STREAM] Inside try block. Frame: 320
+[VIDEO_STREAM] PRE-YIELD frame 321. Size: 118266
+[VIDEO_STREAM] POST-YIELD frame 321.
+[VIDEO_STREAM] Top of while True loop. Frame: 321
+[VIDEO_STREAM] Inside try block. Frame: 321
+[VIDEO_STREAM] PRE-YIELD frame 322. Size: 118908
+[VIDEO_STREAM] POST-YIELD frame 322.
+[VIDEO_STREAM] Top of while True loop. Frame: 322
+[VIDEO_STREAM] Inside try block. Frame: 322
+[VIDEO_STREAM] PRE-YIELD frame 323. Size: 118908
+[VIDEO_STREAM] POST-YIELD frame 323.
+[VIDEO_STREAM] Top of while True loop. Frame: 323
+[VIDEO_STREAM] Inside try block. Frame: 323
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 324. Size: 118908[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] POST-YIELD frame 324.[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.38, 'ai_frame_process_time_ms': 1100.0, 'ram_usage_mb': 1054.7, 'cpu_usage_percent_core': ['24.3%', '99.1%', '11.9%', '22.2%']}}
+
+[VIDEO_STREAM] Top of while True loop. Frame: 324
+[VIDEO_STREAM] Inside try block. Frame: 324
+[VIDEO_STREAM] PRE-YIELD frame 325. Size: 120299
+[VIDEO_STREAM] POST-YIELD frame 325.
+[VIDEO_STREAM] Top of while True loop. Frame: 325
+[VIDEO_STREAM] Inside try block. Frame: 325
+[VIDEO_STREAM] PRE-YIELD frame 326. Size: 120316
+[VIDEO_STREAM] POST-YIELD frame 326.
+[VIDEO_STREAM] Top of while True loop. Frame: 326
+[VIDEO_STREAM] Inside try block. Frame: 326
+[VIDEO_STREAM] PRE-YIELD frame 327. Size: 120316
+[VIDEO_STREAM] POST-YIELD frame 327.
+[VIDEO_STREAM] Top of while True loop. Frame: 327
+[VIDEO_STREAM] Inside try block. Frame: 327
+[VIDEO_STREAM] PRE-YIELD frame 328. Size: 120316
+[VIDEO_STREAM] POST-YIELD frame 328.
+[VIDEO_STREAM] Top of while True loop. Frame: 328
+[VIDEO_STREAM] Inside try block. Frame: 328
+[VIDEO_STREAM] PRE-YIELD frame 329. Size: 120669
+[VIDEO_STREAM] POST-YIELD frame 329.
+[VIDEO_STREAM] Top of while True loop. Frame: 329
+[VIDEO_STREAM] Inside try block. Frame: 329
+[VIDEO_STREAM] PRE-YIELD frame 330. Size: 120669
+[VIDEO_STREAM] POST-YIELD frame 330.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 330[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 330
+[VIDEO_STREAM] PRE-YIELD frame 331. Size: 120978
+[VIDEO_STREAM] POST-YIELD frame 331.
+[VIDEO_STREAM] Top of while True loop. Frame: 331
+[VIDEO_STREAM] Inside try block. Frame: 331
+[VIDEO_STREAM] PRE-YIELD frame 332. Size: 120978
+[VIDEO_STREAM] POST-YIELD frame 332.
+[VIDEO_STREAM] Top of while True loop. Frame: 332[CAMERA_THREAD] Captured 33 frames in last ~5.08s. Approx FPS: 6.49
+
+[VIDEO_STREAM] Inside try block. Frame: 332
+[VIDEO_STREAM] PRE-YIELD frame 333. Size: 120978
+[VIDEO_STREAM] POST-YIELD frame 333.
+[VIDEO_STREAM] Top of while True loop. Frame: 333
+[VIDEO_STREAM] Inside try block. Frame: 333
+[VIDEO_STREAM] PRE-YIELD frame 334. Size: 120662
+[VIDEO_STREAM] POST-YIELD frame 334.
+[VIDEO_STREAM] Top of while True loop. Frame: 334
+[VIDEO_STREAM] Inside try block. Frame: 334
+[VIDEO_STREAM] PRE-YIELD frame 335. Size: 120662
+[VIDEO_STREAM] POST-YIELD frame 335.
+[VIDEO_STREAM] Top of while True loop. Frame: 335
+[VIDEO_STREAM] Inside try block. Frame: 335
+[VIDEO_STREAM] PRE-YIELD frame 336. Size: 120662[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)[VIDEO_STREAM] POST-YIELD frame 336.
+
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 336
+
+[VIDEO_STREAM] Inside try block. Frame: 336
+[VIDEO_STREAM] PRE-YIELD frame 337. Size: 120850
+[VIDEO_STREAM] POST-YIELD frame 337.
+[VIDEO_STREAM] Top of while True loop. Frame: 337
+[VIDEO_STREAM] Inside try block. Frame: 337
+[VIDEO_STREAM] PRE-YIELD frame 338. Size: 120850
+[VIDEO_STREAM] POST-YIELD frame 338.
+[VIDEO_STREAM] Top of while True loop. Frame: 338
+[VIDEO_STREAM] Inside try block. Frame: 338
+[VIDEO_STREAM] PRE-YIELD frame 339. Size: 120850
+[VIDEO_STREAM] POST-YIELD frame 339.
+[VIDEO_STREAM] Top of while True loop. Frame: 339
+[VIDEO_STREAM] Inside try block. Frame: 339
+[VIDEO_STREAM] PRE-YIELD frame 340. Size: 121453
+[VIDEO_STREAM] POST-YIELD frame 340.
+[VIDEO_STREAM] Top of while True loop. Frame: 340
+[VIDEO_STREAM] Inside try block. Frame: 340
+[VIDEO_STREAM] PRE-YIELD frame 341. Size: 121453
+[VIDEO_STREAM] POST-YIELD frame 341.
+[VIDEO_STREAM] Top of while True loop. Frame: 341
+[VIDEO_STREAM] Inside try block. Frame: 341
+[VIDEO_STREAM] PRE-YIELD frame 342. Size: 121453
+[VIDEO_STREAM] POST-YIELD frame 342.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 342
+
+[VIDEO_STREAM] Inside try block. Frame: 342
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Unknown', 'right_eye_state': 'Unknown', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.49, 'ai_frame_process_time_ms': 1079.8, 'ram_usage_mb': 1056.8, 'cpu_usage_percent_core': ['38.3%', '98.1%', '15.6%', '14.4%']}}
+[VIDEO_STREAM] PRE-YIELD frame 343. Size: 122990
+[VIDEO_STREAM] POST-YIELD frame 343.
+[VIDEO_STREAM] Top of while True loop. Frame: 343
+[VIDEO_STREAM] Inside try block. Frame: 343
+[VIDEO_STREAM] PRE-YIELD frame 344. Size: 123293
+[VIDEO_STREAM] POST-YIELD frame 344.
+[VIDEO_STREAM] Top of while True loop. Frame: 344
+[VIDEO_STREAM] Inside try block. Frame: 344
+[VIDEO_STREAM] PRE-YIELD frame 345. Size: 123293
+[VIDEO_STREAM] POST-YIELD frame 345.
+[VIDEO_STREAM] Top of while True loop. Frame: 345
+[VIDEO_STREAM] Inside try block. Frame: 345
+[VIDEO_STREAM] PRE-YIELD frame 346. Size: 123293
+[VIDEO_STREAM] POST-YIELD frame 346.
+[VIDEO_STREAM] Top of while True loop. Frame: 346
+[VIDEO_STREAM] Inside try block. Frame: 346
+[VIDEO_STREAM] PRE-YIELD frame 347. Size: 123519
+[VIDEO_STREAM] POST-YIELD frame 347.
+[VIDEO_STREAM] Top of while True loop. Frame: 347
+[VIDEO_STREAM] Inside try block. Frame: 347
+[VIDEO_STREAM] PRE-YIELD frame 348. Size: 123519
+[VIDEO_STREAM] POST-YIELD frame 348.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6655082106590271
+[VIDEO_STREAM] Top of while True loop. Frame: 348
+[VIDEO_STREAM] Inside try block. Frame: 348
+[VIDEO_STREAM] PRE-YIELD frame 349. Size: 123519
+[VIDEO_STREAM] POST-YIELD frame 349.
+[VIDEO_STREAM] Top of while True loop. Frame: 349
+[VIDEO_STREAM] Inside try block. Frame: 349
+[VIDEO_STREAM] PRE-YIELD frame 350. Size: 123790
+[VIDEO_STREAM] POST-YIELD frame 350.
+[VIDEO_STREAM] Top of while True loop. Frame: 350
+[VIDEO_STREAM] Inside try block. Frame: 350
+[VIDEO_STREAM] PRE-YIELD frame 351. Size: 123790
+[VIDEO_STREAM] POST-YIELD frame 351.
+[VIDEO_STREAM] Top of while True loop. Frame: 351
+[VIDEO_STREAM] Inside try block. Frame: 351
+[VIDEO_STREAM] PRE-YIELD frame 352. Size: 123630
+[VIDEO_STREAM] POST-YIELD frame 352.
+[VIDEO_STREAM] Top of while True loop. Frame: 352
+[VIDEO_STREAM] Inside try block. Frame: 352
+[VIDEO_STREAM] PRE-YIELD frame 353. Size: 123630
+[VIDEO_STREAM] POST-YIELD frame 353.
+[VIDEO_STREAM] Top of while True loop. Frame: 353
+[VIDEO_STREAM] Inside try block. Frame: 353
+[VIDEO_STREAM] PRE-YIELD frame 354. Size: 123630[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] POST-YIELD frame 354.[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.7653330564498901
+
+[VIDEO_STREAM] Top of while True loop. Frame: 354
+[VIDEO_STREAM] Inside try block. Frame: 354
+[VIDEO_STREAM] PRE-YIELD frame 355. Size: 123619
+[VIDEO_STREAM] POST-YIELD frame 355.
+[VIDEO_STREAM] Top of while True loop. Frame: 355
+[VIDEO_STREAM] Inside try block. Frame: 355
+[VIDEO_STREAM] PRE-YIELD frame 356. Size: 123619
+[VIDEO_STREAM] POST-YIELD frame 356.
+[VIDEO_STREAM] Top of while True loop. Frame: 356
+[VIDEO_STREAM] Inside try block. Frame: 356
+[VIDEO_STREAM] PRE-YIELD frame 357. Size: 123619
+[VIDEO_STREAM] POST-YIELD frame 357.
+[VIDEO_STREAM] Top of while True loop. Frame: 357
+[VIDEO_STREAM] Inside try block. Frame: 357
+[VIDEO_STREAM] PRE-YIELD frame 358. Size: 124063
+[VIDEO_STREAM] POST-YIELD frame 358.
+[VIDEO_STREAM] Top of while True loop. Frame: 358
+[VIDEO_STREAM] Inside try block. Frame: 358
+[VIDEO_STREAM] PRE-YIELD frame 359. Size: 124063
+[VIDEO_STREAM] POST-YIELD frame 359.
+[VIDEO_STREAM] Top of while True loop. Frame: 359
+[VIDEO_STREAM] Inside try block. Frame: 359
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] PRE-YIELD frame 360. Size: 124063
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.49, 'ai_frame_process_time_ms': 1074.5, 'ram_usage_mb': 1057.5, 'cpu_usage_percent_core': ['28.7%', '98.1%', '24.5%', '12.4%']}}
+[VIDEO_STREAM] POST-YIELD frame 360.
+[VIDEO_STREAM] Top of while True loop. Frame: 360
+[VIDEO_STREAM] Inside try block. Frame: 360
+[VIDEO_STREAM] PRE-YIELD frame 361. Size: 125543
+[VIDEO_STREAM] POST-YIELD frame 361.
+[VIDEO_STREAM] Top of while True loop. Frame: 361
+[VIDEO_STREAM] Inside try block. Frame: 361
+[VIDEO_STREAM] PRE-YIELD frame 362. Size: 125335
+[VIDEO_STREAM] POST-YIELD frame 362.
+[VIDEO_STREAM] Top of while True loop. Frame: 362
+[VIDEO_STREAM] Inside try block. Frame: 362
+[VIDEO_STREAM] PRE-YIELD frame 363. Size: 125335
+[VIDEO_STREAM] POST-YIELD frame 363.
+[VIDEO_STREAM] Top of while True loop. Frame: 363
+[VIDEO_STREAM] Inside try block. Frame: 363
+[VIDEO_STREAM] PRE-YIELD frame 364. Size: 125335
+[VIDEO_STREAM] POST-YIELD frame 364.
+[VIDEO_STREAM] Top of while True loop. Frame: 364
+[VIDEO_STREAM] Inside try block. Frame: 364
+[VIDEO_STREAM] PRE-YIELD frame 365. Size: 125959
+[VIDEO_STREAM] POST-YIELD frame 365.
+[VIDEO_STREAM] Top of while True loop. Frame: 365
+[VIDEO_STREAM] Inside try block. Frame: 365
+[VIDEO_STREAM] PRE-YIELD frame 366. Size: 125959
+[VIDEO_STREAM] POST-YIELD frame 366.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 366[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.43332210183143616
+
+[VIDEO_STREAM] Inside try block. Frame: 366
+[VIDEO_STREAM] PRE-YIELD frame 367. Size: 126766
+[VIDEO_STREAM] POST-YIELD frame 367.
+[VIDEO_STREAM] Top of while True loop. Frame: 367
+[VIDEO_STREAM] Inside try block. Frame: 367
+[VIDEO_STREAM] PRE-YIELD frame 368. Size: 126766
+[VIDEO_STREAM] POST-YIELD frame 368.
+[VIDEO_STREAM] Top of while True loop. Frame: 368
+[VIDEO_STREAM] Inside try block. Frame: 368
+[VIDEO_STREAM] PRE-YIELD frame 369. Size: 126766
+[VIDEO_STREAM] POST-YIELD frame 369.
+[VIDEO_STREAM] Top of while True loop. Frame: 369
+[VIDEO_STREAM] Inside try block. Frame: 369
+[VIDEO_STREAM] PRE-YIELD frame 370. Size: 126676
+[VIDEO_STREAM] POST-YIELD frame 370.
+[VIDEO_STREAM] Top of while True loop. Frame: 370
+[VIDEO_STREAM] Inside try block. Frame: 370
+[VIDEO_STREAM] PRE-YIELD frame 371. Size: 126676
+[VIDEO_STREAM] POST-YIELD frame 371.
+[VIDEO_STREAM] Top of while True loop. Frame: 371
+[VIDEO_STREAM] Inside try block. Frame: 371
+[VIDEO_STREAM] PRE-YIELD frame 372. Size: 126676
+[VIDEO_STREAM] POST-YIELD frame 372.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 372[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6104210615158081
+[VIDEO_STREAM] Inside try block. Frame: 372
+
+[VIDEO_STREAM] PRE-YIELD frame 373. Size: 126604
+[VIDEO_STREAM] POST-YIELD frame 373.
+[VIDEO_STREAM] Top of while True loop. Frame: 373
+[VIDEO_STREAM] Inside try block. Frame: 373
+[VIDEO_STREAM] PRE-YIELD frame 374. Size: 126604
+[VIDEO_STREAM] POST-YIELD frame 374.
+[VIDEO_STREAM] Top of while True loop. Frame: 374
+[VIDEO_STREAM] Inside try block. Frame: 374
+[VIDEO_STREAM] PRE-YIELD frame 375. Size: 126604
+[VIDEO_STREAM] POST-YIELD frame 375.
+[VIDEO_STREAM] Top of while True loop. Frame: 375
+[VIDEO_STREAM] Inside try block. Frame: 375
+[VIDEO_STREAM] PRE-YIELD frame 376. Size: 126492
+[VIDEO_STREAM] POST-YIELD frame 376.
+[VIDEO_STREAM] Top of while True loop. Frame: 376
+[VIDEO_STREAM] Inside try block. Frame: 376
+[VIDEO_STREAM] PRE-YIELD frame 377. Size: 126492
+[VIDEO_STREAM] POST-YIELD frame 377.
+[VIDEO_STREAM] Top of while True loop. Frame: 377
+[VIDEO_STREAM] Inside try block. Frame: 377
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 378. Size: 126492[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.49, 'ai_frame_process_time_ms': 1079.3, 'ram_usage_mb': 1054.0, 'cpu_usage_percent_core': ['30.0%', '99.1%', '6.7%', '19.3%']}}
+[VIDEO_STREAM] POST-YIELD frame 378.
+[VIDEO_STREAM] Top of while True loop. Frame: 378
+[VIDEO_STREAM] Inside try block. Frame: 378
+[VIDEO_STREAM] PRE-YIELD frame 379. Size: 126641
+[VIDEO_STREAM] POST-YIELD frame 379.
+[VIDEO_STREAM] Top of while True loop. Frame: 379
+[VIDEO_STREAM] Inside try block. Frame: 379
+[VIDEO_STREAM] PRE-YIELD frame 380. Size: 115413
+[VIDEO_STREAM] POST-YIELD frame 380.
+[VIDEO_STREAM] Top of while True loop. Frame: 380
+[VIDEO_STREAM] Inside try block. Frame: 380
+[VIDEO_STREAM] PRE-YIELD frame 381. Size: 115413
+[VIDEO_STREAM] POST-YIELD frame 381.
+[VIDEO_STREAM] Top of while True loop. Frame: 381
+[VIDEO_STREAM] Inside try block. Frame: 381
+[VIDEO_STREAM] PRE-YIELD frame 382. Size: 115413
+[VIDEO_STREAM] POST-YIELD frame 382.
+[VIDEO_STREAM] Top of while True loop. Frame: 382
+[VIDEO_STREAM] Inside try block. Frame: 382
+[VIDEO_STREAM] PRE-YIELD frame 383. Size: 114942
+[VIDEO_STREAM] POST-YIELD frame 383.
+[VIDEO_STREAM] Top of while True loop. Frame: 383
+[VIDEO_STREAM] Inside try block. Frame: 383
+[VIDEO_STREAM] PRE-YIELD frame 384. Size: 114942
+[VIDEO_STREAM] POST-YIELD frame 384.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 384[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.45618951320648193
+
+[VIDEO_STREAM] Inside try block. Frame: 384
+[VIDEO_STREAM] PRE-YIELD frame 385. Size: 114942
+[VIDEO_STREAM] POST-YIELD frame 385.
+[VIDEO_STREAM] Top of while True loop. Frame: 385
+[VIDEO_STREAM] Inside try block. Frame: 385
+[VIDEO_STREAM] PRE-YIELD frame 386. Size: 112733
+[VIDEO_STREAM] POST-YIELD frame 386.
+[VIDEO_STREAM] Top of while True loop. Frame: 386
+[VIDEO_STREAM] Inside try block. Frame: 386
+[VIDEO_STREAM] PRE-YIELD frame 387. Size: 112733
+[VIDEO_STREAM] POST-YIELD frame 387.
+[VIDEO_STREAM] Top of while True loop. Frame: 387
+[VIDEO_STREAM] Inside try block. Frame: 387
+[VIDEO_STREAM] PRE-YIELD frame 388. Size: 112415
+[VIDEO_STREAM] POST-YIELD frame 388.
+[VIDEO_STREAM] Top of while True loop. Frame: 388
+[VIDEO_STREAM] Inside try block. Frame: 388
+[VIDEO_STREAM] PRE-YIELD frame 389. Size: 112415
+[VIDEO_STREAM] POST-YIELD frame 389.
+[VIDEO_STREAM] Top of while True loop. Frame: 389
+[VIDEO_STREAM] Inside try block. Frame: 389
+[VIDEO_STREAM] PRE-YIELD frame 390. Size: 112415
+[VIDEO_STREAM] POST-YIELD frame 390.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.7021092176437378[VIDEO_STREAM] Top of while True loop. Frame: 390
+
+[VIDEO_STREAM] Inside try block. Frame: 390
+[VIDEO_STREAM] PRE-YIELD frame 391. Size: 112839
+[VIDEO_STREAM] POST-YIELD frame 391.
+[VIDEO_STREAM] Top of while True loop. Frame: 391
+[VIDEO_STREAM] Inside try block. Frame: 391
+[VIDEO_STREAM] PRE-YIELD frame 392. Size: 112839
+[VIDEO_STREAM] POST-YIELD frame 392.
+[VIDEO_STREAM] Top of while True loop. Frame: 392
+[VIDEO_STREAM] Inside try block. Frame: 392
+[VIDEO_STREAM] PRE-YIELD frame 393. Size: 112839
+[VIDEO_STREAM] POST-YIELD frame 393.
+[VIDEO_STREAM] Top of while True loop. Frame: 393
+[VIDEO_STREAM] Inside try block. Frame: 393
+[VIDEO_STREAM] PRE-YIELD frame 394. Size: 112167
+[VIDEO_STREAM] POST-YIELD frame 394.
+[VIDEO_STREAM] Top of while True loop. Frame: 394
+[VIDEO_STREAM] Inside try block. Frame: 394
+[VIDEO_STREAM] PRE-YIELD frame 395. Size: 112167
+[VIDEO_STREAM] POST-YIELD frame 395.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)[VIDEO_STREAM] Top of while True loop. Frame: 395
+
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)[VIDEO_STREAM] Inside try block. Frame: 395
+
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.49, 'ai_frame_process_time_ms': 1083.2, 'ram_usage_mb': 1053.3, 'cpu_usage_percent_core': ['21.4%', '21.0%', '96.3%', '9.4%']}}
+[VIDEO_STREAM] PRE-YIELD frame 396. Size: 112167
+[VIDEO_STREAM] POST-YIELD frame 396.
+[VIDEO_STREAM] Top of while True loop. Frame: 396
+[VIDEO_STREAM] Inside try block. Frame: 396
+[VIDEO_STREAM] PRE-YIELD frame 397. Size: 116710
+[VIDEO_STREAM] POST-YIELD frame 397.
+[VIDEO_STREAM] Top of while True loop. Frame: 397
+[VIDEO_STREAM] Inside try block. Frame: 397
+[VIDEO_STREAM] PRE-YIELD frame 398. Size: 117730
+[VIDEO_STREAM] POST-YIELD frame 398.
+[VIDEO_STREAM] Top of while True loop. Frame: 398
+[VIDEO_STREAM] Inside try block. Frame: 398
+[VIDEO_STREAM] PRE-YIELD frame 399. Size: 117730
+[VIDEO_STREAM] POST-YIELD frame 399.
+[VIDEO_STREAM] Top of while True loop. Frame: 399
+[VIDEO_STREAM] Inside try block. Frame: 399
+[VIDEO_STREAM] PRE-YIELD frame 400. Size: 117730
+[VIDEO_STREAM] POST-YIELD frame 400.
+[VIDEO_STREAM] Top of while True loop. Frame: 400
+[VIDEO_STREAM] Inside try block. Frame: 400
+[VIDEO_STREAM] PRE-YIELD frame 401. Size: 118826
+[VIDEO_STREAM] POST-YIELD frame 401.
+[VIDEO_STREAM] Top of while True loop. Frame: 401
+[VIDEO_STREAM] Inside try block. Frame: 401
+[VIDEO_STREAM] PRE-YIELD frame 402. Size: 118826
+[VIDEO_STREAM] POST-YIELD frame 402.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.4803098142147064
+[VIDEO_STREAM] Top of while True loop. Frame: 402
+[VIDEO_STREAM] Inside try block. Frame: 402
+[VIDEO_STREAM] PRE-YIELD frame 403. Size: 119122
+[VIDEO_STREAM] POST-YIELD frame 403.
+[VIDEO_STREAM] Top of while True loop. Frame: 403
+[VIDEO_STREAM] Inside try block. Frame: 403
+[VIDEO_STREAM] PRE-YIELD frame 404. Size: 119122
+[VIDEO_STREAM] POST-YIELD frame 404.
+[VIDEO_STREAM] Top of while True loop. Frame: 404
+[VIDEO_STREAM] Inside try block. Frame: 404
+[VIDEO_STREAM] PRE-YIELD frame 405. Size: 119122
+[VIDEO_STREAM] POST-YIELD frame 405.
+[VIDEO_STREAM] Top of while True loop. Frame: 405
+[VIDEO_STREAM] Inside try block. Frame: 405
+[VIDEO_STREAM] PRE-YIELD frame 406. Size: 119085
+[VIDEO_STREAM] POST-YIELD frame 406.
+[VIDEO_STREAM] Top of while True loop. Frame: 406
+[VIDEO_STREAM] Inside try block. Frame: 406
+[VIDEO_STREAM] PRE-YIELD frame 407. Size: 119085
+[VIDEO_STREAM] POST-YIELD frame 407.
+[VIDEO_STREAM] Top of while True loop. Frame: 407
+[VIDEO_STREAM] Inside try block. Frame: 407
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 408. Size: 119085
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.7023914456367493
+[VIDEO_STREAM] POST-YIELD frame 408.
+[VIDEO_STREAM] Top of while True loop. Frame: 408
+[VIDEO_STREAM] Inside try block. Frame: 408
+[VIDEO_STREAM] PRE-YIELD frame 409. Size: 118781
+[VIDEO_STREAM] POST-YIELD frame 409.
+[VIDEO_STREAM] Top of while True loop. Frame: 409
+[VIDEO_STREAM] Inside try block. Frame: 409
+[VIDEO_STREAM] PRE-YIELD frame 410. Size: 118781
+[VIDEO_STREAM] POST-YIELD frame 410.
+[VIDEO_STREAM] Top of while True loop. Frame: 410
+[VIDEO_STREAM] Inside try block. Frame: 410
+[VIDEO_STREAM] PRE-YIELD frame 411. Size: 118781
+[VIDEO_STREAM] POST-YIELD frame 411.
+[VIDEO_STREAM] Top of while True loop. Frame: 411
+[VIDEO_STREAM] Inside try block. Frame: 411
+[VIDEO_STREAM] PRE-YIELD frame 412. Size: 118423
+[VIDEO_STREAM] POST-YIELD frame 412.
+[VIDEO_STREAM] Top of while True loop. Frame: 412
+[VIDEO_STREAM] Inside try block. Frame: 412
+[VIDEO_STREAM] PRE-YIELD frame 413. Size: 118423
+[VIDEO_STREAM] POST-YIELD frame 413.
+[VIDEO_STREAM] Top of while True loop. Frame: 413
+[VIDEO_STREAM] Inside try block. Frame: 413
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] PRE-YIELD frame 414. Size: 118423
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] POST-YIELD frame 414.[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.49, 'ai_frame_process_time_ms': 1078.9, 'ram_usage_mb': 1054.2, 'cpu_usage_percent_core': ['6.9%', '19.8%', '100.0%', '32.7%']}}
+
+[VIDEO_STREAM] Top of while True loop. Frame: 414
+[VIDEO_STREAM] Inside try block. Frame: 414
+[VIDEO_STREAM] PRE-YIELD frame 415. Size: 119476
+[VIDEO_STREAM] POST-YIELD frame 415.
+[VIDEO_STREAM] Top of while True loop. Frame: 415
+[VIDEO_STREAM] Inside try block. Frame: 415
+[VIDEO_STREAM] PRE-YIELD frame 416. Size: 119313
+[VIDEO_STREAM] POST-YIELD frame 416.
+[VIDEO_STREAM] Top of while True loop. Frame: 416
+[VIDEO_STREAM] Inside try block. Frame: 416
+[VIDEO_STREAM] PRE-YIELD frame 417. Size: 119313
+[VIDEO_STREAM] POST-YIELD frame 417.
+[CAMERA_THREAD] Captured 33 frames in last ~5.08s. Approx FPS: 6.50
+[VIDEO_STREAM] Top of while True loop. Frame: 417
+[VIDEO_STREAM] Inside try block. Frame: 417
+[VIDEO_STREAM] PRE-YIELD frame 418. Size: 119313
+[VIDEO_STREAM] POST-YIELD frame 418.
+[VIDEO_STREAM] Top of while True loop. Frame: 418
+[VIDEO_STREAM] Inside try block. Frame: 418
+[VIDEO_STREAM] PRE-YIELD frame 419. Size: 119091
+[VIDEO_STREAM] POST-YIELD frame 419.
+[VIDEO_STREAM] Top of while True loop. Frame: 419
+[VIDEO_STREAM] Inside try block. Frame: 419
+[VIDEO_STREAM] PRE-YIELD frame 420. Size: 119091
+[VIDEO_STREAM] POST-YIELD frame 420.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 420[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.40002718567848206
+
+[VIDEO_STREAM] Inside try block. Frame: 420
+[VIDEO_STREAM] PRE-YIELD frame 421. Size: 119091
+[VIDEO_STREAM] POST-YIELD frame 421.
+[VIDEO_STREAM] Top of while True loop. Frame: 421
+[VIDEO_STREAM] Inside try block. Frame: 421
+[VIDEO_STREAM] PRE-YIELD frame 422. Size: 118340
+[VIDEO_STREAM] POST-YIELD frame 422.
+[VIDEO_STREAM] Top of while True loop. Frame: 422
+[VIDEO_STREAM] Inside try block. Frame: 422
+[VIDEO_STREAM] PRE-YIELD frame 423. Size: 118340
+[VIDEO_STREAM] POST-YIELD frame 423.
+[VIDEO_STREAM] Top of while True loop. Frame: 423
+[VIDEO_STREAM] Inside try block. Frame: 423
+[VIDEO_STREAM] PRE-YIELD frame 424. Size: 119283
+[VIDEO_STREAM] POST-YIELD frame 424.
+[VIDEO_STREAM] Top of while True loop. Frame: 424
+[VIDEO_STREAM] Inside try block. Frame: 424
+[VIDEO_STREAM] PRE-YIELD frame 425. Size: 119283
+[VIDEO_STREAM] POST-YIELD frame 425.
+[VIDEO_STREAM] Top of while True loop. Frame: 425
+[VIDEO_STREAM] Inside try block. Frame: 425
+[VIDEO_STREAM] PRE-YIELD frame 426. Size: 119283
+[VIDEO_STREAM] POST-YIELD frame 426.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 426[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6133237481117249
+
+[VIDEO_STREAM] Inside try block. Frame: 426
+[VIDEO_STREAM] PRE-YIELD frame 427. Size: 120095
+[VIDEO_STREAM] POST-YIELD frame 427.
+[VIDEO_STREAM] Top of while True loop. Frame: 427
+[VIDEO_STREAM] Inside try block. Frame: 427
+[VIDEO_STREAM] PRE-YIELD frame 428. Size: 120095
+[VIDEO_STREAM] POST-YIELD frame 428.
+[VIDEO_STREAM] Top of while True loop. Frame: 428
+[VIDEO_STREAM] Inside try block. Frame: 428
+[VIDEO_STREAM] PRE-YIELD frame 429. Size: 120476
+[VIDEO_STREAM] POST-YIELD frame 429.
+[VIDEO_STREAM] Top of while True loop. Frame: 429
+[VIDEO_STREAM] Inside try block. Frame: 429
+[VIDEO_STREAM] PRE-YIELD frame 430. Size: 120476
+[VIDEO_STREAM] POST-YIELD frame 430.
+[VIDEO_STREAM] Top of while True loop. Frame: 430
+[VIDEO_STREAM] Inside try block. Frame: 430
+[VIDEO_STREAM] PRE-YIELD frame 431. Size: 120679
+[VIDEO_STREAM] POST-YIELD frame 431.
+[VIDEO_STREAM] Top of while True loop. Frame: 431
+[VIDEO_STREAM] Inside try block. Frame: 431
+[VIDEO_STREAM] PRE-YIELD frame 432. Size: 120679
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)[VIDEO_STREAM] POST-YIELD frame 432.
+
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 432
+
+[VIDEO_STREAM] Inside try block. Frame: 432
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.5, 'ai_frame_process_time_ms': 1088.7, 'ram_usage_mb': 1059.2, 'cpu_usage_percent_core': ['31.7%', '21.0%', '97.3%', '22.9%']}}
+[VIDEO_STREAM] PRE-YIELD frame 433. Size: 120679
+[VIDEO_STREAM] POST-YIELD frame 433.
+[AI_THREAD] Emitting status update: {'blinks': 0, 'microsleeps_duration': 0, 'yawns': 0, 'yawn_duration': 0, 'left_eye_state': 'Open Eye', 'right_eye_state': 'Open Eye', 'yawn_state': '', 'alert_status': 'Awake', 'performance': {'camera_fps': 6.5, 'ai_frame_process_time_ms': 22.1, 'ram_usage_mb': 1059.2, 'cpu_usage_percent_core': ['33.3%', '100.0%', '66.7%', '66.7%']}}
+[VIDEO_STREAM] Top of while True loop. Frame: 433
+[VIDEO_STREAM] Inside try block. Frame: 433
+[VIDEO_STREAM] PRE-YIELD frame 434. Size: 87839
+[VIDEO_STREAM] POST-YIELD frame 434.
+[VIDEO_STREAM] Top of while True loop. Frame: 434
+[VIDEO_STREAM] Inside try block. Frame: 434
+[VIDEO_STREAM] PRE-YIELD frame 435. Size: 87042
+[VIDEO_STREAM] POST-YIELD frame 435.
+[VIDEO_STREAM] Top of while True loop. Frame: 435
+[VIDEO_STREAM] Inside try block. Frame: 435
+[VIDEO_STREAM] PRE-YIELD frame 436. Size: 87393
+[VIDEO_STREAM] POST-YIELD frame 436.
+[VIDEO_STREAM] Top of while True loop. Frame: 436
+[VIDEO_STREAM] Inside try block. Frame: 436
+[VIDEO_STREAM] PRE-YIELD frame 437. Size: 87393
+[VIDEO_STREAM] POST-YIELD frame 437.
+[VIDEO_STREAM] Top of while True loop. Frame: 437
+[VIDEO_STREAM] Inside try block. Frame: 437
+[VIDEO_STREAM] PRE-YIELD frame 438. Size: 90085
+[VIDEO_STREAM] POST-YIELD frame 438.
+[VIDEO_STREAM] Top of while True loop. Frame: 438
+[VIDEO_STREAM] Inside try block. Frame: 438
+[VIDEO_STREAM] PRE-YIELD frame 439. Size: 90085
+[VIDEO_STREAM] POST-YIELD frame 439.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 439Application shutting down. Releasing resources...[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+
+Releasing resources...
+Joining camera thread...
+[VIDEO_STREAM] Inside try block. Frame: 439
+[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.
+[VIDEO_STREAM] Video stream generator finishing.
+[CAMERA_THREAD] Camera thread finishing. Final detection_active: False, stop_event: True, loop_count: 178
+Joining AI processing thread...
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+Traceback (most recent call last):
+  File "/home/srtp/01_driver/real-time-drowsy-driving-detection/app.py", line 624, in <module>
+    [AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.33616483211517334release_resources()
+
+  File "/home/srtp/01_driver/real-time-drowsy-driving-detection/app.py", line 205, in release_resources
+    ai_processing_thread.join(timeout=2)
+  File "/usr/lib/python3.11/threading.py", line 1116, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "/usr/lib/python3.11/threading.py", line 1132, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

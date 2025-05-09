@@ -116,7 +116,7 @@ MODEL_CONFIGURATIONS = {
     # Add more configurations as needed, e.g., for different model versions or custom paths
 }
 # --- >>> SELECT YOUR DEFAULT MODEL CONFIGURATION BY CHANGING THE KEY BELOW <<< ---
-DEFAULT_MODEL_CONFIG_KEY = "fp16_320" # Change this key to select a default config
+DEFAULT_MODEL_CONFIG_KEY = "int8_320" # Change this key to select a default config
 
 # --- Global Variables and Locks ---
 camera_object = None
@@ -355,6 +355,7 @@ def ai_processing_thread_function():
             performance_stats["cpu_usage_percent_core"] = [f"{usage}%" for usage in cpu_cores_usage]
             full_status_update = {**status_dict, "performance": performance_stats}
         
+        print(f"[AI_THREAD] Emitting status update: {full_status_update}", flush=True)
         socketio.emit('status_update', full_status_update)
 
     print("AI Processing and status emission finishing.")

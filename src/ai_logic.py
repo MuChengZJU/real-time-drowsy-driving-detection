@@ -97,234 +97,230 @@ class AIDrowsinessProcessor:
         (x_center, y_center, width, height, confidence, class_probs...)
         Coordinates are normalized to the TFLite model's input dimensions.
         """
-        print(f"[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: {output_data.shape}")
-        # print(f"[AI_LOGIC DEBUG] TFLite output data sample [0, :5, :]: {output_data[0,:5,:]}") # Might be too verbose
+        # print(f"[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: {output_data.shape}") # Reduced verbosity
 
         best_class_id = -1
         max_confidence = -1.0
 
-        # If shape is (1, num_coords_plus_classes, num_proposals), then transpose
-        if output_data.shape[1] < output_data.shape[2] and (output_data.shape[1] == (4 + 2) or output_data.shape[1] == (4+1+2)): # Assuming 2 classes for eye/yawn
-             print(f"[AI_LOGIC DEBUG] Transposing output from {output_data.shape} to (0, 2, 1)")
+        if output_data.shape[1] < output_data.shape[2] and (output_data.shape[1] == (4 + 2) or output_data.shape[1] == (4+1+2)):
+             # print(f"[AI_LOGIC DEBUG] Transposing output from {output_data.shape} to (0, 2, 1)") # Reduced verbosity
              output_data = np.transpose(output_data, (0, 2, 1))
         
-        print(f"[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: {output_data.shape}")
+        # print(f"[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: {output_data.shape}") # Reduced verbosity
 
         detections = output_data[0] 
-        output_dim_size = detections.shape[1] # Dimension of a single detection, e.g., 6 for (x,y,w,h,c0,c1)
-        print(f"[AI_LOGIC DEBUG] Number of detections: {detections.shape[0]}, Output_dim_size (per detection): {output_dim_size}")
-
-        # Filter out detections with very low scores early if possible (though NMS in model should handle this)
-        # For example, if obj_conf is present and very low.
+        output_dim_size = detections.shape[1]
+        # print(f"[AI_LOGIC DEBUG] Number of detections: {detections.shape[0]}, Output_dim_size (per detection): {output_dim_size}") # Reduced verbosity
 
         for i in range(detections.shape[0]):
             detection = detections[i] 
             current_confidence = 0
             current_class_id = -1
 
-            # print(f"[AI_LOGIC DEBUG] Parsing detection {i}: {detection}") # Can be very verbose
-
-            if output_dim_size == 6: # Assuming 4 coords + 2 class scores (e.g., from Ultralytics export with NMS)
-                # detection = [x,y,w,h, class0_score, class1_score]
+            if output_dim_size == 6: 
                 class_scores = detection[4:] 
                 current_confidence = np.max(class_scores)
                 current_class_id = np.argmax(class_scores)
-                # print(f"[AI_LOGIC DEBUG] Branch 1 (dim=6): Raw scores: {class_scores}, Conf: {current_confidence}, Class: {current_class_id}")
-            elif output_dim_size == 7: # Assuming 4 coords + 1 obj_conf + 2 class scores
-                # detection = [x,y,w,h, obj_conf, class0_score, class1_score]
+            elif output_dim_size == 7: 
                 object_confidence = detection[4]
                 class_scores = detection[5:]
-                # current_confidence = object_confidence # Often, obj_conf is the primary confidence.
-                                                    # Or, sometimes obj_conf * max(class_scores)
                 current_confidence = object_confidence * np.max(class_scores) if np.max(class_scores) > 0 else object_confidence 
                 current_class_id = np.argmax(class_scores)
-                # print(f"[AI_LOGIC DEBUG] Branch 2 (dim=7): ObjConf: {object_confidence}, Raw scores: {class_scores}, FinalConf: {current_confidence}, Class: {current_class_id}")
             else:
-                print(f"[AI_LOGIC DEBUG] Branch 3 (dim={output_dim_size}): Unexpected output dimension. Skipping parsing for this detection.")
-                # Fallback or needs more specific parsing based on your model output.
-                # This part is CRITICAL and depends heavily on the exact TFLite model's output signature.
-                # You might need to inspect the model output with a tool like Netron or print shapes/values.
-                # For now, let's assume it's [x,y,w,h, conf_class0, conf_class1]
-                # if output_dim_size < 2: continue # Not enough info
-                # class_scores = detection[-(output_dim_size - 4):] # Heuristic: last elements are class scores
-                # current_confidence = np.max(class_scores)
-                # current_class_id = np.argmax(class_scores)
-                continue # Skip this detection if we don't know how to parse it
+                # print(f"[AI_LOGIC DEBUG] Branch 3 (dim={output_dim_size}): Unexpected output dimension. Skipping parsing for this detection.") # Reduced verbosity
+                continue 
 
             if current_confidence > conf_threshold and current_confidence > max_confidence:
                 max_confidence = current_confidence
                 best_class_id = current_class_id
         
-        print(f"[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: {best_class_id}, MaxConfidence: {max_confidence}")
+        # print(f"[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: {best_class_id}, MaxConfidence: {max_confidence}") # Reduced verbosity
         return best_class_id, max_confidence
 
 
     def _predict_eye_state_tflite(self, eye_roi_frame):
+        # t_pred_eye_enter = time.time() # Optional: for even finer detail
         if eye_roi_frame is None or eye_roi_frame.size == 0:
             return "Unknown"
 
         input_data = self._preprocess_image_for_tflite(eye_roi_frame, self.eye_input_height, self.eye_input_width, self.eye_input_details)
         if input_data is None:
             return "Unknown"
-
+        
+        t_before_invoke = time.time()
         self.eye_interpreter.set_tensor(self.eye_input_details[0]['index'], input_data)
         self.eye_interpreter.invoke()
         output_data = self.eye_interpreter.get_tensor(self.eye_output_details[0]['index'])
+        t_after_invoke = time.time()
+        print(f"[PERF_PROFILE_DETAIL] _predict_eye_state_tflite: invoke took: {(t_after_invoke - t_before_invoke)*1000:.2f} ms")
         
         class_id, confidence = self._parse_tflite_output(output_data, eye_roi_frame.shape, conf_threshold=0.3)
 
-        # print(f"Eye detection - Class ID: {class_id}, Confidence: {confidence}")
-
-        if class_id == 1: # Assuming class 1 is "Close Eye"
-            return "Close Eye"
-        elif class_id == 0: # Assuming class 0 is "Open Eye"
-            return "Open Eye"
-        return "Unknown" # Or previous state if confidence is low
+        if class_id == 1: return "Close Eye"
+        elif class_id == 0: return "Open Eye"
+        return "Unknown"
 
     def _predict_yawn_tflite(self, mouth_roi_frame):
+        # t_pred_yawn_enter = time.time() # Optional: for even finer detail
         if mouth_roi_frame is None or mouth_roi_frame.size == 0:
-            return self.yawn_state # Keep previous state
+            return self.yawn_state 
 
         input_data = self._preprocess_image_for_tflite(mouth_roi_frame, self.yawn_input_height, self.yawn_input_width, self.yawn_input_details)
         if input_data is None:
             return self.yawn_state
 
+        t_before_invoke = time.time()
         self.yawn_interpreter.set_tensor(self.yawn_input_details[0]['index'], input_data)
         self.yawn_interpreter.invoke()
         output_data = self.yawn_interpreter.get_tensor(self.yawn_output_details[0]['index'])
+        t_after_invoke = time.time()
+        print(f"[PERF_PROFILE_DETAIL] _predict_yawn_tflite: invoke took: {(t_after_invoke - t_before_invoke)*1000:.2f} ms")
 
         class_id, confidence = self._parse_tflite_output(output_data, mouth_roi_frame.shape, conf_threshold=0.5)
         
-        # print(f"Yawn detection - Class ID: {class_id}, Confidence: {confidence}")
+        if class_id == 0: return "Yawn"
+        elif class_id == 1: return "No Yawn" 
+        return self.yawn_state
 
-        if class_id == 0:  # Assuming class 0 is "Yawn"
-            return "Yawn"
-        elif class_id == 1:  # Assuming class 1 is "No Yawn"
-            return "No Yawn"
-        return self.yawn_state # Keep previous state if low confidence or unknown
 
     def process_frame(self, frame):
-        if frame is None:
-             return {}, self.get_current_status()
-             
+        t_pf_enter = time.time()
+        # print(f"[PERF_PROFILE] process_frame: ENTER at {t_pf_enter}") # Reduced verbosity
+
         current_time = time.time()
         delta_time = current_time - self.last_frame_time
         self.last_frame_time = current_time
 
-        draw_elements = {
-            "face_landmarks_coords": [],
-            "mouth_roi_bbox": None,
-            "right_eye_roi_bbox": None,
-            "left_eye_roi_bbox": None
-        }
-
-        image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        image_rgb.flags.writeable = False
-        results_facemesh = self.face_mesh.process(image_rgb)
+        draw_elements = {'face_landmarks': None, 'left_eye_roi': None, 'right_eye_roi': None, 'mouth_roi': None}
         
-        mouth_roi_frame, right_eye_roi_frame, left_eye_roi_frame = None, None, None
-        # rois_extracted = False # Not strictly needed with direct ROI processing
+        t_mp_start = time.time()
+        results = self.face_mesh.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        t_mp_end = time.time()
+        print(f"[PERF_PROFILE] process_frame: MediaPipe mesh processing took: {(t_mp_end - t_mp_start)*1000:.2f} ms")
 
-        if results_facemesh.multi_face_landmarks:
-            for face_landmarks in results_facemesh.multi_face_landmarks:
-                ih, iw, _ = frame.shape
+        left_eye_roi_frame, right_eye_roi_frame, mouth_roi_frame = None, None, None
+        
+        t_roi_ext_start = time.time()
+        if results.multi_face_landmarks:
+            face_landmarks = results.multi_face_landmarks[0] 
+            draw_elements['face_landmarks'] = face_landmarks 
+
+            LEFT_EYE_CONTOUR = [33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246]
+            RIGHT_EYE_CONTOUR = [362, 382, 381, 380, 373, 374, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398]
+            MOUTH_OUTLINE_CONTOUR = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146]
+
+            img_h, img_w = frame.shape[:2]
+
+            def get_roi_bbox_from_landmarks(landmark_list, indices, img_width, img_height, padding=5):
+                if not landmark_list or not indices: return None
+                # Ensure landmark indices are within bounds before accessing
+                valid_indices = [i for i in indices if i < len(landmark_list.landmark)]
+                if not valid_indices: return None
+
+                points_data = [(landmark_list.landmark[i].x * img_width, landmark_list.landmark[i].y * img_height) for i in valid_indices]
+                if not points_data: return None 
                 
-                # Simplified ROI extraction using specific landmark indices (more robust than self.points_ids approach)
-                # These are standard MediaPipe Face Mesh landmark indices.
-                LEFT_EYE_INDICES = [33, 160, 158, 133, 153, 144] # Example subset for bounding box
-                RIGHT_EYE_INDICES = [362, 385, 387, 263, 373, 380] # Example subset
-                MOUTH_INDICES = [61, 291, 0, 17] # Example: left, right, top, bottom points of mouth outline
+                points = np.array(points_data, dtype=np.int32)
                 
-                def get_roi_bbox_from_landmarks(landmark_list, indices, img_width, img_height, padding=5):
-                    xs = [landmark_list[i].x * img_width for i in indices]
-                    ys = [landmark_list[i].y * img_height for i in indices]
-                    if not xs or not ys: return None, None
-                    
-                    x_min, x_max = int(min(xs)), int(max(xs))
-                    y_min, y_max = int(min(ys)), int(max(ys))
-
-                    x_min = max(0, x_min - padding)
-                    y_min = max(0, y_min - padding)
-                    x_max = min(img_width, x_max + padding)
-                    y_max = min(img_height, y_max + padding)
-                    
-                    if x_max > x_min and y_max > y_min:
-                        return (x_min, y_min, x_max, y_max), frame[y_min:y_max, x_min:x_max]
-                    return None, None
-
-                landmarks_list = face_landmarks.landmark
-
-                left_eye_bbox, left_eye_roi_frame = get_roi_bbox_from_landmarks(landmarks_list, LEFT_EYE_INDICES, iw, ih)
-                right_eye_bbox, right_eye_roi_frame = get_roi_bbox_from_landmarks(landmarks_list, RIGHT_EYE_INDICES, iw, ih)
-                mouth_bbox, mouth_roi_frame = get_roi_bbox_from_landmarks(landmarks_list, MOUTH_INDICES, iw, ih, padding=10) # More padding for mouth
-
-                if left_eye_bbox: draw_elements["left_eye_roi_bbox"] = left_eye_bbox
-                if right_eye_bbox: draw_elements["right_eye_roi_bbox"] = right_eye_bbox
-                if mouth_bbox: draw_elements["mouth_roi_bbox"] = mouth_bbox
+                x_coords = points[:, 0]
+                y_coords = points[:, 1]
+                x_min, x_max = np.min(x_coords), np.max(x_coords)
+                y_min, y_max = np.min(y_coords), np.max(y_coords)
                 
-                all_face_mesh_points_for_draw = []
-                for landmark in landmarks_list:
-                    x, y = int(landmark.x * iw), int(landmark.y * ih)
-                    all_face_mesh_points_for_draw.append((x,y))
-                draw_elements["face_landmarks_coords"] = all_face_mesh_points_for_draw
-                
-                # Prediction
-                try:
-                    if left_eye_roi_frame is not None and left_eye_roi_frame.size > 0:
-                        self.left_eye_state = self._predict_eye_state_tflite(left_eye_roi_frame)
-                    else:
-                        self.left_eye_state = "Unknown" # Or keep previous
+                x_min = max(0, x_min - padding)
+                y_min = max(0, y_min - padding)
+                x_max = min(img_width, x_max + padding)
+                y_max = min(img_height, y_max + padding)
 
-                    if right_eye_roi_frame is not None and right_eye_roi_frame.size > 0:
-                        self.right_eye_state = self._predict_eye_state_tflite(right_eye_roi_frame)
-                    else:
-                        self.right_eye_state = "Unknown" # Or keep previous
-                    
-                    if mouth_roi_frame is not None and mouth_roi_frame.size > 0:
-                        self.yawn_state = self._predict_yawn_tflite(mouth_roi_frame)
-                    # else: keep previous yawn_state
+                if x_max > x_min and y_max > y_min:
+                    return (x_min, y_min, x_max - x_min, y_max - y_min) 
+                return None
 
-                except Exception as e:
-                    print(f"Error during TFLite prediction: {e}")
-                    # Optionally reset states or log more verbosely
-                    self.left_eye_state = "Error"
-                    self.right_eye_state = "Error"
-                    self.yawn_state = "Error"
+            left_eye_bbox = get_roi_bbox_from_landmarks(face_landmarks, LEFT_EYE_CONTOUR, img_w, img_h, padding=10)
+            right_eye_bbox = get_roi_bbox_from_landmarks(face_landmarks, RIGHT_EYE_CONTOUR, img_w, img_h, padding=10)
+            mouth_bbox = get_roi_bbox_from_landmarks(face_landmarks, MOUTH_OUTLINE_CONTOUR, img_w, img_h, padding=15)
+            
+            if left_eye_bbox:
+                x, y, w, h = left_eye_bbox
+                left_eye_roi_frame = frame[y:y+h, x:x+w]
+                draw_elements['left_eye_roi'] = (x,y,w,h)
+            if right_eye_bbox:
+                x, y, w, h = right_eye_bbox
+                right_eye_roi_frame = frame[y:y+h, x:x+w]
+                draw_elements['right_eye_roi'] = (x,y,w,h)
+            if mouth_bbox:
+                x, y, w, h = mouth_bbox
+                mouth_roi_frame = frame[y:y+h, x:x+w]
+                draw_elements['mouth_roi'] = (x,y,w,h)
+        t_roi_ext_end = time.time()
+        print(f"[PERF_PROFILE] process_frame: ROI extraction (conditional) took: {(t_roi_ext_end - t_roi_ext_start)*1000:.2f} ms")
 
-                break # Process only the first detected face
+        t_eye_pred_start = time.time()
+        if left_eye_roi_frame is not None:
+            self.left_eye_state = self._predict_eye_state_tflite(left_eye_roi_frame)
+        else: self.left_eye_state = "Unknown"
+        
+        if right_eye_roi_frame is not None:
+            self.right_eye_state = self._predict_eye_state_tflite(right_eye_roi_frame)
+        else: self.right_eye_state = "Unknown"
+        t_eye_pred_end = time.time()
+        print(f"[PERF_PROFILE] process_frame: Both Eye state predictions took: {(t_eye_pred_end - t_eye_pred_start)*1000:.2f} ms")
 
-        # Update drowsiness logic (remains largely the same)
+        t_yawn_pred_start = time.time()
+        if mouth_roi_frame is not None:
+            current_yawn_detection = self._predict_yawn_tflite(mouth_roi_frame)
+        else: current_yawn_detection = "No Yawn" 
+        t_yawn_pred_end = time.time()
+        print(f"[PERF_PROFILE] process_frame: Yawn state prediction took: {(t_yawn_pred_end - t_yawn_pred_start)*1000:.2f} ms")
+        
+        t_state_logic_start = time.time()
         if self.left_eye_state == "Close Eye" and self.right_eye_state == "Close Eye":
-            if not self.left_eye_still_closed: # Checks if this is the start of a continuous closure
-                self.left_eye_still_closed = True
-                self.right_eye_still_closed = True # Assuming both start closing together for a blink
-                self.blinks += 1 
-            self.microsleeps_duration += delta_time
-        else:
-            if self.left_eye_still_closed or self.right_eye_still_closed: # If either was closed and now isn't
-                 self.left_eye_still_closed = False
-                 self.right_eye_still_closed = False
-            self.microsleeps_duration = 0 # Reset microsleep if eyes are not consistently closed
+            if not self.left_eye_still_closed and not self.right_eye_still_closed: # Both just closed
+                self.blinks += 1
+                self.blink_start_time = current_time # Record time when blink starts
+            self.left_eye_still_closed = True
+            self.right_eye_still_closed = True
+            # Microsleep check: if eyes remain closed for a certain duration
+            if hasattr(self, 'blink_start_time'): # Check if blink_start_time is initialized
+                 if current_time - self.blink_start_time > 0.5: # Threshold for microsleep (e.g., 0.5 seconds)
+                    self.microsleeps_duration += delta_time # Accumulate microsleep duration
+        else: # One or both eyes are open
+            self.left_eye_still_closed = False
+            self.right_eye_still_closed = False
+            # If they were in a microsleep, it ends. Duration is already accumulated.
+            # Reset blink_start_time when eyes open to correctly time the next closure
+            if hasattr(self, 'blink_start_time'):
+                del self.blink_start_time
 
-        if self.yawn_state == "Yawn":
+        # Yawns
+        if current_yawn_detection == "Yawn":
             if not self.yawn_in_progress:
+                self.yawns += 1
+                self.yawn_start_time = current_time
                 self.yawn_in_progress = True
-                self.yawns += 1  
-            self.yawn_duration += delta_time
-        else: # "No Yawn" or other states
-            if self.yawn_in_progress: # If it was yawning and now stopped
-                self.yawn_in_progress = False
-                # self.yawn_duration = 0 # Reset duration when yawn stops
-            # If yawn_state is "No Yawn" and was not in progress, duration should remain 0 or be reset.
-            # The key is to reset duration when a yawn event concludes.
-            if not self.yawn_in_progress : # Simplified: if not yawning, duration does not accumulate / is reset
-                 self.yawn_duration = 0
+            # Accumulate duration as long as yawn is detected in the current frame
+            # This means self.yawn_duration will be the duration of the ongoing or last completed yawn *within the detection period*
+            if hasattr(self, 'yawn_start_time'): # Ensure yawn_start_time exists
+                self.yawn_duration = current_time - self.yawn_start_time             
+        else: # No Yawn detected in the current frame
+            if self.yawn_in_progress: # Yawn just ended
+                 self.yawn_in_progress = False
+                 # self.yawn_duration would hold the duration of the just-ended yawn.
+                 # If you want to reset it for the *next* yawn, or accumulate total time spent yawning, adjust here.
+                 # For displaying duration of the last yawn, this is fine. If it becomes "No Yawn", this value persists.
+            # If not currently yawning and wasn't in progress, yawn_duration might need to be 0 or reflect last known.
+            # To show 0 when not yawning, and >0 when a yawn just finished/is in progress:
+            if not self.yawn_in_progress and self.yawn_state == "No Yawn": # Check previous state as well
+                 self.yawn_duration = 0 # Explicitly reset if no yawn is active and previous was also no yawn
 
+        self.yawn_state = current_yawn_detection # Update overall yawn state for the next frame's logic
+        t_state_logic_end = time.time()
+        print(f"[PERF_PROFILE] process_frame: State update logic took: {(t_state_logic_end - t_state_logic_start)*1000:.2f} ms")
 
         current_status_dict = self.get_current_status()
-        # Potentially update self.last_processed_frame_with_drawings if drawing is done here
-        # For now, drawing is handled by app.py after getting status and draw_elements
-
+        
+        t_pf_exit = time.time()
+        print(f"[PERF_PROFILE] process_frame: EXIT, Total time: {(t_pf_exit - t_pf_enter)*1000:.2f} ms")
         return draw_elements, current_status_dict
 
     def get_current_status(self):

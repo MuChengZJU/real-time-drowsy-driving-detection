@@ -1,0 +1,337 @@
+File logging setup complete. Subsequent output will be logged and also printed to console.
+Starting Drowsiness Detection System with final settings:
+  Selected Configuration Key: fp16_320 (Description: FP16 models with 320x320 input. Balanced speed and precision.)
+  Eye Model: model/tflite/eye_detect_320_fp16.tflite
+  Yawn Model: model/tflite/yawn_detect_320_fp16.tflite
+  Camera Index: 0
+  Host: 0.0.0.0
+  Port: 5000
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.215:5000
+Press CTRL+C to quit
+192.168.31.245 - - [10/May/2025 00:00:51] "GET / HTTP/1.1" 200 -
+[VIDEO_STREAM] Function CALLED. detection_active: False, stop_event: False, APP_ARGS.display_fps: 20
+[VIDEO_STREAM] Initialized with TARGET_VIDEO_FPS: 20, delay_per_frame: 0.05
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /static/style.css HTTP/1.1" 304 -
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /video_feed HTTP/1.1" 200 -
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /static/script.js HTTP/1.1" 200 -
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /socket.io/?EIO=4&transport=polling&t=PQrnop2 HTTP/1.1" 200 -
+Client connected
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /socket.io/?EIO=4&transport=polling&t=PQrnopS&sid=iog9Z4ibj4ihILQ7AAAA HTTP/1.1" 200 -
+192.168.31.245 - - [10/May/2025 00:00:51] "POST /socket.io/?EIO=4&transport=polling&t=PQrnopR&sid=iog9Z4ibj4ihILQ7AAAA HTTP/1.1" 200 -
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /socket.io/?EIO=4&transport=polling&t=PQrnoqF&sid=iog9Z4ibj4ihILQ7AAAA HTTP/1.1" 200 -
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /socket.io/?EIO=4&transport=polling&t=PQrnoqe&sid=iog9Z4ibj4ihILQ7AAAA HTTP/1.1" 200 -
+192.168.31.245 - - [10/May/2025 00:00:51] "GET /favicon.ico HTTP/1.1" 404 -
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+Attempting to start detection...
+Opening camera 0...
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+Camera opened successfully.
+Initializing AIDrowsinessProcessor...
+[VIDEO_STREAM] Top of while True loop. Frame: 0Eye TFLite model: model/tflite/eye_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+
+Eye TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+[VIDEO_STREAM] Inside try block. Frame: 0Eye TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+
+Yawn TFLite model: model/tflite/yawn_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+Yawn TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+Yawn TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+AIDrowsinessProcessor initialized with Eye: model/tflite/eye_detect_320_fp16.tflite, Yawn: model/tflite/yawn_detect_320_fp16.tflite
+Starting threads for detection...
+[CAMERA_THREAD] Starting. Initial detection_active: True, stop_event: False[AI_THREAD] AI Processing and status emission started.
+Detection started successfully.
+
+192.168.31.245 - - [10/May/2025 00:00:55] "POST /start_detection HTTP/1.1" 200 -
+[VIDEO_STREAM] Function CALLED. detection_active: True, stop_event: False, APP_ARGS.display_fps: 20
+[VIDEO_STREAM] Initialized with TARGET_VIDEO_FPS: 20, delay_per_frame: 0.05
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+[VIDEO_STREAM] Top of while True loop. Frame: 0
+[VIDEO_STREAM] Inside try block. Frame: 0
+192.168.31.245 - - [10/May/2025 00:00:55] "GET /video_feed?1746806455210 HTTP/1.1" 200 -
+/home/srtp/01_driver/real-time-drowsy-driving-detection/venv/lib/python3.11/site-packages/google/protobuf/symbol_database.py:55: UserWarning: SymbolDatabase.GetPrototype() is deprecated. Please use message_factory.GetMessageClass() instead. SymbolDatabase.GetPrototype() will be removed soon.
+  warnings.warn('SymbolDatabase.GetPrototype() is deprecated. Please '
+[VIDEO_STREAM] Top of while True loop. Frame: 1
+[VIDEO_STREAM] Inside try block. Frame: 1
+[VIDEO_STREAM] Top of while True loop. Frame: 1
+[VIDEO_STREAM] Inside try block. Frame: 1
+[VIDEO_STREAM] Top of while True loop. Frame: 2
+[VIDEO_STREAM] Inside try block. Frame: 2
+[VIDEO_STREAM] Top of while True loop. Frame: 3
+[VIDEO_STREAM] Inside try block. Frame: 3
+[VIDEO_STREAM] Top of while True loop. Frame: 4
+[VIDEO_STREAM] Inside try block. Frame: 4
+[VIDEO_STREAM] Top of while True loop. Frame: 5
+[VIDEO_STREAM] Inside try block. Frame: 5
+[VIDEO_STREAM] Top of while True loop. Frame: 6
+[VIDEO_STREAM] Inside try block. Frame: 6
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 7[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 7
+[VIDEO_STREAM] Top of while True loop. Frame: 8
+[VIDEO_STREAM] Inside try block. Frame: 8
+[VIDEO_STREAM] Top of while True loop. Frame: 9
+[VIDEO_STREAM] Inside try block. Frame: 9
+[VIDEO_STREAM] Top of while True loop. Frame: 10
+[VIDEO_STREAM] Inside try block. Frame: 10
+[VIDEO_STREAM] Top of while True loop. Frame: 11
+[VIDEO_STREAM] Inside try block. Frame: 11
+[VIDEO_STREAM] Top of while True loop. Frame: 12
+[VIDEO_STREAM] Inside try block. Frame: 12
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0[VIDEO_STREAM] Top of while True loop. Frame: 13
+
+[VIDEO_STREAM] Inside try block. Frame: 13
+[VIDEO_STREAM] Top of while True loop. Frame: 14
+[VIDEO_STREAM] Inside try block. Frame: 14
+[VIDEO_STREAM] Top of while True loop. Frame: 15
+[VIDEO_STREAM] Inside try block. Frame: 15
+[VIDEO_STREAM] Top of while True loop. Frame: 16
+[VIDEO_STREAM] Inside try block. Frame: 16
+[VIDEO_STREAM] Top of while True loop. Frame: 17
+[VIDEO_STREAM] Inside try block. Frame: 17
+[VIDEO_STREAM] Top of while True loop. Frame: 18
+[VIDEO_STREAM] Inside try block. Frame: 18
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 19[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+
+[VIDEO_STREAM] Inside try block. Frame: 19
+[VIDEO_STREAM] Top of while True loop. Frame: 20
+[VIDEO_STREAM] Inside try block. Frame: 20
+[VIDEO_STREAM] Top of while True loop. Frame: 21
+[VIDEO_STREAM] Inside try block. Frame: 21
+[VIDEO_STREAM] Top of while True loop. Frame: 22
+[VIDEO_STREAM] Inside try block. Frame: 22
+[VIDEO_STREAM] Top of while True loop. Frame: 23
+[VIDEO_STREAM] Inside try block. Frame: 23
+[VIDEO_STREAM] Top of while True loop. Frame: 24
+[VIDEO_STREAM] Inside try block. Frame: 24
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 25
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Inside try block. Frame: 25
+[VIDEO_STREAM] Top of while True loop. Frame: 26
+[VIDEO_STREAM] Inside try block. Frame: 26
+[VIDEO_STREAM] Top of while True loop. Frame: 27
+[VIDEO_STREAM] Inside try block. Frame: 27
+[VIDEO_STREAM] Top of while True loop. Frame: 28
+[VIDEO_STREAM] Inside try block. Frame: 28
+[VIDEO_STREAM] Top of while True loop. Frame: 29
+[VIDEO_STREAM] Inside try block. Frame: 29
+[VIDEO_STREAM] Top of while True loop. Frame: 30
+[VIDEO_STREAM] Inside try block. Frame: 30
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] Top of while True loop. Frame: 31
+[VIDEO_STREAM] Inside try block. Frame: 31
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[VIDEO_STREAM] Top of while True loop. Frame: 32
+[VIDEO_STREAM] Inside try block. Frame: 32
+[VIDEO_STREAM] Top of while True loop. Frame: 33
+[VIDEO_STREAM] Inside try block. Frame: 33
+Attempting to stop detection...
+Releasing resources...
+Joining camera thread...
+[VIDEO_STREAM] Top of while True loop. Frame: 34
+[VIDEO_STREAM] Inside try block. Frame: 34
+[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.
+[VIDEO_STREAM] Video stream generator finishing.
+[CAMERA_THREAD] Camera thread finishing. Final detection_active: False, stop_event: True, loop_count: 16
+Joining AI processing thread...
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+AI Processing and status emission finishing.
+Releasing camera...
+Camera released.
+Releasing AI Processor...
+AIDrowsinessProcessor resources released.
+AI Processor released.
+Resources released.
+Detection stopped successfully.
+192.168.31.245 - - [10/May/2025 00:00:57] "POST /stop_detection HTTP/1.1" 200 -
+Application shutting down. Releasing resources...
+Releasing resources...
+Resources released.
+Cleanup complete. Exiting.

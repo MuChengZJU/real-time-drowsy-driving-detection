@@ -362,19 +362,19 @@ def ai_processing_thread_function():
 def video_stream_generator():
     global latest_raw_frame, raw_frame_lock, latest_ai_status_dict, ai_status_lock, latest_ai_draw_elements, ai_draw_elements_lock
     global detection_active, ai_processor, stop_event, APP_ARGS
-    print(f"[VIDEO_STREAM] Function CALLED. detection_active: {detection_active}, stop_event: {stop_event.is_set()}, APP_ARGS.display_fps: {getattr(APP_ARGS, 'display_fps', 'N/A')}")
+    print(f"[VIDEO_STREAM] Function CALLED. detection_active: {detection_active}, stop_event: {stop_event.is_set()}, APP_ARGS.display_fps: {getattr(APP_ARGS, 'display_fps', 'N/A')}", flush=True)
     
     TARGET_VIDEO_FPS = APP_ARGS.display_fps if hasattr(APP_ARGS, 'display_fps') and APP_ARGS.display_fps is not None else 20 # Robust access
     delay_per_frame = 1.0 / TARGET_VIDEO_FPS if TARGET_VIDEO_FPS > 0 else 0.05 
     frame_counter = 0
-    print(f"[VIDEO_STREAM] Initialized with TARGET_VIDEO_FPS: {TARGET_VIDEO_FPS}, delay_per_frame: {delay_per_frame}")
+    print(f"[VIDEO_STREAM] Initialized with TARGET_VIDEO_FPS: {TARGET_VIDEO_FPS}, delay_per_frame: {delay_per_frame}", flush=True)
 
     while True:
-        print(f"[VIDEO_STREAM] Top of while True loop. Frame: {frame_counter}") # New log
+        print(f"[VIDEO_STREAM] Top of while True loop. Frame: {frame_counter}", flush=True) 
         try:
-            print(f"[VIDEO_STREAM] Inside try block. Frame: {frame_counter}") # New log
+            print(f"[VIDEO_STREAM] Inside try block. Frame: {frame_counter}", flush=True) 
             if stop_event.is_set() and not detection_active:
-                print("[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.")
+                print("[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.", flush=True)
                 break
 
             start_frame_gen_time = time.time()
@@ -387,26 +387,30 @@ def video_stream_generator():
                     frame_source = "latest_raw_frame"
             
             if current_frame_to_display is None:
-                if not detection_active:
-                    placeholder = np.zeros((APP_ARGS.display_height if hasattr(APP_ARGS, 'display_height') else 480, 
-                                            APP_ARGS.display_width if hasattr(APP_ARGS, 'display_width') else 640, 3), dtype=np.uint8)
-                    cv2.putText(placeholder, "Detection Stopped or Starting...", (50, 240), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-                    try:
-                        ret_enc, encoded_image = cv2.imencode('.jpg', placeholder)
-                        if not ret_enc:
-                            print("[VIDEO_STREAM] Error encoding placeholder image.")
-                            time.sleep(delay_per_frame) # Avoid fast loop on error
-                            continue
-                        yield (b'--frame\\r\\n'
-                               b'Content-Type: image/jpeg\\r\\n\\r\\n' + encoded_image.tobytes() + b'\\r\\n')
-                    except Exception as e:
-                        print(f"[VIDEO_STREAM] Error yielding placeholder: {e}")
-                    time.sleep(delay_per_frame)
-                    continue
-                else:
-                    time.sleep(delay_per_frame / 2) 
-                    continue
+                # ALWAYS yield a frame, even if it's a placeholder, to keep the stream alive.
+                placeholder_text = "Detection Stopped or Starting..."
+                if detection_active:
+                    placeholder_text = "Waiting for AI frame..."
+                
+                placeholder = np.zeros((APP_ARGS.display_height if hasattr(APP_ARGS, 'display_height') else 480, 
+                                        APP_ARGS.display_width if hasattr(APP_ARGS, 'display_width') else 640, 3), dtype=np.uint8)
+                cv2.putText(placeholder, placeholder_text, (50, 240), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                try:
+                    ret_enc, encoded_image = cv2.imencode('.jpg', placeholder)
+                    if not ret_enc:
+                        print("[VIDEO_STREAM] Error encoding placeholder image.", flush=True)
+                        time.sleep(delay_per_frame) # Avoid fast loop on error
+                        continue
+                    print(f"[VIDEO_STREAM] PRE-YIELD (placeholder) frame. Text: {placeholder_text}", flush=True)
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + encoded_image.tobytes() + b'\r\n')
+                    print(f"[VIDEO_STREAM] POST-YIELD (placeholder) frame.", flush=True)
+                except Exception as e:
+                    print(f"[VIDEO_STREAM] Error yielding placeholder: {e}", flush=True)
+                time.sleep(delay_per_frame) # Wait after sending placeholder
+                continue # Go to next iteration to try to get a real frame
             
+            # If we have a real frame, proceed to process and yield it.
             frame_counter += 1
 
             current_status_for_draw = None
@@ -430,7 +434,7 @@ def video_stream_generator():
                     )
                     final_frame_to_encode = frame_with_overlays # Update frame to be encoded
                 except Exception as e:
-                    print(f"[VIDEO_STREAM] Error during drawing overlays: {e}")
+                    print(f"[VIDEO_STREAM] Error during drawing overlays: {e}", flush=True)
                     # Fallback to sending the frame without overlays in case of drawing error
             elif not detection_active:
                  cv2.putText(final_frame_to_encode, "Detection Stopped", (10, final_frame_to_encode.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255),2)
@@ -438,13 +442,15 @@ def video_stream_generator():
             try:
                 ret_enc, encoded_image = cv2.imencode('.jpg', final_frame_to_encode)
                 if not ret_enc:
-                    print(f"[VIDEO_STREAM] Error encoding frame {frame_counter} for streaming.")
+                    print(f"[VIDEO_STREAM] Error encoding frame {frame_counter} for streaming.", flush=True)
                     # Don't yield if encoding failed
                 else:
-                    yield (b'--frame\\r\\n'
-                           b'Content-Type: image/jpeg\\r\\n\\r\\n' + encoded_image.tobytes() + b'\\r\\n')
+                    print(f"[VIDEO_STREAM] PRE-YIELD frame {frame_counter}. Size: {len(encoded_image.tobytes())}", flush=True) # Log Before Yield
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + encoded_image.tobytes() + b'\r\n')
+                    print(f"[VIDEO_STREAM] POST-YIELD frame {frame_counter}.", flush=True) # Log After Yield
             except Exception as e:
-                print(f"[VIDEO_STREAM] Error during final imencode or yield of frame {frame_counter}: {e}")
+                print(f"[VIDEO_STREAM] Error during final imencode or yield of frame {frame_counter}: {e}", flush=True)
 
             elapsed_time = time.time() - start_frame_gen_time
             sleep_time = delay_per_frame - elapsed_time
@@ -452,9 +458,9 @@ def video_stream_generator():
                 time.sleep(sleep_time)
 
         except Exception as e:
-            print(f"[VIDEO_STREAM] CRITICAL ERROR in main loop: {e}")
+            print(f"[VIDEO_STREAM] CRITICAL ERROR in main loop: {e}", flush=True)
             import traceback
-            print(traceback.format_exc())
+            print(traceback.format_exc(), flush=True)
             # Attempt to yield a visual error frame to the client
             try:
                 error_display_frame = np.zeros((APP_ARGS.display_height if hasattr(APP_ARGS, 'display_height') else 480, 
@@ -463,14 +469,14 @@ def video_stream_generator():
                 cv2.putText(error_display_frame, str(e)[:60], (50, 280), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255),1)
                 (flag, encoded_error_Image) = cv2.imencode(".jpg", error_display_frame)
                 if flag:
-                    print("[VIDEO_STREAM] Yielding visual error frame.")
+                    print("[VIDEO_STREAM] Yielding visual error frame.", flush=True)
                     yield (b'--frame\\r\\n' b'Content-Type: image/jpeg\\r\\n\\r\\n' +
                            bytearray(encoded_error_Image) + b'\\r\\n')
             except Exception as e2:
-                print(f"[VIDEO_STREAM] Failed to yield visual error frame: {e2}")
+                print(f"[VIDEO_STREAM] Failed to yield visual error frame: {e2}", flush=True)
             time.sleep(1) # Avoid rapid looping on persistent error
 
-    print("[VIDEO_STREAM] Video stream generator finishing.")
+    print("[VIDEO_STREAM] Video stream generator finishing.", flush=True)
 
 # --- Flask Routes ---
 @app.route('/')

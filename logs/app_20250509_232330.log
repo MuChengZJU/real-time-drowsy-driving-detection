@@ -1,0 +1,315 @@
+File logging setup complete. Subsequent output will be logged and also printed to console.
+Starting Drowsiness Detection System with final settings:
+  Selected Configuration Key: fp16_320 (Description: FP16 models with 320x320 input. Balanced speed and precision.)
+  Eye Model: model/tflite/eye_detect_320_fp16.tflite
+  Yawn Model: model/tflite/yawn_detect_320_fp16.tflite
+  Camera Index: 0
+  Host: 0.0.0.0
+  Port: 5000
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.215:5000
+Press CTRL+C to quit
+127.0.0.1 - - [09/May/2025 23:24:05] "GET / HTTP/1.1" 200 -
+[VIDEO_STREAM] Video stream generator started.
+127.0.0.1 - - [09/May/2025 23:24:05] "GET /video_feed HTTP/1.1" 200 -
+127.0.0.1 - - [09/May/2025 23:24:05] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [09/May/2025 23:24:05] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [09/May/2025 23:24:05] "GET /socket.io/?EIO=4&transport=polling&t=PQrfO9I HTTP/1.1" 200 -
+Client connected
+127.0.0.1 - - [09/May/2025 23:24:05] "GET /socket.io/?EIO=4&transport=polling&t=PQrfOB0.0&sid=O5f83DDzKtOekRgoAAAA HTTP/1.1" 200 -
+127.0.0.1 - - [09/May/2025 23:24:05] "POST /socket.io/?EIO=4&transport=polling&t=PQrfOB0&sid=O5f83DDzKtOekRgoAAAA HTTP/1.1" 200 -
+Attempting to start detection...
+Opening camera 0...
+Camera opened successfully.
+Initializing AIDrowsinessProcessor...
+Eye TFLite model: model/tflite/eye_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+Eye TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+Eye TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+Yawn TFLite model: model/tflite/yawn_detect_320_fp16.tflite, Input shape: (1, 320, 320, 3)
+Yawn TFLite Input Details: dtype=<class 'numpy.float32'>, quantization=(0.0, 0)
+Yawn TFLite Output Details: [{'name': 'Identity', 'index': 768, 'shape': array([   1,    6, 2100], dtype=int32), 'shape_signature': array([   1,    6, 2100], dtype=int32), 'dtype': <class 'numpy.float32'>, 'quantization': (0.0, 0), 'quantization_parameters': {'scales': array([], dtype=float32), 'zero_points': array([], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+AIDrowsinessProcessor initialized with Eye: model/tflite/eye_detect_320_fp16.tflite, Yawn: model/tflite/yawn_detect_320_fp16.tflite
+Starting threads for detection...
+[CAMERA_THREAD] Starting. Initial detection_active: True, stop_event: False[AI_THREAD] AI Processing and status emission started.Detection started successfully.
+
+
+127.0.0.1 - - [09/May/2025 23:24:07] "POST /start_detection HTTP/1.1" 200 -
+[VIDEO_STREAM] Video stream generator started.
+127.0.0.1 - - [09/May/2025 23:24:07] "GET /video_feed?1746804247261 HTTP/1.1" 200 -
+/home/srtp/01_driver/real-time-drowsy-driving-detection/venv/lib/python3.11/site-packages/google/protobuf/symbol_database.py:55: UserWarning: SymbolDatabase.GetPrototype() is deprecated. Please use message_factory.GetMessageClass() instead. SymbolDatabase.GetPrototype() will be removed soon.
+  warnings.warn('SymbolDatabase.GetPrototype() is deprecated. Please '
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+Attempting to start detection...
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0Detection is already active.
+
+127.0.0.1 - - [09/May/2025 23:24:10] "POST /start_detection HTTP/1.1" 200 -
+[VIDEO_STREAM] Video stream generator started.
+127.0.0.1 - - [09/May/2025 23:24:10] "GET /video_feed?1746804250017 HTTP/1.1" 200 -
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[CAMERA_THREAD] Captured 34 frames in last ~5.06s. Approx FPS: 6.73
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.560547947883606
+[CAMERA_THREAD] Captured 37 frames in last ~5.14s. Approx FPS: 7.20
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[CAMERA_THREAD] Captured 35 frames in last ~5.18s. Approx FPS: 6.76
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+[CAMERA_THREAD] Captured 35 frames in last ~5.06s. Approx FPS: 6.92
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.6785686016082764
+Attempting to stop detection...
+Releasing resources...
+Joining camera thread...
+[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.
+[VIDEO_STREAM] Video stream generator finishing.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.[VIDEO_STREAM] stop_event is set and detection not active. Exiting loop.[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: 0, MaxConfidence: 0.4562720060348511
+[CAMERA_THREAD] Camera thread finishing. Final detection_active: False, stop_event: True, loop_count: 144
+Joining AI processing thread...
+
+[VIDEO_STREAM] Video stream generator finishing.
+
+[VIDEO_STREAM] Video stream generator finishing.
+[AI_LOGIC DEBUG] _parse_tflite_output: Raw TFLite output_data shape: (1, 6, 2100)
+[AI_LOGIC DEBUG] Transposing output from (1, 6, 2100) to (0, 2, 1)
+[AI_LOGIC DEBUG] Final TFLite output_data shape for parsing: (1, 2100, 6)
+[AI_LOGIC DEBUG] Number of detections: 2100, Output_dim_size (per detection): 6
+[AI_LOGIC DEBUG] _parse_tflite_output result: BestClassID: -1, MaxConfidence: -1.0
+AI Processing and status emission finishing.
+Releasing camera...
+Camera released.
+Releasing AI Processor...
+AIDrowsinessProcessor resources released.
+AI Processor released.
+Resources released.
+Detection stopped successfully.
+127.0.0.1 - - [09/May/2025 23:24:28] "POST /stop_detection HTTP/1.1" 200 -
+Application shutting down. Releasing resources...
+Releasing resources...
+Resources released.
+Cleanup complete. Exiting.

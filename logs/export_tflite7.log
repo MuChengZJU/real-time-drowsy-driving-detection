@@ -1,0 +1,286 @@
+所有转换后的模型将保存在: /home/qcy/SynologyDrive/01-Project/2025-05-06-SRTP酒驾疲劳监测/01_src/ubuntu/real-time-drowsy-driving-detection/model/tflite
+
+==================== 开始处理模型: 眼睛状态检测 (runs/detecteye/train/weights/best.pt) ====================
+
+--- 图像尺寸: 320 ---
+正在转换为 INT8 TFLite (imgsz: 320) 使用配置: eye_calibration_config.yaml...
+Ultralytics 8.3.129 🚀 Python-3.11.11 torch-2.7.0+cu126 CPU (12th Gen Intel Core(TM) i5-12400)
+Model summary (fused): 72 layers, 3,006,038 parameters, 0 gradients, 8.1 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'runs/detecteye/train/weights/best.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) (1, 6, 2100) (5.9 MB)
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1746810501.814491  971855 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1746810501.818787  971855 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1746810501.827995  971855 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1746810501.828031  971855 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1746810501.828035  971855 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1746810501.828038  971855 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+[34m[1mTensorFlow SavedModel:[0m starting export with tensorflow 2.19.0...
+
+[34m[1mONNX:[0m starting export with onnx 1.17.0 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.51...
+[34m[1mONNX:[0m export success ✅ 0.7s, saved as 'runs/detecteye/train/weights/best.onnx' (11.6 MB)
+[34m[1mTensorFlow SavedModel:[0m collecting INT8 calibration images from 'data=eye_calibration_config.yaml'
+Fast image access ✅ (ping: 0.0±0.0 ms, read: 446.9±317.4 MB/s, size: 2.8 KB)
+Scanning /home/qcy/SynologyDrive/01-Project/2025-05-06-SRTP酒驾疲劳监测/01_src/ubuntu/real-time-drowsy-driving-detection/data/calibration_images_eye/labels.cache... 0 images, 100 backgrounds, 0 corrupt: 100%|██████████| 100/100 [00:00<?, ?it/s]Scanning /home/qcy/SynologyDrive/01-Project/2025-05-06-SRTP酒驾疲劳监测/01_src/ubuntu/real-time-drowsy-driving-detection/data/calibration_images_eye/labels.cache... 0 images, 100 backgrounds, 0 corrupt: 100%|██████████| 100/100 [00:00<?, ?it/s]
+WARNING ⚠️ No labels found in /home/qcy/SynologyDrive/01-Project/2025-05-06-SRTP酒驾疲劳监测/01_src/ubuntu/real-time-drowsy-driving-detection/data/calibration_images_eye/labels.cache, training may not work correctly. See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+WARNING ⚠️ [34m[1mTensorFlow SavedModel:[0m >300 images recommended for INT8 calibration, found 100 images.
+[34m[1mTensorFlow SavedModel:[0m starting TFLite export with onnx2tf 1.27.2...
+Saved artifact at 'runs/detecteye/train/weights/best_saved_model'. The following endpoints are available:
+
+* Endpoint 'serving_default'
+  inputs_0 (POSITIONAL_ONLY): TensorSpec(shape=(1, 320, 320, 3), dtype=tf.float32, name='images')
+Output Type:
+  TensorSpec(shape=(1, 6, 2100), dtype=tf.float32, name=None)
+Captures:
+  135840400382224: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840400380304: TensorSpec(shape=(3, 3, 3, 16), dtype=tf.float32, name=None)
+  135840400382608: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  135840400382416: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840400386448: TensorSpec(shape=(3, 3, 16, 32), dtype=tf.float32, name=None)
+  135840400387024: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840400386064: TensorSpec(shape=(1, 1, 32, 32), dtype=tf.float32, name=None)
+  135840400387408: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840400387600: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840400387792: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840400389904: TensorSpec(shape=(3, 3, 16, 16), dtype=tf.float32, name=None)
+  135840400390288: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  135840400388944: TensorSpec(shape=(3, 3, 16, 16), dtype=tf.float32, name=None)
+  135840400390672: TensorSpec(shape=(16,), dtype=tf.float32, name=None)
+  135840400387984: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840400387216: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840400390480: TensorSpec(shape=(1, 1, 48, 32), dtype=tf.float32, name=None)
+  135840400390864: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840400391056: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840400388560: TensorSpec(shape=(3, 3, 32, 64), dtype=tf.float32, name=None)
+  135840400389136: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840400391248: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  135840400391632: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391905936: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391906320: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840400391824: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840400391440: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840391905744: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840391907472: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840391906512: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840391907664: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840391907088: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840391907856: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840400392016: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391905360: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391908432: TensorSpec(shape=(1, 1, 128, 64), dtype=tf.float32, name=None)
+  135840391908240: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391908624: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840391907280: TensorSpec(shape=(3, 3, 64, 128), dtype=tf.float32, name=None)
+  135840391908048: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391908816: TensorSpec(shape=(1, 1, 128, 128), dtype=tf.float32, name=None)
+  135840391909200: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391909584: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391909392: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391910160: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391911504: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391910736: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391911888: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391910928: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391912080: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391910352: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391912272: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391909776: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391909008: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391912848: TensorSpec(shape=(1, 1, 256, 128), dtype=tf.float32, name=None)
+  135840391912656: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391913040: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840391911696: TensorSpec(shape=(3, 3, 128, 256), dtype=tf.float32, name=None)
+  135840391912464: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840391913232: TensorSpec(shape=(1, 1, 256, 256), dtype=tf.float32, name=None)
+  135840391913616: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840391914000: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391913808: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391914576: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  135840391915920: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391915152: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  135840391916304: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391914192: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391913424: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391916496: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  135840391915344: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840391914768: TensorSpec(shape=(1, 1, 256, 128), dtype=tf.float32, name=None)
+  135840391916688: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391916880: TensorSpec(shape=(1, 1, 512, 256), dtype=tf.float32, name=None)
+  135840391917072: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840391917456: TensorSpec(shape=(1, 1, 384, 128), dtype=tf.float32, name=None)
+  135840391917264: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391917840: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391917648: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391918416: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391919760: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391918992: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840391920144: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391918032: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391916112: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391919184: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  135840391919952: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840391920336: TensorSpec(shape=(1, 1, 192, 64), dtype=tf.float32, name=None)
+  135840391920528: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840391920720: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391921488: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391920912: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840391921296: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840370131600: TensorSpec(shape=(3, 3, 32, 32), dtype=tf.float32, name=None)
+  135840370132560: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  135840391921104: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840391918608: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370131792: TensorSpec(shape=(1, 1, 96, 64), dtype=tf.float32, name=None)
+  135840370132368: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370132944: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840370132752: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370132176: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370134672: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  135840370134864: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840370135824: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370136016: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370138512: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370138704: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370138128: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370139280: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370136208: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370136400: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370138896: TensorSpec(shape=(1, 1, 192, 128), dtype=tf.float32, name=None)
+  135840370136976: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840370139088: TensorSpec(shape=(4, 2), dtype=tf.int32, name=None)
+  135840370137360: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  135840370138320: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840370140624: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  135840370140816: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840370141776: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370141968: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370144464: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  135840370144272: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840370142736: TensorSpec(shape=(3, 3, 128, 128), dtype=tf.float32, name=None)
+  135840370143504: TensorSpec(shape=(128,), dtype=tf.float32, name=None)
+  135840370142160: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370142352: TensorSpec(shape=(4,), dtype=tf.int64, name=None)
+  135840370145232: TensorSpec(shape=(1, 1, 384, 256), dtype=tf.float32, name=None)
+  135840370142928: TensorSpec(shape=(256,), dtype=tf.float32, name=None)
+  135840370144656: TensorSpec(shape=(3, 3, 256, 64), dtype=tf.float32, name=None)
+  135840370143312: TensorSpec(shape=(3, 3, 256, 64), dtype=tf.float32, name=None)
+  135840370137552: TensorSpec(shape=(3, 3, 128, 64), dtype=tf.float32, name=None)
+  135840370136784: TensorSpec(shape=(3, 3, 128, 64), dtype=tf.float32, name=None)
+  135840370133520: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370133136: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370145040: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370144080: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370139664: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370139472: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370133712: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370133328: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370145424: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370145616: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370139856: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370140048: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370133904: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370134096: TensorSpec(shape=(3, 3, 64, 64), dtype=tf.float32, name=None)
+  135840370144848: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370145808: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370140240: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370140432: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370134288: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370134480: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370146000: TensorSpec(shape=(1, 1, 64, 2), dtype=tf.float32, name=None)
+  135840370146384: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  135840370141008: TensorSpec(shape=(1, 1, 64, 2), dtype=tf.float32, name=None)
+  135840370141584: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  135840370135056: TensorSpec(shape=(1, 1, 64, 2), dtype=tf.float32, name=None)
+  135840370135632: TensorSpec(shape=(1, 1, 64, 64), dtype=tf.float32, name=None)
+  135840370146576: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370146192: TensorSpec(shape=(2,), dtype=tf.float32, name=None)
+  135840370141200: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370141392: TensorSpec(shape=(2,), dtype=tf.float32, name=None)
+  135840370135248: TensorSpec(shape=(64,), dtype=tf.float32, name=None)
+  135840370135440: TensorSpec(shape=(2,), dtype=tf.float32, name=None)
+  135840136986704: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136986896: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840370147152: TensorSpec(shape=(1, 1, 16, 1), dtype=tf.float32, name=None)
+  135840370146768: TensorSpec(shape=(1, 4, 2100), dtype=tf.float32, name=None)
+  135840136990544: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136991504: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136990928: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136989392: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136990352: TensorSpec(shape=(1, 2, 2100), dtype=tf.float32, name=None)
+  135840136989200: TensorSpec(shape=(1, 2, 2100), dtype=tf.float32, name=None)
+  135840136988048: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+  135840136987856: TensorSpec(shape=(3,), dtype=tf.int64, name=None)
+I0000 00:00:1746810508.985098  971855 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1746810508.985210  971855 single_machine.cc:374] Starting new session
+W0000 00:00:1746810509.457370  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810509.457396  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+I0000 00:00:1746810509.849495  971855 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+I0000 00:00:1746810509.849586  971855 single_machine.cc:374] Starting new session
+W0000 00:00:1746810510.326013  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810510.326044  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+I0000 00:00:1746810510.755191  971855 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+I0000 00:00:1746810510.755272  971855 single_machine.cc:374] Starting new session
+W0000 00:00:1746810511.361423  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810511.361458  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+W0000 00:00:1746810512.394421  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810512.394451  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+I0000 00:00:1746810512.415086  971855 mlir_graph_optimization_pass.cc:425] MLIR V1 optimization pass is not enabled
+fully_quantize: 0, inference_type: 6, input_inference_type: FLOAT32, output_inference_type: FLOAT32
+W0000 00:00:1746810539.432701  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810539.432731  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+fully_quantize: 0, inference_type: 6, input_inference_type: INT8, output_inference_type: INT8
+W0000 00:00:1746810566.532309  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810566.532339  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+W0000 00:00:1746810618.813236  971855 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1746810618.813271  971855 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+
+
+Traceback (most recent call last):
+  File "/home/qcy/SynologyDrive/01-Project/2025-05-06-SRTP酒驾疲劳监测/01_src/ubuntu/real-time-drowsy-driving-detection/export_tflite.py", line 61, in <module>
+    model.export(
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/ultralytics/engine/model.py", line 730, in export
+    return Exporter(overrides=args, _callbacks=self.callbacks)(model=self.model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/ultralytics/engine/exporter.py", line 460, in __call__
+    f[5], keras_model = self.export_saved_model()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/ultralytics/engine/exporter.py", line 191, in outer_func
+    f, model = inner_func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/ultralytics/engine/exporter.py", line 967, in export_saved_model
+    keras_model = onnx2tf.convert(
+                  ^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/onnx2tf/onnx2tf.py", line 1805, in convert
+    tflite_model = converter.convert()
+                   ^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 1250, in wrapper
+    return self._convert_and_export_metrics(convert_func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 1202, in _convert_and_export_metrics
+    result = convert_func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 1586, in convert
+    return self._convert_from_saved_model(graph_def)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 1445, in _convert_from_saved_model
+    return self._optimize_tflite_model(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/convert_phase.py", line 205, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 1146, in _optimize_tflite_model
+    model = self._quantize(
+            ^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/lite.py", line 779, in _quantize
+    return calibrate_quantize.calibrate_and_quantize(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/convert_phase.py", line 205, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/optimize/calibrator.py", line 196, in calibrate_and_quantize
+    self._feed_tensors(dataset_gen, resize_input)
+  File "/home/qcy/miniconda/envs/srtp_tflite/lib/python3.11/site-packages/tensorflow/lite/python/optimize/calibrator.py", line 152, in _feed_tensors
+    self._calibrator.FeedTensor(input_array)
+KeyboardInterrupt

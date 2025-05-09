@@ -1,4 +1,5 @@
-train: ../data/calibration_images_eye/
-val: ../data/calibration_images_eye/ # For calibration, val can be the same as train or a subset
+path: ../data  # Root directory for datasets, relative to this YAML file's location
+train: calibration_images_eye/images # Path to training images, relative to 'path'
+val: calibration_images_eye/images   # Path to validation images, relative to 'path'
 nc: 2
 names: ['open_eye', 'close_eye'] 

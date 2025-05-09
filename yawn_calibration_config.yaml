@@ -1,4 +1,5 @@
-train: ../data/calibration_images_yawn/
-val: ../data/calibration_images_yawn/ # For calibration, val can be the same as train or a subset
+path: ../data  # Root directory for datasets, relative to this YAML file's location
+train: calibration_images_yawn/images # Path to training images, relative to 'path'
+val: calibration_images_yawn/images   # Path to validation images, relative to 'path'
 nc: 2
 names: ['yawn', 'no_yawn'] 
